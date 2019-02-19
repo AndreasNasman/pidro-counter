@@ -8,5 +8,8 @@
     "tslint-eslint-rules",
     "tslint-react",
     "tslint-config-prettier"
-  ]
+  ],
+  "rules": {
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
+  }
 }
