@@ -28,6 +28,13 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "tslint": "^5.12.1",
+    "tslint-clean-code": "^0.2.9",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-consistent-codestyle": "^1.15.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "tslint-react": "^3.6.0",
+    "tslint-sonarts": "^1.9.0"
   }
 }

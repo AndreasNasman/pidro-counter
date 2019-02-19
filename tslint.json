@@ -1,0 +1,12 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:all",
+    "tslint-clean-code",
+    "tslint-consistent-codestyle",
+    "tslint-sonarts",
+    "tslint-eslint-rules",
+    "tslint-react",
+    "tslint-config-prettier"
+  ]
+}
