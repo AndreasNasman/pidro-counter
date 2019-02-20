@@ -1,0 +1,17 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:all",
+    "tslint-clean-code",
+    "tslint-consistent-codestyle",
+    "tslint-sonarts",
+    "tslint-eslint-rules",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "no-import-side-effect": [true, { "ignore-module": "\\.css$" }],
+    "strict-boolean-expressions": [true, "allow-undefined-union"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
+  }
+}
