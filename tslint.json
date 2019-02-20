@@ -10,6 +10,7 @@
     "tslint-config-prettier"
   ],
   "rules": {
+    "no-import-side-effect": [true, { "ignore-module": "\\.css$" }],
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
   }
 }
