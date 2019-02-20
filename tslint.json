@@ -11,6 +11,7 @@
   ],
   "rules": {
     "no-import-side-effect": [true, { "ignore-module": "\\.css$" }],
+    "strict-boolean-expressions": [true, "allow-undefined-union"],
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
   }
 }
