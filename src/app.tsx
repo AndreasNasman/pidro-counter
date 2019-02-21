@@ -6,6 +6,7 @@ import styled, {
   StyledComponent,
 } from 'styled-components';
 import { Keypad } from './components/keypad/keypad';
+import { FELT_GREEN } from './constants/colors';
 
 const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
   html,
@@ -16,7 +17,7 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
 `;
 
 const Felt: StyledComponent<'div', {}> = styled.div`
-  background-color: #006e3b;
+  background-color: ${FELT_GREEN};
   box-shadow: inset 0 0 10rem black;
   display: grid;
   grid-template-rows: 1fr auto;
@@ -27,7 +28,7 @@ export const App: FunctionComponent = (): ReactElement => (
   <>
     <GlobalStyle />
     <Felt>
-      <div>Hello World!</div>
+      <div />
       <Keypad />
     </Felt>
   </>
