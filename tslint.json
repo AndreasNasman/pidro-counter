@@ -10,8 +10,8 @@
     "tslint-config-prettier"
   ],
   "rules": {
+    "completed-docs": false,
     "file-name-casing": [true, "kebab-case"],
-
     "no-import-side-effect": [true, { "ignore-module": "(^typeface|\\.css$)" }],
     "no-inferrable-types": false,
     "strict-boolean-expressions": [true, "allow-undefined-union"],
