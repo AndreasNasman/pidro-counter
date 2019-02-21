@@ -15,7 +15,9 @@ const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
     }
 `;
 
-const Grid: StyledComponent<'div', {}> = styled.div`
+const Felt: StyledComponent<'div', {}> = styled.div`
+  background-color: #006e3b;
+  box-shadow: inset 0 0 10rem black;
   display: grid;
   grid-template-rows: 1fr auto;
   height: 100%;
@@ -24,9 +26,9 @@ const Grid: StyledComponent<'div', {}> = styled.div`
 export const App: FunctionComponent = (): ReactElement => (
   <>
     <GlobalStyle />
-    <Grid>
+    <Felt>
       <div>Hello World!</div>
       <Keypad />
-    </Grid>
+    </Felt>
   </>
 );
