@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactElement, useState } from 'react';
-import { Button, PointGrid } from './styles';
+import { PLAYING_CARD_BLACK } from '../../constants/colors';
+import { Button, H1, PointWrapper, TeamWrapper } from './styles';
 
 export const Keypad: FunctionComponent = (): ReactElement => {
   const [points] = useState(() => {
@@ -12,10 +13,19 @@ export const Keypad: FunctionComponent = (): ReactElement => {
   });
 
   return (
-    <PointGrid>
-      {points.map((point: number) => (
-        <Button key={point}>{point}</Button>
-      ))}
-    </PointGrid>
+    <>
+      <H1>Vem bjöud va?</H1>
+
+      <TeamWrapper>
+        <Button theme={{ color: PLAYING_CARD_BLACK }}>Vi</Button>
+        <Button theme={{ color: PLAYING_CARD_BLACK }}>De</Button>
+      </TeamWrapper>
+
+      <PointWrapper>
+        {points.map((point: number) => (
+          <Button key={point}>{point}</Button>
+        ))}
+      </PointWrapper>
+    </>
   );
 };
