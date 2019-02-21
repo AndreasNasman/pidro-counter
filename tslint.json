@@ -10,7 +10,10 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "no-import-side-effect": [true, { "ignore-module": "\\.css$" }],
+    "file-name-casing": [true, "kebab-case"],
+
+    "no-import-side-effect": [true, { "ignore-module": "(^typeface|\\.css$)" }],
+    "no-inferrable-types": false,
     "strict-boolean-expressions": [true, "allow-undefined-union"],
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
   }
