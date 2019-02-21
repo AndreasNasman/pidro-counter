@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, useState } from 'react';
-import { Button, Grid } from './styles';
+import { Button, PointGrid } from './styles';
 
 export const Keypad: FunctionComponent = (): ReactElement => {
   const [points] = useState(() => {
@@ -12,10 +12,10 @@ export const Keypad: FunctionComponent = (): ReactElement => {
   });
 
   return (
-    <Grid>
+    <PointGrid>
       {points.map((point: number) => (
         <Button key={point}>{point}</Button>
       ))}
-    </Grid>
+    </PointGrid>
   );
 };

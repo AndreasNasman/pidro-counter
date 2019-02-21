@@ -1,7 +1,5 @@
 import styled, { StyledComponent } from 'styled-components';
 
-const borderWidth: string = '1rem';
-
 export const Button: StyledComponent<'button', {}> = styled.button`
   background-color: transparent;
   border: 5px solid white;
@@ -18,7 +16,7 @@ export const Button: StyledComponent<'button', {}> = styled.button`
   }
 `;
 
-export const Grid: StyledComponent<'div', {}> = styled.div`
+export const PointGrid: StyledComponent<'div', {}> = styled.div`
   display: grid;
   grid-gap: 1px;
   grid-template-columns: 1fr 1fr 1fr;
