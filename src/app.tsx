@@ -20,7 +20,7 @@ const Felt: StyledComponent<'div', {}> = styled.div`
   box-shadow: inset 0 0 10rem black;
   display: grid;
   grid-template-rows: 1fr auto;
-  height: 100%;
+  min-height: 100%;
 `;
 
 export const App: FunctionComponent = (): ReactElement => (
