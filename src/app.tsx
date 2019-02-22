@@ -8,10 +8,7 @@ const Felt: StyledComponent<'div', {}> = styled.div`
   box-shadow: inset 0 0 10rem black;
   display: grid;
   grid-template-rows: 1fr auto;
-  height: 100%;
-  overflow: auto;
-  position: fixed;
-  width: 100%;
+  min-height: 100vh;
 `;
 
 export const App: FunctionComponent = (): ReactElement => (
