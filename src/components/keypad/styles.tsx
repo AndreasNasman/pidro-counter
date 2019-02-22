@@ -1,4 +1,5 @@
 import styled, { StyledComponent, ThemedStyledProps } from 'styled-components';
+import { LANDSCAPE } from '../../constants/breakpoints';
 import { PLAYING_CARD_RED } from '../../constants/colors';
 
 export const Button: StyledComponent<'button', {}> = styled.button`
@@ -19,8 +20,19 @@ export const Button: StyledComponent<'button', {}> = styled.button`
 `;
 Button.defaultProps = { theme: { color: PLAYING_CARD_RED } };
 
+export const Container: StyledComponent<'div', {}> = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (min-width: ${LANDSCAPE}) {
+    max-width: 20em;
+  }
+`;
+
 export const H1: StyledComponent<'h1', {}> = styled.h1`
   color: white;
+  margin-top: 0.1rem;
   text-align: center;
 `;
 

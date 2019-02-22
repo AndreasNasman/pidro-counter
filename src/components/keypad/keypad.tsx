@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactElement, useState } from 'react';
 import { PLAYING_CARD_BLACK } from '../../constants/colors';
-import { Button, H1, PointWrapper, TeamWrapper } from './styles';
+import { Button, Container, H1, PointWrapper, TeamWrapper } from './styles';
 
 export const Keypad: FunctionComponent = (): ReactElement => {
   const [teams] = useState(['vi', 'de']);
@@ -14,7 +14,7 @@ export const Keypad: FunctionComponent = (): ReactElement => {
   });
 
   return (
-    <div>
+    <Container>
       <H1>Vem bjöud?</H1>
 
       <TeamWrapper>
@@ -30,6 +30,6 @@ export const Keypad: FunctionComponent = (): ReactElement => {
           <Button key={point}>{point}</Button>
         ))}
       </PointWrapper>
-    </div>
+    </Container>
   );
 };
