@@ -6,14 +6,14 @@ export const Button: StyledComponent<'button', {}> = styled.button`
   border: 5px solid white;
   border-radius: 10px;
   color: white;
-  font: normal 1.5rem 'Roboto', sans-serif;
+  font: bold 1.5rem 'Roboto', sans-serif;
   padding: 0.5rem;
+  text-transform: uppercase;
 
   &:focus {
     background-color: white;
     color: ${(props: ThemedStyledProps<{}, { color: string }>): string =>
       props.theme.color};
-    font-weight: bold;
     outline: none;
   }
 `;

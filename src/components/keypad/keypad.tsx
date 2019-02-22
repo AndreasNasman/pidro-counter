@@ -3,6 +3,7 @@ import { PLAYING_CARD_BLACK } from '../../constants/colors';
 import { Button, H1, PointWrapper, TeamWrapper } from './styles';
 
 export const Keypad: FunctionComponent = (): ReactElement => {
+  const [teams] = useState(['vi', 'de']);
   const [points] = useState(() => {
     const size: number = 9;
     const minimum: number = 6;
@@ -13,12 +14,15 @@ export const Keypad: FunctionComponent = (): ReactElement => {
   });
 
   return (
-    <>
-      <H1>Vem bjöud va?</H1>
+    <div>
+      <H1>Vem bjöud?</H1>
 
       <TeamWrapper>
-        <Button theme={{ color: PLAYING_CARD_BLACK }}>Vi</Button>
-        <Button theme={{ color: PLAYING_CARD_BLACK }}>De</Button>
+        {teams.map((team: string) => (
+          <Button key={team} theme={{ color: PLAYING_CARD_BLACK }}>
+            {team}
+          </Button>
+        ))}
       </TeamWrapper>
 
       <PointWrapper>
@@ -26,6 +30,6 @@ export const Keypad: FunctionComponent = (): ReactElement => {
           <Button key={point}>{point}</Button>
         ))}
       </PointWrapper>
-    </>
+    </div>
   );
 };
