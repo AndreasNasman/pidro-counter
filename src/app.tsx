@@ -1,8 +1,19 @@
 import React, { FunctionComponent, ReactElement } from 'react';
-import styled, { StyledComponent } from 'styled-components';
+import styled, {
+  createGlobalStyle,
+  DefaultTheme,
+  GlobalStyleComponent,
+  StyledComponent,
+} from 'styled-components';
 import { Keypad } from './components/keypad/keypad';
 import { LANDSCAPE } from './constants/breakpoints';
 import { FELT_GREEN } from './constants/colors';
+
+const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
+  * {
+    font-family: 'Roboto', sans-serif;
+    }
+`;
 
 const Felt: StyledComponent<'div', {}> = styled.div`
   background-color: ${FELT_GREEN};
@@ -17,8 +28,11 @@ const Felt: StyledComponent<'div', {}> = styled.div`
 `;
 
 export const App: FunctionComponent = (): ReactElement => (
-  <Felt>
-    <div />
-    <Keypad />
-  </Felt>
+  <>
+    <GlobalStyle />
+    <Felt>
+      <div />
+      <Keypad />
+    </Felt>
+  </>
 );

@@ -7,7 +7,8 @@ export const Button: StyledComponent<'button', {}> = styled.button`
   border: 5px solid white;
   border-radius: 10px;
   color: white;
-  font: bold 1.5rem 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
   padding: 0.5rem;
   text-transform: uppercase;
 
