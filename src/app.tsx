@@ -6,12 +6,12 @@ import styled, {
   StyledComponent,
 } from 'styled-components';
 import { Keypad } from './components/keypad/keypad';
-import { LANDSCAPE } from './constants/breakpoints';
 import { FELT_GREEN } from './constants/colors';
 
 const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
   * {
     font-family: 'Roboto', sans-serif;
+    font-size: 2.5vmax;
     }
 `;
 
@@ -22,7 +22,7 @@ const Felt: StyledComponent<'div', {}> = styled.div`
   grid-template: 1fr auto / 1fr;
   min-height: 100vh;
 
-  @media (min-width: ${LANDSCAPE}) {
+  @media screen and (orientation: landscape) {
     grid-template: 1fr / 2fr 1fr;
   }
 `;
