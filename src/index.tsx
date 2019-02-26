@@ -2,7 +2,7 @@ import 'normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'typeface-roboto';
-import { App } from './app';
+import { App } from './components/app';
 import * as serviceWorker from './serviceWorker';
 
 const rootElement: HTMLElement | null = document.getElementById('root');
@@ -10,8 +10,8 @@ const rootElement: HTMLElement | null = document.getElementById('root');
 ReactDOM.render(<App />, rootElement);
 
 if (module.hot) {
-  module.hot.accept('./app', async () => {
-    const { App: NextApp } = await import('./app');
+  module.hot.accept('./components/app', async () => {
+    const { App: NextApp } = await import('./components/app');
     ReactDOM.render(<NextApp />, rootElement);
   });
 }

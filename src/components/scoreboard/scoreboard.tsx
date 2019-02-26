@@ -1,8 +1,10 @@
 import React, { FunctionComponent, ReactElement, useState } from 'react';
 import { Body, Cell, Column, Foot, Head, Table } from './styles';
+import { IProps } from './types';
 
-export const Scoreboard: FunctionComponent = (): ReactElement => {
-  const [teams] = useState(['vi', 'de']);
+export const Scoreboard: FunctionComponent<IProps> = ({
+  teams,
+}: IProps): ReactElement => {
   const [sets] = useState([
     { round: 1, score: { de: 7, vi: 7 } },
     { round: 2, score: { de: 14, vi: -9 } },

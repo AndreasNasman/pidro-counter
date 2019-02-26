@@ -1,9 +1,11 @@
 import React, { FunctionComponent, ReactElement, useState } from 'react';
 import { PLAYING_CARD_BLACK } from '../../constants/colors';
 import { Button, Container, H1, PointWrapper, TeamWrapper } from './styles';
+import { IProps } from './types';
 
-export const Keypad: FunctionComponent = (): ReactElement => {
-  const [teams] = useState(['vi', 'de']);
+export const Keypad: FunctionComponent<IProps> = ({
+  teams,
+}: IProps): ReactElement => {
   const [points] = useState(() => {
     const size: number = 9;
     const minimum: number = 6;
