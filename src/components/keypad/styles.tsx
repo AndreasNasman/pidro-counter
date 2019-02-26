@@ -11,7 +11,6 @@ export const Button: StyledComponent<'button', {}> = styled.button`
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0.5rem;
-  text-transform: uppercase;
 
   &:focus {
     background-color: white;
