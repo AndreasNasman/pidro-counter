@@ -6,6 +6,7 @@ import styled, {
   StyledComponent,
 } from 'styled-components';
 import { Keypad } from './components/keypad/keypad';
+import { Scoreboard } from './components/scoreboard/scoreboard';
 import { FELT_GREEN } from './constants/colors';
 
 const GlobalStyle: GlobalStyleComponent<{}, DefaultTheme> = createGlobalStyle`
@@ -34,6 +35,7 @@ export const App: FunctionComponent = (): ReactElement => (
   <>
     <GlobalStyle />
     <Felt>
+      <Scoreboard />
       <Keypad />
     </Felt>
   </>
