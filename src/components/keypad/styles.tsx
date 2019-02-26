@@ -1,6 +1,8 @@
 import styled, { StyledComponent, ThemedStyledProps } from 'styled-components';
 import { PLAYING_CARD_RED } from '../../constants/colors';
 
+const buttonGap: number = 0.1;
+
 export const Button: StyledComponent<'button', {}> = styled.button`
   background-color: transparent;
   border: 0.25rem solid white;
@@ -24,10 +26,6 @@ export const Container: StyledComponent<'div', {}> = styled.div`
   align-content: center;
   display: grid;
   grid-auto-rows: min-content;
-
-  @media screen and (orientation: landscape) {
-    margin-left: 1rem;
-  }
 `;
 
 export const H1: StyledComponent<'h1', {}> = styled.h1`
@@ -35,19 +33,19 @@ export const H1: StyledComponent<'h1', {}> = styled.h1`
   text-align: center;
 
   @media screen and (orientation: landscape) {
-    margin-top: 0.1rem;
+    margin-top: 0;
   }
 `;
 
 export const PointWrapper: StyledComponent<'div', {}> = styled.div`
   display: grid;
-  grid-gap: 0.1rem;
+  grid-gap: ${buttonGap}rem;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 0.1rem;
 `;
 
 export const TeamWrapper: StyledComponent<'div', {}> = styled.div`
   display: grid;
-  grid-gap: 0.1rem;
+  grid-gap: ${buttonGap}rem;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: ${buttonGap}rem;
 `;
