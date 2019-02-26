@@ -23,9 +23,9 @@ export const Button: StyledComponent<'button', {}> = styled.button`
 Button.defaultProps = { theme: { color: PLAYING_CARD_RED } };
 
 export const Container: StyledComponent<'div', {}> = styled.div`
-  align-content: center;
+  align-content: safe center;
   display: grid;
-  grid-auto-rows: min-content;
+  overflow: auto;
 `;
 
 export const H1: StyledComponent<'h1', {}> = styled.h1`
