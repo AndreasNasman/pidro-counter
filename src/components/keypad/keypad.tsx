@@ -20,7 +20,7 @@ export const Keypad: FunctionComponent = (): ReactElement => {
       <TeamWrapper>
         {teams.map((team: string) => (
           <Button key={team} theme={{ color: PLAYING_CARD_BLACK }}>
-            {team}
+            {team.toUpperCase()}
           </Button>
         ))}
       </TeamWrapper>

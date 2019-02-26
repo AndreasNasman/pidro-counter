@@ -1,15 +1,16 @@
 import styled, { StyledComponent, ThemedStyledProps } from 'styled-components';
-import { LANDSCAPE } from '../../constants/breakpoints';
 import { PLAYING_CARD_RED } from '../../constants/colors';
+
+const buttonGap: number = 0.1;
 
 export const Button: StyledComponent<'button', {}> = styled.button`
   background-color: transparent;
-  border: 5px solid white;
-  border-radius: 10px;
+  border: 0.25rem solid white;
+  border-radius: 0.5rem;
   color: white;
-  font: bold 1.5rem 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
   padding: 0.5rem;
-  text-transform: uppercase;
 
   &:focus {
     background-color: white;
@@ -21,30 +22,29 @@ export const Button: StyledComponent<'button', {}> = styled.button`
 Button.defaultProps = { theme: { color: PLAYING_CARD_RED } };
 
 export const Container: StyledComponent<'div', {}> = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  @media (min-width: ${LANDSCAPE}) {
-    max-width: 20em;
-  }
+  align-content: safe center;
+  display: grid;
+  overflow: auto;
 `;
 
 export const H1: StyledComponent<'h1', {}> = styled.h1`
   color: white;
-  margin-top: 0.1rem;
   text-align: center;
+
+  @media screen and (orientation: landscape) {
+    margin-top: 0;
+  }
 `;
 
 export const PointWrapper: StyledComponent<'div', {}> = styled.div`
   display: grid;
-  grid-gap: 1px;
+  grid-gap: ${buttonGap}rem;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 1px;
 `;
 
 export const TeamWrapper: StyledComponent<'div', {}> = styled.div`
   display: grid;
-  grid-gap: 1px;
+  grid-gap: ${buttonGap}rem;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: ${buttonGap}rem;
 `;
