@@ -1,25 +1,24 @@
-import styled, { StyledComponent, ThemedStyledProps } from 'styled-components';
-import { PLAYING_CARD_RED } from '../../constants/colors';
+import styled, { StyledComponent } from 'styled-components';
+import { IButton } from './types';
 
 const buttonGap: number = 0.1;
 
-export const Button: StyledComponent<'button', {}> = styled.button`
-  background-color: transparent;
+export const Button: StyledComponent<'button', {}, IButton> = styled.button`
+  background-color: ${(props: IButton): string =>
+    props.active ? 'white' : 'transparent'};
   border: 0.25rem solid white;
   border-radius: 0.5rem;
   color: white;
+  color: ${(props: IButton): string =>
+    props.active ? props.activeColor : 'white'};
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0.5rem;
 
   &:focus {
-    background-color: white;
-    color: ${(props: ThemedStyledProps<{}, { color: string }>): string =>
-      props.theme.color};
     outline: none;
   }
 `;
-Button.defaultProps = { theme: { color: PLAYING_CARD_RED } };
 
 export const Container: StyledComponent<'div', {}> = styled.div`
   align-content: safe center;
@@ -27,7 +26,7 @@ export const Container: StyledComponent<'div', {}> = styled.div`
   overflow: auto;
 `;
 
-export const H1: StyledComponent<'h1', {}> = styled.h1`
+export const H2: StyledComponent<'h2', {}> = styled.h2`
   color: white;
   text-align: center;
 

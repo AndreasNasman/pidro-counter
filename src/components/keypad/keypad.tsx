@@ -1,9 +1,10 @@
 import React, { FunctionComponent, ReactElement, useState } from 'react';
-import { PLAYING_CARD_BLACK } from '../../constants/colors';
-import { Button, Container, H1, PointWrapper, TeamWrapper } from './styles';
+import { PLAYING_CARD_BLACK, PLAYING_CARD_RED } from '../../constants/colors';
+import { Button, Container, H2, PointWrapper, TeamWrapper } from './styles';
 import { IProps } from './types';
 
 export const Keypad: FunctionComponent<IProps> = ({
+  bid,
   teams,
 }: IProps): ReactElement => {
   const [points] = useState(() => {
@@ -14,14 +15,44 @@ export const Keypad: FunctionComponent<IProps> = ({
       (point: number) => point + minimum,
     );
   });
+  const [selectedTeam, setSelectedTeam] = useState<string | undefined>(
+    undefined,
+  );
+  const [selectedPoint, setSelectedPoint] = useState<number | undefined>(
+    undefined,
+  );
+
+  const handleTeamClick: (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => void = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    const { value } = event.currentTarget;
+    setSelectedTeam(value);
+  };
+
+  const handlePointClick: (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => void = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    const { value } = event.currentTarget;
+    setSelectedPoint(Number(value));
+  };
 
   return (
     <Container>
-      <H1>Vem bjöud?</H1>
+      {!bid || bid.team === undefined || bid.point === undefined ? (
+        <H2>Vem bjöud?</H2>
+      ) : (
+        <H2>Vem fick högst poäng?</H2>
+      )}
 
       <TeamWrapper>
         {teams.map((team: string) => (
-          <Button key={team} theme={{ color: PLAYING_CARD_BLACK }}>
+          <Button
+            active={team === selectedTeam}
+            activeColor={PLAYING_CARD_BLACK}
+            key={team}
+            onClick={handleTeamClick}
+            value={team}
+          >
             {team.toUpperCase()}
           </Button>
         ))}
@@ -29,7 +60,15 @@ export const Keypad: FunctionComponent<IProps> = ({
 
       <PointWrapper>
         {points.map((point: number) => (
-          <Button key={point}>{point}</Button>
+          <Button
+            active={point === selectedPoint}
+            activeColor={PLAYING_CARD_RED}
+            key={point}
+            onClick={handlePointClick}
+            value={point}
+          >
+            {point}
+          </Button>
         ))}
       </PointWrapper>
     </Container>
