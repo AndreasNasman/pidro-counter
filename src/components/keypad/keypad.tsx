@@ -26,11 +26,13 @@ export const Keypad: FunctionComponent<IProps> = ({
   );
 
   useEffect(() => {
-    if (selectedTeam !== undefined && selectedDigit !== undefined) {
-      updateSet({ points: selectedDigit, team: selectedTeam });
-      setSelectedTeam(undefined);
-      setSelectedDigit(undefined);
+    if (selectedTeam === undefined || selectedDigit === undefined) {
+      return undefined;
     }
+
+    updateSet({ points: selectedDigit, team: selectedTeam });
+    setSelectedTeam(undefined);
+    setSelectedDigit(undefined);
   }, [selectedTeam, selectedDigit]);
 
   const handleTeamClick: (
