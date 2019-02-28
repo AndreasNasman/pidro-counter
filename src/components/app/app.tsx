@@ -34,9 +34,7 @@ export const App: FunctionComponent = (): ReactElement => {
     ]);
   };
 
-  const updateScore: (highestScore: IResult) => void = (
-    highestScore: IResult,
-  ): void => {
+  const updateScore: (winner: IResult) => void = (winner: IResult): void => {
     const { bid } = currentSet;
     if (!bid) return;
     const { points: biddingPoints, team: biddingTeam } = bid;
@@ -44,9 +42,7 @@ export const App: FunctionComponent = (): ReactElement => {
     const score: Score = teams.reduce(
       (result: Score, team: Team) => {
         result[team] =
-          team === highestScore.team
-            ? highestScore.points
-            : MAXIMUM_POINTS - highestScore.points;
+          team === winner.team ? winner.points : MAXIMUM_POINTS - winner.points;
 
         if (team === biddingTeam && result[team] < biddingPoints) {
           result[team] = -biddingPoints;

@@ -58,11 +58,7 @@ export const Keypad: FunctionComponent<IProps> = ({
 
   return (
     <Container>
-      {phase === Phases.Bidding ? (
-        <H2>Vem bjöud?</H2>
-      ) : (
-        <H2>Vem fick högst poäng?</H2>
-      )}
+      {phase === Phases.Bidding ? <H2>Vem bjöud?</H2> : <H2>Vem vann?</H2>}
 
       <TeamWrapper>
         {teams.map((team: Team) => (
