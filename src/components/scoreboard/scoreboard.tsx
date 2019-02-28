@@ -1,4 +1,5 @@
 import React, { FunctionComponent, ReactElement, useState } from 'react';
+import { Team } from '../app/types';
 import { Body, Cell, Column, Foot, Head, Table } from './styles';
 import { IProps } from './types';
 
@@ -19,7 +20,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
   return (
     <Table>
       <Head>
-        {teams.map((team: string) => (
+        {teams.map((team: Team) => (
           <Column key={team}>
             <Cell>{team.toUpperCase()}</Cell>
           </Column>

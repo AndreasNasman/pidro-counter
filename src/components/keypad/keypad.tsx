@@ -1,51 +1,69 @@
-import React, { FunctionComponent, ReactElement, useState } from 'react';
+import React, {
+  FunctionComponent,
+  ReactElement,
+  useEffect,
+  useState,
+} from 'react';
 import { PLAYING_CARD_BLACK, PLAYING_CARD_RED } from '../../constants/colors';
+import { MAXIMUM_POINTS, MINIMUM_POINTS } from '../../constants/game';
+import { Phases, Team } from '../app/types';
 import { Button, Container, H2, PointWrapper, TeamWrapper } from './styles';
 import { IProps } from './types';
 
 export const Keypad: FunctionComponent<IProps> = ({
-  bid,
+  phase,
   teams,
+  updateSet,
 }: IProps): ReactElement => {
-  const [points] = useState(() => {
-    const size: number = 9;
-    const minimum: number = 6;
-
-    return Array.from(Array(size).keys()).map(
-      (point: number) => point + minimum,
-    );
-  });
-  const [selectedTeam, setSelectedTeam] = useState<string | undefined>(
-    undefined,
+  const [points] = useState(() =>
+    Array.from(Array(MAXIMUM_POINTS - MINIMUM_POINTS + 1).keys()).map(
+      (point: number) => point + MINIMUM_POINTS,
+    ),
   );
+  const [selectedTeam, setSelectedTeam] = useState<Team | undefined>(undefined);
   const [selectedPoint, setSelectedPoint] = useState<number | undefined>(
     undefined,
   );
 
+  useEffect(() => {
+    if (selectedTeam !== undefined && selectedPoint !== undefined) {
+      updateSet({ point: selectedPoint, team: selectedTeam });
+      setSelectedTeam(undefined);
+      setSelectedPoint(undefined);
+    }
+  }, [selectedTeam, selectedPoint]);
+
   const handleTeamClick: (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => void = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    const { value } = event.currentTarget;
-    setSelectedTeam(value);
+    const newSelectedTeam: Team = event.currentTarget.value as Team;
+
+    if (newSelectedTeam === selectedTeam) return;
+
+    setSelectedTeam(newSelectedTeam);
   };
 
   const handlePointClick: (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => void = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const { value } = event.currentTarget;
-    setSelectedPoint(Number(value));
+    const newSelectedPoint: number = Number(value);
+
+    if (newSelectedPoint === selectedPoint) return;
+
+    setSelectedPoint(newSelectedPoint);
   };
 
   return (
     <Container>
-      {!bid || bid.team === undefined || bid.point === undefined ? (
+      {phase === Phases.Bidding ? (
         <H2>Vem bjöud?</H2>
       ) : (
         <H2>Vem fick högst poäng?</H2>
       )}
 
       <TeamWrapper>
-        {teams.map((team: string) => (
+        {teams.map((team: Team) => (
           <Button
             active={team === selectedTeam}
             activeColor={PLAYING_CARD_BLACK}

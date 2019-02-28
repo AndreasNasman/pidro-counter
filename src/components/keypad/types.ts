@@ -1,8 +1,9 @@
-import { IBid, Team } from '../app/types';
+import { IResult, Phases, Team } from '../app/types';
 
 export interface IProps {
-  bid?: IBid;
+  phase: Phases;
   teams: Team[];
+  updateSet(result: IResult): void;
 }
 
 export interface IButton {
