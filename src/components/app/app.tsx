@@ -13,7 +13,7 @@ import { Game, IResult, ISet, Phases, Score, Team } from './types';
 export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
   const [game, setGame] = useState<Game>(() => {
-    const storedGame: string | null = localStorage.getItem('game');
+    const storedGame: string | null = sessionStorage.getItem('game');
     if (storedGame === null) {
       return [{ phase: Phases.Bidding, round: 1 }];
     }
@@ -24,7 +24,7 @@ export const App: FunctionComponent = (): ReactElement => {
   const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
 
   useEffect(() => {
-    localStorage.setItem('game', JSON.stringify(game));
+    sessionStorage.setItem('game', JSON.stringify(game));
   }, [game]);
 
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
