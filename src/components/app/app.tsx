@@ -1,4 +1,9 @@
-import React, { FunctionComponent, ReactElement, useState } from 'react';
+import React, {
+  FunctionComponent,
+  ReactElement,
+  useEffect,
+  useState,
+} from 'react';
 import { MAXIMUM_POINTS } from '../../constants/game';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
@@ -7,13 +12,25 @@ import { Game, IResult, ISet, Phases, Score, Team } from './types';
 
 export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
-  const [game, setGame] = useState<Game>([{ round: 1 }]);
+  const [game, setGame] = useState<Game>(() => {
+    const storedGame: string | null = localStorage.getItem('game');
+    if (storedGame !== null) {
+      return JSON.parse(storedGame) as Game;
+    }
+
+    return [{ phase: Phases.Bidding, round: 1 }];
+  });
   const currentSet: ISet = game[game.length - 1];
-  const [phase, setPhase] = useState(Phases.Bidding);
+
+  useEffect(() => {
+    localStorage.setItem('game', JSON.stringify(game));
+  }, [game]);
 
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
-    setGame([...game.slice(0, -1), { ...currentSet, bid }]);
-    setPhase(Phases.Score);
+    setGame([
+      ...game.slice(0, -1),
+      { ...currentSet, bid, phase: Phases.Score },
+    ]);
   };
 
   const updateScore: (highestScore: IResult) => void = (
@@ -42,20 +59,19 @@ export const App: FunctionComponent = (): ReactElement => {
     setGame([
       ...game.slice(0, -1),
       { ...currentSet, score },
-      { round: currentSet.round + 1 },
+      { phase: Phases.Bidding, round: currentSet.round + 1 },
     ]);
-    setPhase(Phases.Bidding);
   };
 
   const updateSet: (result: IResult) => void =
-    phase === Phases.Bidding ? updateBid : updateScore;
+    currentSet.phase === Phases.Bidding ? updateBid : updateScore;
 
   return (
     <>
       <GlobalStyle />
       <Felt>
         <Scoreboard game={game} teams={teams} />
-        <Keypad phase={phase} teams={teams} updateSet={updateSet} />
+        <Keypad phase={currentSet.phase} teams={teams} updateSet={updateSet} />
       </Felt>
     </>
   );
