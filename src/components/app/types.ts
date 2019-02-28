@@ -11,6 +11,8 @@ export interface ISet {
   score?: { [K in Team]: number };
 }
 
+export type Game = ISet[];
+
 export enum Phases {
   Bidding,
   Score,
