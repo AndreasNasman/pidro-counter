@@ -7,7 +7,7 @@ import React, {
 import { PLAYING_CARD_BLACK, PLAYING_CARD_RED } from '../../constants/colors';
 import { MAXIMUM_POINTS, MINIMUM_POINTS } from '../../constants/game';
 import { Phases, Team } from '../app/types';
-import { Button, Container, H2, PointWrapper, TeamWrapper } from './styles';
+import { Button, Container, DigitWrapper, H2, TeamWrapper } from './styles';
 import { IProps } from './types';
 
 export const Keypad: FunctionComponent<IProps> = ({
@@ -15,23 +15,23 @@ export const Keypad: FunctionComponent<IProps> = ({
   teams,
   updateSet,
 }: IProps): ReactElement => {
-  const [points] = useState(() =>
+  const [digits] = useState(() =>
     Array.from(Array(MAXIMUM_POINTS - MINIMUM_POINTS + 1).keys()).map(
-      (point: number) => point + MINIMUM_POINTS,
+      (digit: number) => digit + MINIMUM_POINTS,
     ),
   );
   const [selectedTeam, setSelectedTeam] = useState<Team | undefined>(undefined);
-  const [selectedPoint, setSelectedPoint] = useState<number | undefined>(
+  const [selectedDigit, setSelectedDigit] = useState<number | undefined>(
     undefined,
   );
 
   useEffect(() => {
-    if (selectedTeam !== undefined && selectedPoint !== undefined) {
-      updateSet({ point: selectedPoint, team: selectedTeam });
+    if (selectedTeam !== undefined && selectedDigit !== undefined) {
+      updateSet({ points: selectedDigit, team: selectedTeam });
       setSelectedTeam(undefined);
-      setSelectedPoint(undefined);
+      setSelectedDigit(undefined);
     }
-  }, [selectedTeam, selectedPoint]);
+  }, [selectedTeam, selectedDigit]);
 
   const handleTeamClick: (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -43,15 +43,15 @@ export const Keypad: FunctionComponent<IProps> = ({
     setSelectedTeam(newSelectedTeam);
   };
 
-  const handlePointClick: (
+  const handleDigitClick: (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => void = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const { value } = event.currentTarget;
-    const newSelectedPoint: number = Number(value);
+    const newSelectedDigit: number = Number(value);
 
-    if (newSelectedPoint === selectedPoint) return;
+    if (newSelectedDigit === selectedDigit) return;
 
-    setSelectedPoint(newSelectedPoint);
+    setSelectedDigit(newSelectedDigit);
   };
 
   return (
@@ -76,19 +76,19 @@ export const Keypad: FunctionComponent<IProps> = ({
         ))}
       </TeamWrapper>
 
-      <PointWrapper>
-        {points.map((point: number) => (
+      <DigitWrapper>
+        {digits.map((digit: number) => (
           <Button
-            active={point === selectedPoint}
+            active={digit === selectedDigit}
             activeColor={PLAYING_CARD_RED}
-            key={point}
-            onClick={handlePointClick}
-            value={point}
+            key={digit}
+            onClick={handleDigitClick}
+            value={digit}
           >
-            {point}
+            {digit}
           </Button>
         ))}
-      </PointWrapper>
+      </DigitWrapper>
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 export type Team = 'vi' | 'de';
 
 export interface IResult {
-  point: number;
+  points: number;
   team: Team;
 }
 

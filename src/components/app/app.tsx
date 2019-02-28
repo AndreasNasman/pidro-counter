@@ -21,17 +21,17 @@ export const App: FunctionComponent = (): ReactElement => {
   ): void => {
     const { bid } = currentSet;
     if (!bid) return;
-    const { point: biddingPoint, team: biddingTeam } = bid;
+    const { points: biddingPoints, team: biddingTeam } = bid;
 
     const score: { [K in Team]: number } = teams.reduce(
       (result: { [K in Team]: number }, team: Team) => {
         result[team] =
           team === highestScore.team
-            ? highestScore.point
-            : MAXIMUM_POINTS - highestScore.point;
+            ? highestScore.points
+            : MAXIMUM_POINTS - highestScore.points;
 
-        if (team === biddingTeam && result[team] < biddingPoint) {
-          result[team] = -biddingPoint;
+        if (team === biddingTeam && result[team] < biddingPoints) {
+          result[team] = -biddingPoints;
         }
 
         return result;
