@@ -8,7 +8,7 @@ const Row: StyledComponent<'div', {}> = styled.div`
 `;
 
 export const Body: StyledComponent<'div', {}> = styled(Row)`
-  overflow: scroll;
+  overflow: auto;
 `;
 
 export const Cell: StyledComponent<'div', {}> = styled.div`
