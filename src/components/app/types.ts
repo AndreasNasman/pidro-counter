@@ -5,10 +5,12 @@ export interface IResult {
   team: Team;
 }
 
+export type Score = { [K in Team]: number };
+
 export interface ISet {
   bid?: IResult;
   round: number;
-  score?: { [K in Team]: number };
+  score?: Score;
 }
 
 export type Game = ISet[];

@@ -3,7 +3,7 @@ import { MAXIMUM_POINTS } from '../../constants/game';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
 import { Felt, GlobalStyle } from './styles';
-import { Game, IResult, ISet, Phases, Team } from './types';
+import { Game, IResult, ISet, Phases, Score, Team } from './types';
 
 export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
@@ -23,8 +23,8 @@ export const App: FunctionComponent = (): ReactElement => {
     if (!bid) return;
     const { points: biddingPoints, team: biddingTeam } = bid;
 
-    const score: { [K in Team]: number } = teams.reduce(
-      (result: { [K in Team]: number }, team: Team) => {
+    const score: Score = teams.reduce(
+      (result: Score, team: Team) => {
         result[team] =
           team === highestScore.team
             ? highestScore.points
@@ -36,7 +36,7 @@ export const App: FunctionComponent = (): ReactElement => {
 
         return result;
       },
-      {} as { [K in Team]: number }, // tslint:disable-line: no-object-literal-type-assertion
+      {} as Score, // tslint:disable-line: no-object-literal-type-assertion
     );
 
     setGame([
