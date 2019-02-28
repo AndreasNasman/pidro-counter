@@ -5,15 +5,18 @@ export interface IResult {
   team: Team;
 }
 
-export interface ISet {
-  bid?: IResult;
-  round: number;
-  score?: { [K in Team]: number };
-}
-
-export type Game = ISet[];
-
 export enum Phases {
   Bidding,
   Score,
 }
+
+export type Score = { [K in Team]: number };
+
+export interface ISet {
+  bid?: IResult;
+  phase: Phases;
+  round: number;
+  score?: Score;
+}
+
+export type Game = ISet[];
