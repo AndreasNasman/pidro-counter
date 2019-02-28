@@ -14,13 +14,14 @@ export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
   const [game, setGame] = useState<Game>(() => {
     const storedGame: string | null = localStorage.getItem('game');
-    if (storedGame !== null) {
-      return JSON.parse(storedGame) as Game;
+    if (storedGame === null) {
+      return [{ phase: Phases.Bidding, round: 1 }];
     }
 
-    return [{ phase: Phases.Bidding, round: 1 }];
+    return JSON.parse(storedGame) as Game;
   });
   const currentSet: ISet = game[game.length - 1];
+  const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
 
   useEffect(() => {
     localStorage.setItem('game', JSON.stringify(game));
@@ -33,9 +34,7 @@ export const App: FunctionComponent = (): ReactElement => {
     ]);
   };
 
-  const updateScore: (highestScore: IResult) => void = (
-    highestScore: IResult,
-  ): void => {
+  const updateScore: (winner: IResult) => void = (winner: IResult): void => {
     const { bid } = currentSet;
     if (!bid) return;
     const { points: biddingPoints, team: biddingTeam } = bid;
@@ -43,9 +42,7 @@ export const App: FunctionComponent = (): ReactElement => {
     const score: Score = teams.reduce(
       (result: Score, team: Team) => {
         result[team] =
-          team === highestScore.team
-            ? highestScore.points
-            : MAXIMUM_POINTS - highestScore.points;
+          team === winner.team ? winner.points : MAXIMUM_POINTS - winner.points;
 
         if (team === biddingTeam && result[team] < biddingPoints) {
           result[team] = -biddingPoints;
@@ -69,8 +66,12 @@ export const App: FunctionComponent = (): ReactElement => {
   return (
     <>
       <GlobalStyle />
-      <Felt>
-        <Scoreboard game={game} teams={teams} />
+      <Felt scoreboardMinHeight={scoreboardMinHeight}>
+        <Scoreboard
+          game={game}
+          setScoreboardMinHeight={setScoreboardMinHeight}
+          teams={teams}
+        />
         <Keypad phase={currentSet.phase} teams={teams} updateSet={updateSet} />
       </Felt>
     </>

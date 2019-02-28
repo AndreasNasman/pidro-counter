@@ -26,11 +26,13 @@ export const Keypad: FunctionComponent<IProps> = ({
   );
 
   useEffect(() => {
-    if (selectedTeam !== undefined && selectedDigit !== undefined) {
-      updateSet({ points: selectedDigit, team: selectedTeam });
-      setSelectedTeam(undefined);
-      setSelectedDigit(undefined);
+    if (selectedTeam === undefined || selectedDigit === undefined) {
+      return undefined;
     }
+
+    updateSet({ points: selectedDigit, team: selectedTeam });
+    setSelectedTeam(undefined);
+    setSelectedDigit(undefined);
   }, [selectedTeam, selectedDigit]);
 
   const handleTeamClick: (
@@ -56,11 +58,7 @@ export const Keypad: FunctionComponent<IProps> = ({
 
   return (
     <Container>
-      {phase === Phases.Bidding ? (
-        <H2>Vem bjöud?</H2>
-      ) : (
-        <H2>Vem fick högst poäng?</H2>
-      )}
+      {phase === Phases.Bidding ? <H2>Vem bjöud?</H2> : <H2>Vem vann?</H2>}
 
       <TeamWrapper>
         {teams.map((team: Team) => (
