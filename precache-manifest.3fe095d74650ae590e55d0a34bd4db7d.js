@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "f5ea7a75e2e03163c871",
-    "url": "/pidro-counter/static/js/main.f5ea7a75.chunk.js"
+    "revision": "f0eceb4226e7c0be4c81",
+    "url": "/pidro-counter/static/js/main.f0eceb42.chunk.js"
   },
   {
     "revision": "7df57f6ad20a58c6bafb",
     "url": "/pidro-counter/static/js/runtime~main.7df57f6a.js"
   },
   {
-    "revision": "75df7fb55b9f1b3cec95",
+    "revision": "8abe3ec3e0168b91c2b8",
     "url": "/pidro-counter/static/css/2.362a4029.chunk.css"
   },
   {
-    "revision": "75df7fb55b9f1b3cec95",
-    "url": "/pidro-counter/static/js/2.75df7fb5.chunk.js"
+    "revision": "8abe3ec3e0168b91c2b8",
+    "url": "/pidro-counter/static/js/2.8abe3ec3.chunk.js"
   },
   {
     "revision": "987b84570ea69ee660455b8d5e91f5f1",
@@ -60,12 +60,12 @@ self.__precacheManifest = [
     "url": "/pidro-counter/static/media/roboto-latin-300italic.d69924b9.woff2"
   },
   {
-    "revision": "bafb105baeb22d965c70fe52ba6b49d9",
-    "url": "/pidro-counter/static/media/roboto-latin-400.bafb105b.woff"
-  },
-  {
     "revision": "210a7c781f5a354a0e4985656ab456d9",
     "url": "/pidro-counter/static/media/roboto-latin-300italic.210a7c78.woff"
+  },
+  {
+    "revision": "bafb105baeb22d965c70fe52ba6b49d9",
+    "url": "/pidro-counter/static/media/roboto-latin-400.bafb105b.woff"
   },
   {
     "revision": "d8bcbe724fd6f4ba44d0ee6a2675890f",
@@ -76,20 +76,20 @@ self.__precacheManifest = [
     "url": "/pidro-counter/static/media/roboto-latin-400italic.9680d5a0.woff"
   },
   {
-    "revision": "510dec37fa69fba39593e01a469ee018",
-    "url": "/pidro-counter/static/media/roboto-latin-500italic.510dec37.woff2"
-  },
-  {
     "revision": "de8b7431b74642e830af4d4f4b513ec9",
     "url": "/pidro-counter/static/media/roboto-latin-500.de8b7431.woff"
   },
   {
-    "revision": "cf6613d1adf490972c557a8e318e0868",
-    "url": "/pidro-counter/static/media/roboto-latin-700.cf6613d1.woff"
+    "revision": "510dec37fa69fba39593e01a469ee018",
+    "url": "/pidro-counter/static/media/roboto-latin-500italic.510dec37.woff2"
   },
   {
     "revision": "ffcc050b2d92d4b14a4fcb527ee0bcc8",
     "url": "/pidro-counter/static/media/roboto-latin-500italic.ffcc050b.woff"
+  },
+  {
+    "revision": "cf6613d1adf490972c557a8e318e0868",
+    "url": "/pidro-counter/static/media/roboto-latin-700.cf6613d1.woff"
   },
   {
     "revision": "010c1aeee3c6d1cbb1d5761d80353823",
@@ -112,7 +112,7 @@ self.__precacheManifest = [
     "url": "/pidro-counter/static/media/roboto-latin-900italic.bc833e72.woff"
   },
   {
-    "revision": "339603360d369951805d6b4308722bca",
+    "revision": "ef1a85b2fa7af84c583bfca2646f34da",
     "url": "/pidro-counter/index.html"
   }
 ];
