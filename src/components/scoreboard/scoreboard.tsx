@@ -1,21 +1,25 @@
-import React, { FunctionComponent, ReactElement, useState } from 'react';
-import { Team } from '../app/types';
+import React, {
+  FunctionComponent,
+  MutableRefObject,
+  ReactElement,
+  useEffect,
+  useRef,
+} from 'react';
+import { ISet, Team } from '../app/types';
 import { Body, Cell, Column, Foot, Head, Table } from './styles';
 import { IProps } from './types';
 
 export const Scoreboard: FunctionComponent<IProps> = ({
+  game,
   teams,
 }: IProps): ReactElement => {
-  const [sets] = useState([
-    { round: 1, score: { de: 7, vi: 7 } },
-    { round: 2, score: { de: 14, vi: -9 } },
-    { round: 3, score: { de: 14, vi: -10 } },
-    { round: 4, score: { de: 6, vi: -11 } },
-    { round: 5, score: { de: 6, vi: -12 } },
-    { round: 6, score: { de: 6, vi: -13 } },
-    { round: 7, score: { de: 6, vi: -14 } },
-    { round: 8, score: { de: 14, vi: 0 } },
-  ]);
+  const bodyColumnRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
+  useEffect(() => {
+    const { current } = bodyColumnRef;
+    if (current === null) return undefined;
+
+    current.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  }, [game.length]);
 
   return (
     <Table>
@@ -28,39 +32,28 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       </Head>
 
       <Body>
-        <Column>
-          {sets.map((set: { round: number; score: { vi: number } }) => (
-            <Cell key={set.round}>{set.score.vi}</Cell>
-          ))}
-        </Column>
-
-        <Column>
-          {sets.map((set: { round: number; score: { de: number } }) => (
-            <Cell key={set.round}>{set.score.de}</Cell>
-          ))}
-        </Column>
+        {teams.map((team: Team) => (
+          <Column key={team} ref={bodyColumnRef}>
+            {game.map(
+              (set: ISet) =>
+                set.score && <Cell key={set.round}>{set.score[team]}</Cell>, // tslint:disable-line: strict-boolean-expressions
+            )}
+          </Column>
+        ))}
       </Body>
 
       <Foot>
-        <Column>
-          <Cell>
-            {sets.reduce(
-              (sum: number, set: { score: { vi: number } }) =>
-                sum + set.score.vi,
-              0,
-            )}
-          </Cell>
-        </Column>
-
-        <Column>
-          <Cell>
-            {sets.reduce(
-              (sum: number, set: { score: { de: number } }) =>
-                sum + set.score.de,
-              0,
-            )}
-          </Cell>
-        </Column>
+        {teams.map((team: Team) => (
+          <Column key={team}>
+            <Cell>
+              {game.reduce(
+                (sum: number, set: ISet) =>
+                  set.score ? sum + set.score[team] : sum,
+                0,
+              )}
+            </Cell>
+          </Column>
+        ))}
       </Foot>
     </Table>
   );

@@ -3,11 +3,11 @@ import { MAXIMUM_POINTS } from '../../constants/game';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
 import { Felt, GlobalStyle } from './styles';
-import { IResult, ISet, Phases, Team } from './types';
+import { Game, IResult, ISet, Phases, Team } from './types';
 
 export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
-  const [game, setGame] = useState<ISet[]>([{ round: 1 }]);
+  const [game, setGame] = useState<Game>([{ round: 1 }]);
   const currentSet: ISet = game[game.length - 1];
   const [phase, setPhase] = useState(Phases.Bidding);
 
@@ -54,7 +54,7 @@ export const App: FunctionComponent = (): ReactElement => {
     <>
       <GlobalStyle />
       <Felt>
-        <Scoreboard teams={teams} />
+        <Scoreboard game={game} teams={teams} />
         <Keypad phase={phase} teams={teams} updateSet={updateSet} />
       </Felt>
     </>
