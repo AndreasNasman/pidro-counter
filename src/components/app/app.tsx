@@ -14,13 +14,14 @@ export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
   const [game, setGame] = useState<Game>(() => {
     const storedGame: string | null = localStorage.getItem('game');
-    if (storedGame !== null) {
-      return JSON.parse(storedGame) as Game;
+    if (storedGame === null) {
+      return [{ phase: Phases.Bidding, round: 1 }];
     }
 
-    return [{ phase: Phases.Bidding, round: 1 }];
+    return JSON.parse(storedGame) as Game;
   });
   const currentSet: ISet = game[game.length - 1];
+  const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
 
   useEffect(() => {
     localStorage.setItem('game', JSON.stringify(game));
@@ -69,8 +70,12 @@ export const App: FunctionComponent = (): ReactElement => {
   return (
     <>
       <GlobalStyle />
-      <Felt>
-        <Scoreboard game={game} teams={teams} />
+      <Felt scoreboardMinHeight={scoreboardMinHeight}>
+        <Scoreboard
+          game={game}
+          setScoreboardMinHeight={setScoreboardMinHeight}
+          teams={teams}
+        />
         <Keypad phase={currentSet.phase} teams={teams} updateSet={updateSet} />
       </Felt>
     </>
