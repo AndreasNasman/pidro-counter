@@ -26,6 +26,12 @@ export const Container: StyledComponent<'div', {}> = styled.div`
   overflow: auto;
 `;
 
+export const DigitWrapper: StyledComponent<'div', {}> = styled.div`
+  display: grid;
+  grid-gap: ${buttonGap}rem;
+  grid-template-columns: 1fr 1fr 1fr;
+`;
+
 export const H2: StyledComponent<'h2', {}> = styled.h2`
   color: white;
   text-align: center;
@@ -33,12 +39,6 @@ export const H2: StyledComponent<'h2', {}> = styled.h2`
   @media screen and (orientation: landscape) {
     margin-top: 0;
   }
-`;
-
-export const PointWrapper: StyledComponent<'div', {}> = styled.div`
-  display: grid;
-  grid-gap: ${buttonGap}rem;
-  grid-template-columns: 1fr 1fr 1fr;
 `;
 
 export const TeamWrapper: StyledComponent<'div', {}> = styled.div`
