@@ -35,4 +35,8 @@ export const GlobalStyle: GlobalStyleComponent<
   * {
     font-family: 'Roboto', sans-serif;
     }
+  
+  body {
+    user-select: none;
+  }
 `;
