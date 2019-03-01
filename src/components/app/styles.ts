@@ -37,6 +37,8 @@ export const GlobalStyle: GlobalStyleComponent<
     }
   
   body {
+    background-color: black;
+    overscroll-behavior: contain;
     user-select: none;
   }
 `;
