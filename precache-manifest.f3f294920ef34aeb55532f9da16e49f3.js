@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "a7c7c4de30e33318dc62",
-    "url": "/pidro-counter/static/js/main.a7c7c4de.chunk.js"
+    "revision": "b92a3a57ac809b49f645",
+    "url": "/pidro-counter/static/js/main.b92a3a57.chunk.js"
   },
   {
     "revision": "7df57f6ad20a58c6bafb",
@@ -112,7 +112,7 @@ self.__precacheManifest = [
     "url": "/pidro-counter/static/media/roboto-latin-900italic.bc833e72.woff"
   },
   {
-    "revision": "60c9f568ecce85f965469d68065b8f35",
+    "revision": "425e9e45e5403c84037fe3cbe5f8e5b8",
     "url": "/pidro-counter/index.html"
   }
 ];
