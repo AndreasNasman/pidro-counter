@@ -35,4 +35,12 @@ export const GlobalStyle: GlobalStyleComponent<
   * {
     font-family: 'Roboto', sans-serif;
     }
+  
+  body {
+    background-color: black;
+    overscroll-behavior: contain;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
 `;
