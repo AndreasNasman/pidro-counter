@@ -18,7 +18,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
   const bodyColumnRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
   const headRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
   const footRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
-  const cellRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
+  const footCellRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
 
   useEffect(() => {
     const { current } = bodyColumnRef;
@@ -30,7 +30,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
   useLayoutEffect(() => {
     const { current: currentHeadRef } = headRef;
     const { current: currentFootRef } = footRef;
-    const { current: currentCellRef } = cellRef;
+    const { current: currentCellRef } = footCellRef;
     if (
       currentHeadRef === null ||
       currentFootRef === null ||
@@ -60,11 +60,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
           <Column key={team} ref={bodyColumnRef}>
             {game.map(
               (set: ISet) =>
-                set.score && (
-                  <Cell key={set.round} ref={cellRef}>
-                    {set.score[team]}
-                  </Cell>
-                ), // tslint:disable-line: strict-boolean-expressions
+                set.score && <Cell key={set.round}>{set.score[team]}</Cell>, // tslint:disable-line: strict-boolean-expressions
             )}
           </Column>
         ))}
@@ -73,7 +69,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       <Foot ref={footRef}>
         {teams.map((team: Team) => (
           <Column key={team}>
-            <Cell>
+            <Cell ref={footCellRef}>
               {game.reduce(
                 (sum: number, set: ISet) =>
                   set.score ? sum + set.score[team] : sum,
