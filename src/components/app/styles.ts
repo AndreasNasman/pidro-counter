@@ -40,5 +40,7 @@ export const GlobalStyle: GlobalStyleComponent<
     background-color: black;
     overscroll-behavior: contain;
     user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
   }
 `;
