@@ -1,17 +1,21 @@
 import React, {
   FunctionComponent,
+  MutableRefObject,
   ReactElement,
   useEffect,
+  useLayoutEffect,
+  useRef,
   useState,
 } from 'react';
 import { PLAYING_CARD_BLACK, PLAYING_CARD_RED } from '../../constants/colors';
 import { MAXIMUM_POINTS, MINIMUM_POINTS } from '../../constants/game';
 import { Phases, Team } from '../app/types';
-import { Button, Container, DigitWrapper, H2, TeamWrapper } from './styles';
+import { Button, DigitWrapper, H2, TeamWrapper, Wrapper } from './styles';
 import { IProps } from './types';
 
 export const Keypad: FunctionComponent<IProps> = ({
   phase,
+  setKeypadMinHeight,
   teams,
   updateSet,
 }: IProps): ReactElement => {
@@ -24,6 +28,7 @@ export const Keypad: FunctionComponent<IProps> = ({
   const [selectedDigit, setSelectedDigit] = useState<number | undefined>(
     undefined,
   );
+  const containerRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
 
   useEffect(() => {
     if (selectedTeam === undefined || selectedDigit === undefined) {
@@ -34,6 +39,16 @@ export const Keypad: FunctionComponent<IProps> = ({
     setSelectedTeam(undefined);
     setSelectedDigit(undefined);
   }, [selectedTeam, selectedDigit]);
+
+  useLayoutEffect(() => {
+    const { current } = containerRef;
+    if (current === null) {
+      return undefined;
+    }
+
+    const keypadMinHeight: string = `${current.offsetHeight}px`;
+    setKeypadMinHeight(keypadMinHeight);
+  }, []);
 
   const handleTeamClick: (
     event: React.MouseEvent<HTMLButtonElement>,
@@ -57,36 +72,38 @@ export const Keypad: FunctionComponent<IProps> = ({
   };
 
   return (
-    <Container>
-      {phase === Phases.Bidding ? <H2>Vem bjöud?</H2> : <H2>Vem vann?</H2>}
+    <Wrapper>
+      <div ref={containerRef}>
+        {phase === Phases.Bidding ? <H2>Vem bjöud?</H2> : <H2>Vem vann?</H2>}
 
-      <TeamWrapper>
-        {teams.map((team: Team) => (
-          <Button
-            active={team === selectedTeam}
-            activeColor={PLAYING_CARD_BLACK}
-            key={team}
-            onClick={handleTeamClick}
-            value={team}
-          >
-            {team.toUpperCase()}
-          </Button>
-        ))}
-      </TeamWrapper>
+        <TeamWrapper>
+          {teams.map((team: Team) => (
+            <Button
+              active={team === selectedTeam}
+              activeColor={PLAYING_CARD_BLACK}
+              key={team}
+              onClick={handleTeamClick}
+              value={team}
+            >
+              {team.toUpperCase()}
+            </Button>
+          ))}
+        </TeamWrapper>
 
-      <DigitWrapper>
-        {digits.map((digit: number) => (
-          <Button
-            active={digit === selectedDigit}
-            activeColor={PLAYING_CARD_RED}
-            key={digit}
-            onClick={handleDigitClick}
-            value={digit}
-          >
-            {digit}
-          </Button>
-        ))}
-      </DigitWrapper>
-    </Container>
+        <DigitWrapper>
+          {digits.map((digit: number) => (
+            <Button
+              active={digit === selectedDigit}
+              activeColor={PLAYING_CARD_RED}
+              key={digit}
+              onClick={handleDigitClick}
+              value={digit}
+            >
+              {digit}
+            </Button>
+          ))}
+        </DigitWrapper>
+      </div>
+    </Wrapper>
   );
 };

@@ -22,6 +22,7 @@ export const App: FunctionComponent = (): ReactElement => {
   });
   const currentSet: ISet = game[game.length - 1];
   const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
+  const [keypadMinHeight, setKeypadMinHeight] = useState('0');
 
   useEffect(() => {
     sessionStorage.setItem('game', JSON.stringify(game));
@@ -66,13 +67,21 @@ export const App: FunctionComponent = (): ReactElement => {
   return (
     <>
       <GlobalStyle />
-      <Felt scoreboardMinHeight={scoreboardMinHeight}>
+      <Felt
+        keypadMinHeight={keypadMinHeight}
+        scoreboardMinHeight={scoreboardMinHeight}
+      >
         <Scoreboard
           game={game}
           setScoreboardMinHeight={setScoreboardMinHeight}
           teams={teams}
         />
-        <Keypad phase={currentSet.phase} teams={teams} updateSet={updateSet} />
+        <Keypad
+          phase={currentSet.phase}
+          setKeypadMinHeight={setKeypadMinHeight}
+          teams={teams}
+          updateSet={updateSet}
+        />
       </Felt>
     </>
   );

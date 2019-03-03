@@ -20,12 +20,6 @@ export const Button: StyledComponent<'button', {}, IButton> = styled.button`
   }
 `;
 
-export const Container: StyledComponent<'div', {}> = styled.div`
-  align-content: safe center;
-  display: grid;
-  overflow: auto;
-`;
-
 export const DigitWrapper: StyledComponent<'div', {}> = styled.div`
   display: grid;
   grid-gap: ${buttonGap}rem;
@@ -34,11 +28,8 @@ export const DigitWrapper: StyledComponent<'div', {}> = styled.div`
 
 export const H2: StyledComponent<'h2', {}> = styled.h2`
   color: white;
+  margin-top: 0;
   text-align: center;
-
-  @media screen and (orientation: landscape) {
-    margin-top: 0;
-  }
 `;
 
 export const TeamWrapper: StyledComponent<'div', {}> = styled.div`
@@ -46,4 +37,10 @@ export const TeamWrapper: StyledComponent<'div', {}> = styled.div`
   grid-gap: ${buttonGap}rem;
   grid-template-columns: 1fr 1fr;
   margin-bottom: ${buttonGap}rem;
+`;
+
+export const Wrapper: StyledComponent<'div', {}> = styled.div`
+  align-content: safe center;
+  display: grid;
+  overflow: auto;
 `;
