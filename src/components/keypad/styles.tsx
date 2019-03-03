@@ -34,11 +34,8 @@ export const DigitWrapper: StyledComponent<'div', {}> = styled.div`
 
 export const H2: StyledComponent<'h2', {}> = styled.h2`
   color: white;
+  margin-top: 0;
   text-align: center;
-
-  @media screen and (orientation: landscape) {
-    margin-top: 0;
-  }
 `;
 
 export const TeamWrapper: StyledComponent<'div', {}> = styled.div`
