@@ -35,6 +35,6 @@ export const Head: StyledComponent<'div', {}> = styled(Row)`
 export const Table: StyledComponent<'div', {}> = styled.div`
   background-color: ${CHALK_WHITE};
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto 1fr auto;
   overflow: auto;
 `;
