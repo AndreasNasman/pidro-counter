@@ -23,12 +23,12 @@ export const Column: StyledComponent<'div', {}> = styled.div`
 `;
 
 export const Foot: StyledComponent<'div', {}> = styled(Row)`
-  border-top: 0.2rem solid whitesmoke;
+  border-top: 0.2rem solid ${CHALK_WHITE};
   font-weight: bold;
 `;
 
 export const Head: StyledComponent<'div', {}> = styled(Row)`
-  border-bottom: 0.2rem solid whitesmoke;
+  border-bottom: 0.2rem solid ${CHALK_WHITE};
   font-weight: bold;
 `;
 
