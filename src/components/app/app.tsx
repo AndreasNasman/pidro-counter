@@ -7,7 +7,7 @@ import React, {
 import { MAXIMUM_POINTS } from '../../constants/game';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
-import { Felt, GlobalStyle } from './styles';
+import { Felt, GlobalStyle, Grid } from './styles';
 import { Game, IResult, ISet, Phases, Score, Team } from './types';
 
 export const App: FunctionComponent = (): ReactElement => {
@@ -21,7 +21,6 @@ export const App: FunctionComponent = (): ReactElement => {
     return JSON.parse(storedGame) as Game;
   });
   const currentSet: ISet = game[game.length - 1];
-  const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
 
   useEffect(() => {
     sessionStorage.setItem('game', JSON.stringify(game));
@@ -66,13 +65,15 @@ export const App: FunctionComponent = (): ReactElement => {
   return (
     <>
       <GlobalStyle />
-      <Felt scoreboardMinHeight={scoreboardMinHeight}>
-        <Scoreboard
-          game={game}
-          setScoreboardMinHeight={setScoreboardMinHeight}
-          teams={teams}
-        />
-        <Keypad phase={currentSet.phase} teams={teams} updateSet={updateSet} />
+      <Felt>
+        <Grid>
+          <Scoreboard game={game} teams={teams} />
+          <Keypad
+            phase={currentSet.phase}
+            teams={teams}
+            updateSet={updateSet}
+          />
+        </Grid>
       </Felt>
     </>
   );

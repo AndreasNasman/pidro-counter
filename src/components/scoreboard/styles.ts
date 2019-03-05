@@ -1,5 +1,6 @@
 import styled, { StyledComponent } from 'styled-components';
 import { BLACK_BOARD, CHALK_WHITE } from '../../constants/colors';
+import { ITable } from './types';
 
 const Row: StyledComponent<'div', {}> = styled.div`
   display: grid;
@@ -32,9 +33,10 @@ export const Head: StyledComponent<'div', {}> = styled(Row)`
   font-weight: bold;
 `;
 
-export const Table: StyledComponent<'div', {}> = styled.div`
+export const Table: StyledComponent<'div', {}, ITable> = styled.div`
   background-color: ${CHALK_WHITE};
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  overflow: auto;
+  grid-template-rows: auto 1fr auto;
+  min-height: ${(props: ITable): string => props.scoreboardMinHeight};
+  min-width: max-content;
 `;

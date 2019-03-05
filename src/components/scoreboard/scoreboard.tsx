@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useLayoutEffect,
   useRef,
+  useState,
 } from 'react';
 import { ISet, Team } from '../app/types';
 import { Body, Cell, Column, Foot, Head, Table } from './styles';
@@ -12,9 +13,9 @@ import { IProps } from './types';
 
 export const Scoreboard: FunctionComponent<IProps> = ({
   game,
-  setScoreboardMinHeight,
   teams,
 }: IProps): ReactElement => {
+  const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
   const bodyColumnRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
   const headRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
   const footRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
@@ -39,14 +40,14 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       return undefined;
     }
 
-    const scoreboardMinHeight: string = `${currentHeadRef.offsetHeight +
+    const newScoreboardMinHeight: string = `${currentHeadRef.offsetHeight +
       currentFootRef.offsetHeight +
       currentCellRef.offsetHeight}px`;
-    setScoreboardMinHeight(scoreboardMinHeight);
+    setScoreboardMinHeight(newScoreboardMinHeight);
   }, []);
 
   return (
-    <Table>
+    <Table scoreboardMinHeight={scoreboardMinHeight}>
       <Head ref={headRef}>
         {teams.map((team: Team) => (
           <Column key={team}>

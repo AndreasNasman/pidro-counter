@@ -5,26 +5,25 @@ import styled, {
   StyledComponent,
 } from 'styled-components';
 import { FELT_GREEN } from '../../constants/colors';
-import { IFelt } from './types';
 
 const SPACING: number = 1;
 
-export const Felt: StyledComponent<'div', {}, IFelt> = styled.div`
+export const Felt: StyledComponent<'div', {}> = styled.div`
   background-color: ${FELT_GREEN};
   box-shadow: inset 0 0 10rem black;
   display: grid;
-  grid-gap: ${SPACING}rem;
-  grid-template:
-    minmax(${(props: IFelt): string => props.scoreboardMinHeight}, 1fr)
-    auto / minmax(0, 1fr);
   height: calc(100vh - ${SPACING + SPACING}rem);
   padding: ${SPACING}rem;
+`;
+
+export const Grid: StyledComponent<'div', {}> = styled.div`
+  display: grid;
+  grid-template: 1fr auto / 1fr;
+  overflow: auto;
 
   @media screen and (orientation: landscape) {
-    grid-template:
-      minmax(${(props: IFelt): string => props.scoreboardMinHeight}, 1fr)
-      / minmax(min-content, 2fr) minmax(min-content, 1fr);
-    overflow: auto;
+    grid-gap: ${SPACING}rem;
+    grid-template: 1fr / 2fr 1fr;
   }
 `;
 
@@ -37,7 +36,7 @@ export const GlobalStyle: GlobalStyleComponent<
     }
   
   body {
-    background-color: black;
+    background-color: #000;
     overscroll-behavior: contain;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
