@@ -18,12 +18,19 @@ export const Felt: StyledComponent<'div', {}> = styled.div`
 
 export const Grid: StyledComponent<'div', {}> = styled.div`
   display: grid;
-  grid-template: 1fr auto / 1fr;
+  grid-template: 1fr auto auto / 1fr;
+  grid-template-areas:
+    'scoreboard'
+    'toolbar'
+    'keypad';
   overflow: auto;
 
   @media screen and (orientation: landscape) {
-    grid-gap: ${SPACING}rem;
-    grid-template: 1fr / 2fr 1fr;
+    column-gap: ${SPACING}rem;
+    grid-template: 1fr auto / 2fr 1fr;
+    grid-template-areas:
+      'scoreboard keypad'
+      'scoreboard toolbar';
   }
 `;
 

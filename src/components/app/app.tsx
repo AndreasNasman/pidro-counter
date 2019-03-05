@@ -7,15 +7,18 @@ import React, {
 import { MAXIMUM_POINTS } from '../../constants/game';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
+import { Toolbar } from '../toolbar';
 import { Felt, GlobalStyle, Grid } from './styles';
 import { Game, IResult, ISet, Phases, Score, Team } from './types';
+
+const initialGame: Game = [{ phase: Phases.Bidding, round: 1 }];
 
 export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
   const [game, setGame] = useState<Game>(() => {
     const storedGame: string | null = sessionStorage.getItem('game');
     if (storedGame === null) {
-      return [{ phase: Phases.Bidding, round: 1 }];
+      return initialGame;
     }
 
     return JSON.parse(storedGame) as Game;
@@ -59,6 +62,10 @@ export const App: FunctionComponent = (): ReactElement => {
     ]);
   };
 
+  const resetScore: () => void = (): void => {
+    setGame(initialGame);
+  };
+
   const updateSet: (result: IResult) => void =
     currentSet.phase === Phases.Bidding ? updateBid : updateScore;
 
@@ -68,6 +75,7 @@ export const App: FunctionComponent = (): ReactElement => {
       <Felt>
         <Grid>
           <Scoreboard game={game} teams={teams} />
+          <Toolbar resetScore={resetScore} />
           <Keypad
             phase={currentSet.phase}
             teams={teams}

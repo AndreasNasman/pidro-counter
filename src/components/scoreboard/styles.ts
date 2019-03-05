@@ -3,8 +3,8 @@ import { BLACK_BOARD, CHALK_WHITE } from '../../constants/colors';
 import { ITable } from './types';
 
 const Row: StyledComponent<'div', {}> = styled.div`
+  column-gap: 0.1rem;
   display: grid;
-  grid-gap: 0.1rem;
   grid-template-columns: 1fr 1fr;
 `;
 
@@ -36,6 +36,7 @@ export const Head: StyledComponent<'div', {}> = styled(Row)`
 export const Table: StyledComponent<'div', {}, ITable> = styled.div`
   background-color: ${CHALK_WHITE};
   display: grid;
+  grid-area: scoreboard;
   grid-template-rows: auto 1fr auto;
   min-height: ${(props: ITable): string => props.scoreboardMinHeight};
   min-width: max-content;

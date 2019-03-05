@@ -4,19 +4,10 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { MdRedo, MdReplay, MdUndo } from 'react-icons/md';
 import { PLAYING_CARD_BLACK, PLAYING_CARD_RED } from '../../constants/colors';
 import { MAXIMUM_POINTS, MINIMUM_POINTS } from '../../constants/game';
 import { Phases, Team } from '../app/types';
-import {
-  Button,
-  DigitContainer,
-  Grid,
-  H2,
-  InputContainer,
-  TeamContainer,
-  ToolbarContainer,
-} from './styles';
+import { Button, Container, DigitContainer, H2, TeamContainer } from './styles';
 import { IProps } from './types';
 
 export const Keypad: FunctionComponent<IProps> = ({
@@ -66,44 +57,36 @@ export const Keypad: FunctionComponent<IProps> = ({
   };
 
   return (
-    <Grid>
-      <InputContainer>
-        {phase === Phases.Bidding ? <H2>Vem bjöud?</H2> : <H2>Vem vann?</H2>}
+    <Container>
+      {phase === Phases.Bidding ? <H2>Vem bjöud?</H2> : <H2>Vem vann?</H2>}
 
-        <TeamContainer>
-          {teams.map((team: Team) => (
-            <Button
-              active={team === selectedTeam}
-              activeColor={PLAYING_CARD_BLACK}
-              key={team}
-              onClick={handleTeamClick}
-              value={team}
-            >
-              {team.toUpperCase()}
-            </Button>
-          ))}
-        </TeamContainer>
+      <TeamContainer>
+        {teams.map((team: Team) => (
+          <Button
+            active={team === selectedTeam}
+            activeColor={PLAYING_CARD_BLACK}
+            key={team}
+            onClick={handleTeamClick}
+            value={team}
+          >
+            {team.toUpperCase()}
+          </Button>
+        ))}
+      </TeamContainer>
 
-        <DigitContainer>
-          {digits.map((digit: number) => (
-            <Button
-              active={digit === selectedDigit}
-              activeColor={PLAYING_CARD_RED}
-              key={digit}
-              onClick={handleDigitClick}
-              value={digit}
-            >
-              {digit}
-            </Button>
-          ))}
-        </DigitContainer>
-      </InputContainer>
-
-      <ToolbarContainer>
-        <MdUndo />
-        <MdReplay />
-        <MdRedo />
-      </ToolbarContainer>
-    </Grid>
+      <DigitContainer>
+        {digits.map((digit: number) => (
+          <Button
+            active={digit === selectedDigit}
+            activeColor={PLAYING_CARD_RED}
+            key={digit}
+            onClick={handleDigitClick}
+            value={digit}
+          >
+            {digit}
+          </Button>
+        ))}
+      </DigitContainer>
+    </Container>
   );
 };
