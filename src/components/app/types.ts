@@ -20,7 +20,3 @@ export interface ISet {
 }
 
 export type Game = ISet[];
-
-export interface IGrid {
-  scoreboardMinHeight: string;
-}

@@ -25,13 +25,13 @@ export const Grid: StyledComponent<'div', {}> = styled.div`
   grid-template-areas:
     'toolbar'
     'input';
-  overflow: auto;
+  min-width: max-content;
 
   @media screen and (orientation: landscape) {
     grid-template-areas:
       'input'
       'toolbar';
-    grid-template-rows: 1fr;
+    grid-template-rows: 1fr auto;
   }
 `;
 
@@ -48,16 +48,10 @@ export const H2: StyledComponent<'h2', {}> = styled.h2`
   text-align: center;
 `;
 
-export const PadContainer: StyledComponent<'div', {}> = styled.div`
-  display: grid;
-  overflow: auto;
-`;
-
 export const InputContainer: StyledComponent<'div', {}> = styled.div`
   align-content: center;
   display: grid;
   grid-area: input;
-  overflow: auto;
 `;
 
 export const TeamContainer: StyledComponent<'div', {}> = styled.div`

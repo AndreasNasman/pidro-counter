@@ -21,7 +21,6 @@ export const App: FunctionComponent = (): ReactElement => {
     return JSON.parse(storedGame) as Game;
   });
   const currentSet: ISet = game[game.length - 1];
-  const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
 
   useEffect(() => {
     sessionStorage.setItem('game', JSON.stringify(game));
@@ -67,12 +66,8 @@ export const App: FunctionComponent = (): ReactElement => {
     <>
       <GlobalStyle />
       <Felt>
-        <Grid scoreboardMinHeight={scoreboardMinHeight}>
-          <Scoreboard
-            game={game}
-            setScoreboardMinHeight={setScoreboardMinHeight}
-            teams={teams}
-          />
+        <Grid>
+          <Scoreboard game={game} teams={teams} />
           <Keypad
             phase={currentSet.phase}
             teams={teams}

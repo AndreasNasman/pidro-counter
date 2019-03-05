@@ -14,7 +14,6 @@ import {
   Grid,
   H2,
   InputContainer,
-  PadContainer,
   TeamContainer,
   ToolbarContainer,
 } from './styles';
@@ -71,35 +70,33 @@ export const Keypad: FunctionComponent<IProps> = ({
       <InputContainer>
         {phase === Phases.Bidding ? <H2>Vem bjöud?</H2> : <H2>Vem vann?</H2>}
 
-        <PadContainer>
-          <TeamContainer>
-            {teams.map((team: Team) => (
-              <Button
-                active={team === selectedTeam}
-                activeColor={PLAYING_CARD_BLACK}
-                key={team}
-                onClick={handleTeamClick}
-                value={team}
-              >
-                {team.toUpperCase()}
-              </Button>
-            ))}
-          </TeamContainer>
+        <TeamContainer>
+          {teams.map((team: Team) => (
+            <Button
+              active={team === selectedTeam}
+              activeColor={PLAYING_CARD_BLACK}
+              key={team}
+              onClick={handleTeamClick}
+              value={team}
+            >
+              {team.toUpperCase()}
+            </Button>
+          ))}
+        </TeamContainer>
 
-          <DigitContainer>
-            {digits.map((digit: number) => (
-              <Button
-                active={digit === selectedDigit}
-                activeColor={PLAYING_CARD_RED}
-                key={digit}
-                onClick={handleDigitClick}
-                value={digit}
-              >
-                {digit}
-              </Button>
-            ))}
-          </DigitContainer>
-        </PadContainer>
+        <DigitContainer>
+          {digits.map((digit: number) => (
+            <Button
+              active={digit === selectedDigit}
+              activeColor={PLAYING_CARD_RED}
+              key={digit}
+              onClick={handleDigitClick}
+              value={digit}
+            >
+              {digit}
+            </Button>
+          ))}
+        </DigitContainer>
       </InputContainer>
 
       <ToolbarContainer>
