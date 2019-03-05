@@ -7,7 +7,7 @@ import React, {
 import { MAXIMUM_POINTS } from '../../constants/game';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
-import { Felt, GlobalStyle } from './styles';
+import { Felt, GlobalStyle, Grid } from './styles';
 import { Game, IResult, ISet, Phases, Score, Team } from './types';
 
 export const App: FunctionComponent = (): ReactElement => {
@@ -66,13 +66,19 @@ export const App: FunctionComponent = (): ReactElement => {
   return (
     <>
       <GlobalStyle />
-      <Felt scoreboardMinHeight={scoreboardMinHeight}>
-        <Scoreboard
-          game={game}
-          setScoreboardMinHeight={setScoreboardMinHeight}
-          teams={teams}
-        />
-        <Keypad phase={currentSet.phase} teams={teams} updateSet={updateSet} />
+      <Felt>
+        <Grid scoreboardMinHeight={scoreboardMinHeight}>
+          <Scoreboard
+            game={game}
+            setScoreboardMinHeight={setScoreboardMinHeight}
+            teams={teams}
+          />
+          <Keypad
+            phase={currentSet.phase}
+            teams={teams}
+            updateSet={updateSet}
+          />
+        </Grid>
       </Felt>
     </>
   );

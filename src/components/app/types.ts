@@ -21,6 +21,6 @@ export interface ISet {
 
 export type Game = ISet[];
 
-export interface IFelt {
+export interface IGrid {
   scoreboardMinHeight: string;
 }
