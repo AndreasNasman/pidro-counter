@@ -80,7 +80,6 @@ export const Keypad: FunctionComponent<IProps> = ({
             activeColor={PLAYING_CARD_RED}
             key={digit}
             onClick={handleDigitClick}
-            value={digit}
           >
             {digit}
           </Button>
