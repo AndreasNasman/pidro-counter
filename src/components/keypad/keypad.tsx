@@ -38,7 +38,7 @@ export const Keypad: FunctionComponent<IProps> = ({
   const handleTeamClick: (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => void = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    const newSelectedTeam: Team = event.currentTarget.value as Team;
+    const newSelectedTeam: Team = event.currentTarget.textContent as Team;
 
     if (newSelectedTeam === selectedTeam) return;
 
@@ -48,8 +48,8 @@ export const Keypad: FunctionComponent<IProps> = ({
   const handleDigitClick: (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => void = (event: React.MouseEvent<HTMLButtonElement>): void => {
-    const { value } = event.currentTarget;
-    const newSelectedDigit: number = Number(value);
+    const { textContent } = event.currentTarget;
+    const newSelectedDigit: number = Number(textContent);
 
     if (newSelectedDigit === selectedDigit) return;
 
@@ -67,9 +67,8 @@ export const Keypad: FunctionComponent<IProps> = ({
             activeColor={PLAYING_CARD_BLACK}
             key={team}
             onClick={handleTeamClick}
-            value={team}
           >
-            {team.toUpperCase()}
+            {team}
           </Button>
         ))}
       </TeamContainer>

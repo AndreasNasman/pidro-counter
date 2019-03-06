@@ -17,6 +17,7 @@ export const Cell: StyledComponent<'div', {}> = styled.div`
   font-size: 1.25rem;
   text-align: center;
   padding: 0.5rem;
+  text-transform: uppercase;
 `;
 
 export const Column: StyledComponent<'div', {}> = styled.div`

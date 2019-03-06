@@ -51,7 +51,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       <Head ref={headRef}>
         {teams.map((team: Team) => (
           <Column key={team}>
-            <Cell>{team.toUpperCase()}</Cell>
+            <Cell>{team}</Cell>
           </Column>
         ))}
       </Head>
