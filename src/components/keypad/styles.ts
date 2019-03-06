@@ -1,5 +1,5 @@
 import styled, { StyledComponent } from 'styled-components';
-import { CHALK_WHITE, PLAYING_CARD_WHITE } from '../../constants/colors';
+import { PLAYING_CARD_WHITE } from '../../constants/colors';
 import { IButton } from './types';
 
 const BUTTON_GAP: number = 0.1;
@@ -20,21 +20,6 @@ export const Button: StyledComponent<'button', {}, IButton> = styled.button`
   }
 `;
 
-export const Grid: StyledComponent<'div', {}> = styled.div`
-  display: grid;
-  grid-template-areas:
-    'toolbar'
-    'input';
-  min-width: max-content;
-
-  @media screen and (orientation: landscape) {
-    grid-template-areas:
-      'input'
-      'toolbar';
-    grid-template-rows: 1fr auto;
-  }
-`;
-
 export const DigitContainer: StyledComponent<'div', {}> = styled.div`
   display: grid;
   grid-gap: ${BUTTON_GAP}rem;
@@ -48,24 +33,16 @@ export const H2: StyledComponent<'h2', {}> = styled.h2`
   text-align: center;
 `;
 
-export const InputContainer: StyledComponent<'div', {}> = styled.div`
+export const Container: StyledComponent<'div', {}> = styled.div`
   align-content: center;
   display: grid;
-  grid-area: input;
+  grid-area: keypad;
+  min-width: max-content;
 `;
 
 export const TeamContainer: StyledComponent<'div', {}> = styled.div`
+  column-gap: ${BUTTON_GAP}rem;
   display: grid;
-  grid-gap: ${BUTTON_GAP}rem;
   grid-template-columns: 1fr 1fr;
   margin-bottom: ${BUTTON_GAP}rem;
-`;
-
-export const ToolbarContainer: StyledComponent<'div', {}> = styled.div`
-  color: ${CHALK_WHITE};
-  display: flex;
-  font-size: 1.5rem;
-  grid-area: toolbar;
-  justify-content: space-between;
-  padding: 0.5rem;
 `;
