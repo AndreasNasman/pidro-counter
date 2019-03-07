@@ -21,6 +21,7 @@ import { IProps } from './types';
 
 export const Toolbar: FunctionComponent<IProps> = ({
   resetScore,
+  undo,
 }: IProps): ReactElement => {
   const [popoverOpen, setPopoverOpen] = useState(false);
 
@@ -40,7 +41,7 @@ export const Toolbar: FunctionComponent<IProps> = ({
   return (
     <Container>
       <IconWrapper>
-        <MdUndo />
+        <MdUndo onClick={undo} />
       </IconWrapper>
 
       <Popover
