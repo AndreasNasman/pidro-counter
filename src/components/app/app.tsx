@@ -23,22 +23,43 @@ export const App: FunctionComponent = (): ReactElement => {
     return [];
   });
   const currentSet: ISet | undefined = last(game);
-  const [phase, setPhase] = useState(() => {
-    if (!currentSet || currentSet.score) {
-      return Phases.Bidding;
+
+  const getNextPhase: () => Phases = (): Phases => {
+    if (currentSet && !currentSet.score) {
+      return Phases.Score;
     }
 
-    return Phases.Score;
+    return Phases.Bidding;
+  };
+  const [phase, setPhase] = useState(getNextPhase);
+
+  const [redoHistory, setRedoHistory] = useState<Game[] | []>(() => {
+    const storedRedoHistory: string | null = sessionStorage.getItem(
+      'redoHistory',
+    );
+    if (storedRedoHistory !== null) {
+      return JSON.parse(storedRedoHistory) as Game[];
+    }
+
+    return [];
   });
 
   useEffect(() => {
+    setPhase(getNextPhase);
     sessionStorage.setItem('game', JSON.stringify(game));
   }, [game]);
+
+  useEffect(() => {
+    sessionStorage.setItem('redoHistory', JSON.stringify(redoHistory));
+  }, [redoHistory]);
 
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
     const nextRound: number = currentSet ? currentSet.round + 1 : 1;
     setGame([...game, { bid, round: nextRound }]);
-    setPhase(Phases.Score);
+
+    if (redoHistory.length > 0) {
+      setRedoHistory([]);
+    }
   };
 
   const updateScore: (winner: IResult) => void = (winner: IResult): void => {
@@ -61,7 +82,10 @@ export const App: FunctionComponent = (): ReactElement => {
     );
 
     setGame([...game.slice(0, -1), { ...currentSet, score }]);
-    setPhase(Phases.Bidding);
+
+    if (redoHistory.length > 0) {
+      setRedoHistory([]);
+    }
   };
 
   const updateSet: (result: IResult) => void =
@@ -70,13 +94,21 @@ export const App: FunctionComponent = (): ReactElement => {
   const undo: () => void = (): void => {
     if (!currentSet) return;
 
-    if (phase === Phases.Score) {
-      setGame([...game.slice(0, -1)]);
-      setPhase(Phases.Bidding);
-    } else if (phase === Phases.Bidding) {
+    if (phase === Phases.Bidding) {
       setGame([...game.slice(0, -1), { ...currentSet, score: undefined }]);
-      setPhase(Phases.Score);
+    } else if (phase === Phases.Score) {
+      setGame([...game.slice(0, -1)]);
     }
+
+    setRedoHistory([...redoHistory, game]);
+  };
+
+  const redo: () => void = (): void => {
+    const nextGameState: Game | undefined = last(redoHistory);
+    if (!nextGameState) return;
+
+    setGame(nextGameState);
+    setRedoHistory(redoHistory.slice(0, -1));
   };
 
   const resetScore: () => void = (): void => {
@@ -89,7 +121,7 @@ export const App: FunctionComponent = (): ReactElement => {
       <Felt>
         <Grid>
           <Scoreboard game={game} teams={teams} />
-          <Toolbar resetScore={resetScore} undo={undo} />
+          <Toolbar redo={redo} resetScore={resetScore} undo={undo} />
           <Keypad phase={phase} teams={teams} updateSet={updateSet} />
         </Grid>
       </Felt>

@@ -20,6 +20,7 @@ import {
 import { IProps } from './types';
 
 export const Toolbar: FunctionComponent<IProps> = ({
+  redo,
   resetScore,
   undo,
 }: IProps): ReactElement => {
@@ -77,7 +78,7 @@ export const Toolbar: FunctionComponent<IProps> = ({
       </Popover>
 
       <IconWrapper>
-        <MdRedo />
+        <MdRedo onClick={redo} />
       </IconWrapper>
     </Container>
   );
