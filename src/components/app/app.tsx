@@ -15,7 +15,7 @@ import { Game, IResult, ISet, Phases, Score, Team } from './types';
 export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
   const [game, setGame] = useState<Game>(() => {
-    const storedGame: string | null = sessionStorage.getItem('game');
+    const storedGame: string | null = localStorage.getItem('game');
     if (storedGame !== null) {
       return JSON.parse(storedGame) as Game;
     }
@@ -34,7 +34,7 @@ export const App: FunctionComponent = (): ReactElement => {
   const [phase, setPhase] = useState(getNextPhase);
 
   const [redoHistory, setRedoHistory] = useState<Game[] | []>(() => {
-    const storedRedoHistory: string | null = sessionStorage.getItem(
+    const storedRedoHistory: string | null = localStorage.getItem(
       'redoHistory',
     );
     if (storedRedoHistory !== null) {
@@ -46,11 +46,11 @@ export const App: FunctionComponent = (): ReactElement => {
 
   useEffect(() => {
     setPhase(getNextPhase);
-    sessionStorage.setItem('game', JSON.stringify(game));
+    localStorage.setItem('game', JSON.stringify(game));
   }, [game]);
 
   useEffect(() => {
-    sessionStorage.setItem('redoHistory', JSON.stringify(redoHistory));
+    localStorage.setItem('redoHistory', JSON.stringify(redoHistory));
   }, [redoHistory]);
 
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
