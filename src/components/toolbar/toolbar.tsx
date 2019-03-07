@@ -20,7 +20,11 @@ import {
 import { IProps } from './types';
 
 export const Toolbar: FunctionComponent<IProps> = ({
+  canRedo,
+  canUndo,
+  redo,
   resetScore,
+  undo,
 }: IProps): ReactElement => {
   const [popoverOpen, setPopoverOpen] = useState(false);
 
@@ -39,8 +43,8 @@ export const Toolbar: FunctionComponent<IProps> = ({
 
   return (
     <Container>
-      <IconWrapper>
-        <MdUndo />
+      <IconWrapper disabled={!canUndo}>
+        <MdUndo onClick={undo} />
       </IconWrapper>
 
       <Popover
@@ -70,13 +74,13 @@ export const Toolbar: FunctionComponent<IProps> = ({
         onClickOutside={closePopover}
         padding={0}
       >
-        <IconWrapper onClick={openPopover}>
+        <IconWrapper disabled={!canUndo} onClick={openPopover}>
           <MdReplay />
         </IconWrapper>
       </Popover>
 
-      <IconWrapper>
-        <MdRedo />
+      <IconWrapper disabled={!canRedo}>
+        <MdRedo onClick={redo} />
       </IconWrapper>
     </Container>
   );
