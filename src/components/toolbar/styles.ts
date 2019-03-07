@@ -1,6 +1,6 @@
 import styled, { StyledComponent } from 'styled-components';
 import { CHALK_WHITE } from '../../constants/colors';
-import { IAnswer } from './types';
+import { IAnswer, IIconWrapper } from './types';
 
 export const Answer: StyledComponent<'span', {}, IAnswer> = styled.span`
   color: ${(props: IAnswer): string => props.color};
@@ -21,7 +21,6 @@ export const Confirmation: StyledComponent<'div', {}> = styled.div`
 `;
 
 export const Container: StyledComponent<'div', {}> = styled.div`
-  color: ${CHALK_WHITE};
   display: flex;
   font-size: 1.5rem;
   grid-area: toolbar;
@@ -33,8 +32,16 @@ export const H4: StyledComponent<'h4', {}> = styled.h4`
   text-align: center;
 `;
 
-export const IconWrapper: StyledComponent<'span', {}> = styled.span`
+export const IconWrapper: StyledComponent<
+  'span',
+  {},
+  IIconWrapper
+> = styled.span`
   align-items: center;
+  color: ${(props: IIconWrapper): string =>
+    props.disabled ? 'gray' : CHALK_WHITE};
   display: flex;
   padding: 0.5rem;
+  pointer-events: ${(props: IIconWrapper): string =>
+    props.disabled ? 'none' : 'auto'};
 `;

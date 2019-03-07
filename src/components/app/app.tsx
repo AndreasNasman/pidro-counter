@@ -88,9 +88,6 @@ export const App: FunctionComponent = (): ReactElement => {
     }
   };
 
-  const updateSet: (result: IResult) => void =
-    phase === Phases.Bidding ? updateBid : updateScore;
-
   const undo: () => void = (): void => {
     if (!currentSet) return;
 
@@ -113,7 +110,17 @@ export const App: FunctionComponent = (): ReactElement => {
 
   const resetScore: () => void = (): void => {
     setGame([]);
+
+    if (redoHistory.length > 0) {
+      setRedoHistory([]);
+    }
   };
+
+  const updateSet: (result: IResult) => void =
+    phase === Phases.Bidding ? updateBid : updateScore;
+
+  const canRedo: boolean = redoHistory.length > 0;
+  const canUndo: boolean = game.length > 0;
 
   return (
     <>
@@ -121,7 +128,13 @@ export const App: FunctionComponent = (): ReactElement => {
       <Felt>
         <Grid>
           <Scoreboard game={game} teams={teams} />
-          <Toolbar redo={redo} resetScore={resetScore} undo={undo} />
+          <Toolbar
+            canRedo={canRedo}
+            canUndo={canUndo}
+            redo={redo}
+            resetScore={resetScore}
+            undo={undo}
+          />
           <Keypad phase={phase} teams={teams} updateSet={updateSet} />
         </Grid>
       </Felt>
