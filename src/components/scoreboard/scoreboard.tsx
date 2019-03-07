@@ -59,10 +59,13 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       <Body>
         {teams.map((team: Team) => (
           <Column key={team} ref={bodyColumnRef}>
-            {game.map(
-              (set: ISet) =>
-                set.score && <Cell key={set.round}>{set.score[team]}</Cell>, // tslint:disable-line: strict-boolean-expressions
-            )}
+            {game.map((set: ISet) => {
+              if (set.bid.team === team && !set.score) {
+                return <Cell key={set.round}>({set.bid.points})</Cell>;
+              } else if (set.score) {
+                return <Cell key={set.round}>{set.score[team]}</Cell>;
+              }
+            })}
           </Column>
         ))}
       </Body>
