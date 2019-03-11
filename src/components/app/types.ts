@@ -22,4 +22,5 @@ export interface IGame {
   phase: Phases;
   score: Score;
   sets: ISet[];
+  teams: Team[];
 }

@@ -12,21 +12,22 @@ import { Toolbar } from '../toolbar';
 import { Felt, GlobalStyle, Grid } from './styles';
 import { IGame, IResult, ISet, Phases, Score, Team } from './types';
 
+const getInitialGame: () => IGame = (): IGame => {
+  const teams: Team[] = ['vi', 'de'];
+
+  const initialScore: Score = teams.reduce(
+    (score: Score, team: Team) => {
+      score[team] = 0;
+
+      return score;
+    },
+    {} as Score, // tslint:disable-line: no-object-literal-type-assertion
+  );
+
+  return { phase: Phases.Bidding, score: initialScore, sets: [], teams };
+};
+
 export const App: FunctionComponent = (): ReactElement => {
-  const [teams] = useState<Team[]>(['vi', 'de']);
-
-  const getInitialGame: () => IGame = (): IGame => {
-    const initialScore: Score = teams.reduce(
-      (score: Score, team: Team) => {
-        score[team] = 0;
-
-        return score;
-      },
-      {} as Score, // tslint:disable-line: no-object-literal-type-assertion
-    );
-
-    return { phase: Phases.Bidding, score: initialScore, sets: [] };
-  };
   const [game, setGame] = useState<IGame>(() => {
     const storedGame: string | null = localStorage.getItem('game');
     if (storedGame !== null) {
@@ -35,7 +36,6 @@ export const App: FunctionComponent = (): ReactElement => {
 
     return getInitialGame();
   });
-  const currentSet: ISet | undefined = last(game.sets);
 
   const [redoHistory, setRedoHistory] = useState<IGame[] | []>(() => {
     const storedRedoHistory: string | null = localStorage.getItem(
@@ -59,6 +59,8 @@ export const App: FunctionComponent = (): ReactElement => {
   const getNextPhase: () => Phases = (): Phases =>
     game.phase === Phases.Bidding ? Phases.Score : Phases.Bidding;
 
+  const currentSet: ISet | undefined = last(game.sets);
+
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
     const nextRound: number = currentSet ? currentSet.round + 1 : 1;
     setGame({
@@ -77,7 +79,7 @@ export const App: FunctionComponent = (): ReactElement => {
     const { bid } = currentSet;
     const { points: biddingPoints, team: biddingTeam } = bid;
 
-    const setScore: Score = teams.reduce(
+    const setScore: Score = game.teams.reduce(
       (score: Score, team: Team) => {
         score[team] =
           team === winner.team ? winner.points : MAXIMUM_POINTS - winner.points;
@@ -91,7 +93,7 @@ export const App: FunctionComponent = (): ReactElement => {
       {} as Score, // tslint:disable-line: no-object-literal-type-assertion
     );
 
-    const totalScore: Score = teams.reduce(
+    const totalScore: Score = game.teams.reduce(
       (score: Score, team: Team) => {
         score[team] = game.score[team] + setScore[team];
 
@@ -159,7 +161,7 @@ export const App: FunctionComponent = (): ReactElement => {
       <GlobalStyle />
       <Felt>
         <Grid>
-          <Scoreboard game={game} teams={teams} />
+          <Scoreboard game={game} teams={game.teams} />
           <Toolbar
             canRedo={canRedo}
             canUndo={canUndo}
@@ -167,7 +169,7 @@ export const App: FunctionComponent = (): ReactElement => {
             resetScore={resetScore}
             undo={undo}
           />
-          <Keypad phase={game.phase} teams={teams} updateSet={updateSet} />
+          <Keypad phase={game.phase} teams={game.teams} updateSet={updateSet} />
         </Grid>
       </Felt>
     </>
