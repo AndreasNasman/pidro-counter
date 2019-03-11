@@ -10,19 +10,32 @@ import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
 import { Toolbar } from '../toolbar';
 import { Felt, GlobalStyle, Grid } from './styles';
-import { Game, IResult, ISet, Phases, Score, Team } from './types';
+import { IGame, IResult, ISet, Phases, Score, Team } from './types';
 
 export const App: FunctionComponent = (): ReactElement => {
   const [teams] = useState<Team[]>(['vi', 'de']);
-  const [game, setGame] = useState<Game>(() => {
+
+  const getInitialGame: () => IGame = (): IGame => {
+    const initialScore: Score = teams.reduce(
+      (score: Score, team: Team) => {
+        score[team] = 0;
+
+        return score;
+      },
+      {} as Score, // tslint:disable-line: no-object-literal-type-assertion
+    );
+
+    return { score: initialScore, sets: [] };
+  };
+  const [game, setGame] = useState<IGame>(() => {
     const storedGame: string | null = localStorage.getItem('game');
     if (storedGame !== null) {
-      return JSON.parse(storedGame) as Game;
+      return JSON.parse(storedGame) as IGame;
     }
 
-    return [];
+    return getInitialGame();
   });
-  const currentSet: ISet | undefined = last(game);
+  const currentSet: ISet | undefined = last(game.sets);
 
   const getNextPhase: () => Phases = (): Phases => {
     if (currentSet && !currentSet.score) {
@@ -33,12 +46,12 @@ export const App: FunctionComponent = (): ReactElement => {
   };
   const [phase, setPhase] = useState(getNextPhase);
 
-  const [redoHistory, setRedoHistory] = useState<Game[] | []>(() => {
+  const [redoHistory, setRedoHistory] = useState<IGame[] | []>(() => {
     const storedRedoHistory: string | null = localStorage.getItem(
       'redoHistory',
     );
     if (storedRedoHistory !== null) {
-      return JSON.parse(storedRedoHistory) as Game[];
+      return JSON.parse(storedRedoHistory) as IGame[];
     }
 
     return [];
@@ -55,7 +68,7 @@ export const App: FunctionComponent = (): ReactElement => {
 
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
     const nextRound: number = currentSet ? currentSet.round + 1 : 1;
-    setGame([...game, { bid, round: nextRound }]);
+    setGame({ ...game, sets: [...game.sets, { bid, round: nextRound }] });
 
     if (redoHistory.length > 0) {
       setRedoHistory([]);
@@ -67,21 +80,34 @@ export const App: FunctionComponent = (): ReactElement => {
     const { bid } = currentSet;
     const { points: biddingPoints, team: biddingTeam } = bid;
 
-    const score: Score = teams.reduce(
-      (result: Score, team: Team) => {
-        result[team] =
+    const setScore: Score = teams.reduce(
+      (score: Score, team: Team) => {
+        score[team] =
           team === winner.team ? winner.points : MAXIMUM_POINTS - winner.points;
 
-        if (team === biddingTeam && result[team] < biddingPoints) {
-          result[team] = -biddingPoints;
+        if (team === biddingTeam && score[team] < biddingPoints) {
+          score[team] = -biddingPoints;
         }
 
-        return result;
+        return score;
       },
       {} as Score, // tslint:disable-line: no-object-literal-type-assertion
     );
 
-    setGame([...game.slice(0, -1), { ...currentSet, score }]);
+    const totalScore: Score = teams.reduce(
+      (score: Score, team: Team) => {
+        score[team] = game.score[team] + setScore[team];
+
+        return score;
+      },
+      {} as Score, // tslint:disable-line: no-object-literal-type-assertion
+    );
+
+    setGame({
+      ...game,
+      score: totalScore,
+      sets: [...game.sets.slice(0, -1), { ...currentSet, score: setScore }],
+    });
 
     if (redoHistory.length > 0) {
       setRedoHistory([]);
@@ -92,16 +118,19 @@ export const App: FunctionComponent = (): ReactElement => {
     if (!currentSet) return;
 
     if (phase === Phases.Bidding) {
-      setGame([...game.slice(0, -1), { ...currentSet, score: undefined }]);
+      setGame({
+        ...game,
+        sets: [...game.sets.slice(0, -1), { ...currentSet, score: undefined }],
+      });
     } else if (phase === Phases.Score) {
-      setGame([...game.slice(0, -1)]);
+      setGame({ ...game, sets: [...game.sets.slice(0, -1)] });
     }
 
     setRedoHistory([...redoHistory, game]);
   };
 
   const redo: () => void = (): void => {
-    const nextGameState: Game | undefined = last(redoHistory);
+    const nextGameState: IGame | undefined = last(redoHistory);
     if (!nextGameState) return;
 
     setGame(nextGameState);
@@ -109,7 +138,7 @@ export const App: FunctionComponent = (): ReactElement => {
   };
 
   const resetScore: () => void = (): void => {
-    setGame([]);
+    setGame(getInitialGame());
 
     if (redoHistory.length > 0) {
       setRedoHistory([]);
@@ -120,7 +149,7 @@ export const App: FunctionComponent = (): ReactElement => {
     phase === Phases.Bidding ? updateBid : updateScore;
 
   const canRedo: boolean = redoHistory.length > 0;
-  const canUndo: boolean = game.length > 0;
+  const canUndo: boolean = game.sets.length > 0;
 
   return (
     <>

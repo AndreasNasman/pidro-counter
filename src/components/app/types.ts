@@ -13,7 +13,10 @@ export interface ISet {
   score?: Score;
 }
 
-export type Game = ISet[];
+export interface IGame {
+  score: Score;
+  sets: ISet[];
+}
 
 export enum Phases {
   Bidding,

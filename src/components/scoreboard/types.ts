@@ -1,7 +1,7 @@
-import { Game, Team } from '../app/types';
+import { IGame, Team } from '../app/types';
 
 export interface IProps {
-  game: Game;
+  game: IGame;
   teams: Team[];
 }
 
