@@ -25,7 +25,7 @@ export const App: FunctionComponent = (): ReactElement => {
       {} as Score, // tslint:disable-line: no-object-literal-type-assertion
     );
 
-    return { score: initialScore, sets: [] };
+    return { phase: Phases.Bidding, score: initialScore, sets: [] };
   };
   const [game, setGame] = useState<IGame>(() => {
     const storedGame: string | null = localStorage.getItem('game');
@@ -36,15 +36,6 @@ export const App: FunctionComponent = (): ReactElement => {
     return getInitialGame();
   });
   const currentSet: ISet | undefined = last(game.sets);
-
-  const getNextPhase: () => Phases = (): Phases => {
-    if (currentSet && !currentSet.score) {
-      return Phases.Score;
-    }
-
-    return Phases.Bidding;
-  };
-  const [phase, setPhase] = useState(getNextPhase);
 
   const [redoHistory, setRedoHistory] = useState<IGame[] | []>(() => {
     const storedRedoHistory: string | null = localStorage.getItem(
@@ -58,7 +49,6 @@ export const App: FunctionComponent = (): ReactElement => {
   });
 
   useEffect(() => {
-    setPhase(getNextPhase);
     localStorage.setItem('game', JSON.stringify(game));
   }, [game]);
 
@@ -66,9 +56,16 @@ export const App: FunctionComponent = (): ReactElement => {
     localStorage.setItem('redoHistory', JSON.stringify(redoHistory));
   }, [redoHistory]);
 
+  const getNextPhase: () => Phases = (): Phases =>
+    game.phase === Phases.Bidding ? Phases.Score : Phases.Bidding;
+
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
     const nextRound: number = currentSet ? currentSet.round + 1 : 1;
-    setGame({ ...game, sets: [...game.sets, { bid, round: nextRound }] });
+    setGame({
+      ...game,
+      phase: getNextPhase(),
+      sets: [...game.sets, { bid, round: nextRound }],
+    });
 
     if (redoHistory.length > 0) {
       setRedoHistory([]);
@@ -105,6 +102,7 @@ export const App: FunctionComponent = (): ReactElement => {
 
     setGame({
       ...game,
+      phase: getNextPhase(),
       score: totalScore,
       sets: [...game.sets.slice(0, -1), { ...currentSet, score: setScore }],
     });
@@ -117,13 +115,18 @@ export const App: FunctionComponent = (): ReactElement => {
   const undo: () => void = (): void => {
     if (!currentSet) return;
 
-    if (phase === Phases.Bidding) {
+    if (game.phase === Phases.Bidding) {
       setGame({
         ...game,
+        phase: getNextPhase(),
         sets: [...game.sets.slice(0, -1), { ...currentSet, score: undefined }],
       });
-    } else if (phase === Phases.Score) {
-      setGame({ ...game, sets: [...game.sets.slice(0, -1)] });
+    } else if (game.phase === Phases.Score) {
+      setGame({
+        ...game,
+        phase: getNextPhase(),
+        sets: [...game.sets.slice(0, -1)],
+      });
     }
 
     setRedoHistory([...redoHistory, game]);
@@ -146,7 +149,7 @@ export const App: FunctionComponent = (): ReactElement => {
   };
 
   const updateSet: (result: IResult) => void =
-    phase === Phases.Bidding ? updateBid : updateScore;
+    game.phase === Phases.Bidding ? updateBid : updateScore;
 
   const canRedo: boolean = redoHistory.length > 0;
   const canUndo: boolean = game.sets.length > 0;
@@ -164,7 +167,7 @@ export const App: FunctionComponent = (): ReactElement => {
             resetScore={resetScore}
             undo={undo}
           />
-          <Keypad phase={phase} teams={teams} updateSet={updateSet} />
+          <Keypad phase={game.phase} teams={teams} updateSet={updateSet} />
         </Grid>
       </Felt>
     </>

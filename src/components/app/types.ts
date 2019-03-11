@@ -13,12 +13,13 @@ export interface ISet {
   score?: Score;
 }
 
-export interface IGame {
-  score: Score;
-  sets: ISet[];
-}
-
 export enum Phases {
   Bidding,
   Score,
+}
+
+export interface IGame {
+  phase: Phases;
+  score: Score;
+  sets: ISet[];
 }
