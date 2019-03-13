@@ -40,8 +40,6 @@ export const Keypad: FunctionComponent<IProps> = ({
   ) => void = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const newSelectedTeam: Team = event.currentTarget.textContent as Team;
 
-    if (newSelectedTeam === selectedTeam) return;
-
     setSelectedTeam(newSelectedTeam);
   };
 
@@ -51,14 +49,13 @@ export const Keypad: FunctionComponent<IProps> = ({
     const { textContent } = event.currentTarget;
     const newSelectedDigit: number = Number(textContent);
 
-    if (newSelectedDigit === selectedDigit) return;
-
     setSelectedDigit(newSelectedDigit);
   };
 
   return (
     <Container>
-      {phase === Phases.Bidding ? <H2>Vem bjöud?</H2> : <H2>Vem vann?</H2>}
+      {phase === Phases.Bidding && <H2>Vem bjöud?</H2>}
+      {phase === Phases.Score && <H2>Vem vann?</H2>}
 
       <TeamContainer>
         {teams.map((team: Team) => (
