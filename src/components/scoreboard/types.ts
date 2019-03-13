@@ -1,8 +1,11 @@
-import { Game, Team } from '../app/types';
+import { IGame } from '../app/types';
 
 export interface IProps {
-  game: Game;
-  teams: Team[];
+  game: IGame;
+}
+
+export interface ICell {
+  reverse?: boolean;
 }
 
 export interface ITable {

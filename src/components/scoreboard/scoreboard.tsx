@@ -1,3 +1,4 @@
+import last from 'lodash.last';
 import React, {
   FunctionComponent,
   MutableRefObject,
@@ -7,13 +8,21 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { ISet, Team } from '../app/types';
-import { Body, Cell, Column, Foot, Head, Table } from './styles';
+import { IResult, ISet, Team } from '../app/types';
+import {
+  Body,
+  Cell,
+  Column,
+  Content,
+  Emoji,
+  Foot,
+  Head,
+  Table,
+} from './styles';
 import { IProps } from './types';
 
 export const Scoreboard: FunctionComponent<IProps> = ({
   game,
-  teams,
 }: IProps): ReactElement => {
   const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
   const bodyColumnRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
@@ -26,7 +35,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
     if (current === null) return undefined;
 
     current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [game.length]);
+  }, [game.sets.length]);
 
   useLayoutEffect(() => {
     const { current: currentHeadRef } = headRef;
@@ -49,35 +58,49 @@ export const Scoreboard: FunctionComponent<IProps> = ({
   return (
     <Table scoreboardMinHeight={scoreboardMinHeight}>
       <Head ref={headRef}>
-        {teams.map((team: Team) => (
+        {game.teams.map((team: Team) => (
           <Column key={team}>
-            <Cell>{team}</Cell>
+            <Cell reverse={team === last(game.teams)}>
+              {game.leader === team ? (
+                <>
+                  <Content>{team}</Content>
+                  <Emoji>🏁</Emoji>
+                </>
+              ) : (
+                <Content>{team}</Content>
+              )}
+            </Cell>
           </Column>
         ))}
       </Head>
 
       <Body>
-        {teams.map((team: Team) => (
+        {game.teams.map((team: Team, teamIndex: number) => (
           <Column key={team} ref={bodyColumnRef}>
-            {game.map((set: ISet) => {
-              if (set.bid.team === team && !set.score) {
-                return <Cell key={set.round}>({set.bid.points})</Cell>;
-              } else if (set.score) {
-                return <Cell key={set.round}>{set.score[team]}</Cell>;
-              }
-            })}
+            {game.sets.map((set: ISet) => (
+              <Cell key={set.round}>
+                {!set.score && set.bid.team === team && (
+                  <Content>({set.bid.points})</Content>
+                )}
+
+                {set.score && <Content>{set.score[teamIndex].points}</Content>}
+              </Cell>
+            ))}
           </Column>
         ))}
       </Body>
 
       <Foot ref={footRef}>
-        {teams.map((team: Team) => (
-          <Column key={team}>
-            <Cell ref={footCellRef}>
-              {game.reduce(
-                (sum: number, set: ISet) =>
-                  set.score ? sum + set.score[team] : sum,
-                0,
+        {game.score.map((score: IResult) => (
+          <Column key={score.team}>
+            <Cell ref={footCellRef} reverse={score.team === last(game.teams)}>
+              {game.winner !== undefined && game.winner.team === score.team ? (
+                <>
+                  <Content>{score.points}</Content>
+                  <Emoji>🏆</Emoji>
+                </>
+              ) : (
+                <Content>{score.points}</Content>
               )}
             </Cell>
           </Column>

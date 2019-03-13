@@ -1,11 +1,16 @@
 export type Team = 'vi' | 'de';
 
+export enum Phases {
+  Bidding,
+  Score,
+}
+
 export interface IResult {
   points: number;
   team: Team;
 }
 
-export type Score = { [K in Team]: number };
+export type Score = IResult[];
 
 export interface ISet {
   bid: IResult;
@@ -13,9 +18,11 @@ export interface ISet {
   score?: Score;
 }
 
-export type Game = ISet[];
-
-export enum Phases {
-  Bidding,
-  Score,
+export interface IGame {
+  leader?: Team;
+  phase: Phases;
+  score: Score;
+  sets: ISet[];
+  teams: Team[];
+  winner?: IResult;
 }

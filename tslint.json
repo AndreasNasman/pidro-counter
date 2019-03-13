@@ -17,7 +17,7 @@
     "no-inferrable-types": false,
     "no-submodule-imports": [true, "react-icons/md"],
     "ordered-imports": [true, { "grouped-imports": false }],
-    "strict-boolean-expressions": [true, "allow-undefined-union"],
+    "strict-boolean-expressions": [true, "allow-undefined-union", "ignore-rhs"],
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case"]
   }
 }
