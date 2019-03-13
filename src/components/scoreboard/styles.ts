@@ -14,7 +14,10 @@ export const Body: StyledComponent<'div', {}> = styled(Row)`
 
 export const Cell: StyledComponent<'div', {}> = styled.div`
   color: ${CHALK_WHITE};
+  display: grid;
   font-size: 1.25rem;
+  grid-template-areas: '. content emoji';
+  grid-template-columns: repeat(3, 1fr);
   text-align: center;
   padding: 0.5rem;
   text-transform: uppercase;
@@ -22,6 +25,14 @@ export const Cell: StyledComponent<'div', {}> = styled.div`
 
 export const Column: StyledComponent<'div', {}> = styled.div`
   background-color: ${BLACK_BOARD};
+`;
+
+export const Content: StyledComponent<'div', {}> = styled.div`
+  grid-area: content;
+`;
+
+export const Emoji: StyledComponent<'span', {}> = styled.span`
+  grid-area: emoji;
 `;
 
 export const Foot: StyledComponent<'div', {}> = styled(Row)`

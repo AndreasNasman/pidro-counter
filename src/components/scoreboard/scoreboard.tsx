@@ -8,7 +8,7 @@ import React, {
   useState,
 } from 'react';
 import { ISet, Team } from '../app/types';
-import { Body, Cell, Column, Foot, Head, Table } from './styles';
+import { Body, Cell, Column, Content, Foot, Head, Table } from './styles';
 import { IProps } from './types';
 
 export const Scoreboard: FunctionComponent<IProps> = ({
@@ -26,7 +26,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
     if (current === null) return undefined;
 
     current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [game.length]);
+  }, [game.sets.length]);
 
   useLayoutEffect(() => {
     const { current: currentHeadRef } = headRef;
@@ -51,7 +51,9 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       <Head ref={headRef}>
         {teams.map((team: Team) => (
           <Column key={team}>
-            <Cell>{team}</Cell>
+            <Cell>
+              <Content>{team}</Content>
+            </Cell>
           </Column>
         ))}
       </Head>
@@ -59,11 +61,19 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       <Body>
         {teams.map((team: Team) => (
           <Column key={team} ref={bodyColumnRef}>
-            {game.map((set: ISet) => {
+            {game.sets.map((set: ISet) => {
               if (set.bid.team === team && !set.score) {
-                return <Cell key={set.round}>({set.bid.points})</Cell>;
+                return (
+                  <Cell key={set.round}>
+                    <Content>({set.bid.points})</Content>
+                  </Cell>
+                );
               } else if (set.score) {
-                return <Cell key={set.round}>{set.score[team]}</Cell>;
+                return (
+                  <Cell key={set.round}>
+                    <Content>{set.score[team]}</Content>
+                  </Cell>
+                );
               }
             })}
           </Column>
@@ -74,11 +84,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
         {teams.map((team: Team) => (
           <Column key={team}>
             <Cell ref={footCellRef}>
-              {game.reduce(
-                (sum: number, set: ISet) =>
-                  set.score ? sum + set.score[team] : sum,
-                0,
-              )}
+              <Content>{game.score[team]}</Content>
             </Cell>
           </Column>
         ))}
