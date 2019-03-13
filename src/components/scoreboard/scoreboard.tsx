@@ -13,7 +13,6 @@ import { IProps } from './types';
 
 export const Scoreboard: FunctionComponent<IProps> = ({
   game,
-  teams,
 }: IProps): ReactElement => {
   const [scoreboardMinHeight, setScoreboardMinHeight] = useState('0');
   const bodyColumnRef: MutableRefObject<HTMLDivElement | null> = useRef(null); // tslint:disable-line: no-null-keyword
@@ -49,7 +48,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
   return (
     <Table scoreboardMinHeight={scoreboardMinHeight}>
       <Head ref={headRef}>
-        {teams.map((team: Team) => (
+        {game.teams.map((team: Team) => (
           <Column key={team}>
             <Cell>
               <Content>{team}</Content>
@@ -59,7 +58,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       </Head>
 
       <Body>
-        {teams.map((team: Team, index: number) => (
+        {game.teams.map((team: Team, teamIndex: number) => (
           <Column key={team} ref={bodyColumnRef}>
             {game.sets.map((set: ISet) => (
               <Cell key={set.round}>
@@ -67,7 +66,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
                   <Content>({set.bid.points})</Content>
                 )}
 
-                {set.score && <Content>{set.score[index].points}</Content>}
+                {set.score && <Content>{set.score[teamIndex].points}</Content>}
               </Cell>
             ))}
           </Column>

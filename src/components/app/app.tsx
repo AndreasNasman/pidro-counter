@@ -147,7 +147,7 @@ export const App: FunctionComponent = (): ReactElement => {
       <GlobalStyle />
       <Felt>
         <Grid>
-          <Scoreboard game={game} teams={game.teams} />
+          <Scoreboard game={game} />
           <Toolbar
             canRedo={canRedo}
             canUndo={canUndo}
