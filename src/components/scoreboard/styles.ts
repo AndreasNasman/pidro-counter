@@ -16,6 +16,7 @@ export const Cell: StyledComponent<'div', {}, ICell> = styled.div`
   color: ${CHALK_WHITE};
   display: grid;
   font-size: 1.25rem;
+  grid-column-gap: 0.25rem;
   grid-template-areas: ${(props: ICell): string =>
     props.reverse === true ? '"emoji content ."' : '". content emoji"'};
   grid-template-columns: repeat(3, 1fr);
