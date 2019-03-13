@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { ISet, Team } from '../app/types';
+import { IResult, ISet, Team } from '../app/types';
 import { Body, Cell, Column, Content, Foot, Head, Table } from './styles';
 import { IProps } from './types';
 
@@ -59,32 +59,26 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       </Head>
 
       <Body>
-        {teams.map((team: Team) => (
+        {teams.map((team: Team, index: number) => (
           <Column key={team} ref={bodyColumnRef}>
-            {game.sets.map((set: ISet) => {
-              if (set.bid.team === team && !set.score) {
-                return (
-                  <Cell key={set.round}>
-                    <Content>({set.bid.points})</Content>
-                  </Cell>
-                );
-              } else if (set.score) {
-                return (
-                  <Cell key={set.round}>
-                    <Content>{set.score[team]}</Content>
-                  </Cell>
-                );
-              }
-            })}
+            {game.sets.map((set: ISet) => (
+              <Cell key={set.round}>
+                {!set.score && set.bid.team === team && (
+                  <Content>({set.bid.points})</Content>
+                )}
+
+                {set.score && <Content>{set.score[index].points}</Content>}
+              </Cell>
+            ))}
           </Column>
         ))}
       </Body>
 
       <Foot ref={footRef}>
-        {teams.map((team: Team) => (
-          <Column key={team}>
+        {game.score.map((score: IResult) => (
+          <Column key={score.team}>
             <Cell ref={footCellRef}>
-              <Content>{game.score[team]}</Content>
+              <Content>{score.points}</Content>
             </Cell>
           </Column>
         ))}

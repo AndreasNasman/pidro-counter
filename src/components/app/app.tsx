@@ -14,15 +14,7 @@ import { IGame, IResult, ISet, Phases, Score, Team } from './types';
 
 const getInitialGame: () => IGame = (): IGame => {
   const teams: Team[] = ['vi', 'de'];
-
-  const initialScore: Score = teams.reduce(
-    (score: Score, team: Team) => {
-      score[team] = 0;
-
-      return score;
-    },
-    {} as Score, // tslint:disable-line: no-object-literal-type-assertion
-  );
+  const initialScore: Score = teams.map((team: Team) => ({ points: 0, team }));
 
   return { phase: Phases.Bidding, score: initialScore, sets: [], teams };
 };
@@ -56,13 +48,14 @@ export const App: FunctionComponent = (): ReactElement => {
     localStorage.setItem('redoHistory', JSON.stringify(redoHistory));
   }, [redoHistory]);
 
+  const currentSet: ISet | undefined = last(game.sets);
+
   const getNextPhase: () => Phases = (): Phases =>
     game.phase === Phases.Bidding ? Phases.Score : Phases.Bidding;
 
-  const currentSet: ISet | undefined = last(game.sets);
-
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
     const nextRound: number = currentSet ? currentSet.round + 1 : 1;
+
     setGame({
       ...game,
       phase: getNextPhase(),
@@ -79,33 +72,26 @@ export const App: FunctionComponent = (): ReactElement => {
     const { bid } = currentSet;
     const { points: biddingPoints, team: biddingTeam } = bid;
 
-    const setScore: Score = game.teams.reduce(
-      (score: Score, team: Team) => {
-        score[team] =
-          team === winner.team ? winner.points : MAXIMUM_POINTS - winner.points;
+    const setScore: Score = game.teams.map((team: Team) => {
+      let points: number =
+        team === winner.team ? winner.points : MAXIMUM_POINTS - winner.points;
 
-        if (team === biddingTeam && score[team] < biddingPoints) {
-          score[team] = -biddingPoints;
-        }
+      if (team === biddingTeam && points < biddingPoints) {
+        points = -biddingPoints;
+      }
 
-        return score;
-      },
-      {} as Score, // tslint:disable-line: no-object-literal-type-assertion
-    );
+      return { points, team };
+    });
 
-    const totalScore: Score = game.teams.reduce(
-      (score: Score, team: Team) => {
-        score[team] = game.score[team] + setScore[team];
-
-        return score;
-      },
-      {} as Score, // tslint:disable-line: no-object-literal-type-assertion
-    );
+    const gameScore: Score = game.teams.map((team: Team, index: number) => ({
+      points: game.score[index].points + setScore[index].points,
+      team,
+    }));
 
     setGame({
       ...game,
       phase: getNextPhase(),
-      score: totalScore,
+      score: gameScore,
       sets: [...game.sets.slice(0, -1), { ...currentSet, score: setScore }],
     });
 
