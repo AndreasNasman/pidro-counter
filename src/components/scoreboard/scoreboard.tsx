@@ -1,3 +1,4 @@
+import last from 'lodash.last';
 import React, {
   FunctionComponent,
   MutableRefObject,
@@ -8,7 +9,16 @@ import React, {
   useState,
 } from 'react';
 import { IResult, ISet, Team } from '../app/types';
-import { Body, Cell, Column, Content, Foot, Head, Table } from './styles';
+import {
+  Body,
+  Cell,
+  Column,
+  Content,
+  Emoji,
+  Foot,
+  Head,
+  Table,
+} from './styles';
 import { IProps } from './types';
 
 export const Scoreboard: FunctionComponent<IProps> = ({
@@ -50,8 +60,15 @@ export const Scoreboard: FunctionComponent<IProps> = ({
       <Head ref={headRef}>
         {game.teams.map((team: Team) => (
           <Column key={team}>
-            <Cell>
-              <Content>{team}</Content>
+            <Cell reverse={team === last(game.teams)}>
+              {game.leader === team ? (
+                <>
+                  <Content>{team}</Content>
+                  <Emoji>🏁</Emoji>
+                </>
+              ) : (
+                <Content>{team}</Content>
+              )}
             </Cell>
           </Column>
         ))}

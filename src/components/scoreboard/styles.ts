@@ -1,6 +1,6 @@
 import styled, { StyledComponent } from 'styled-components';
 import { BLACK_BOARD, CHALK_WHITE } from '../../constants/colors';
-import { ITable } from './types';
+import { ICell, ITable } from './types';
 
 const Row: StyledComponent<'div', {}> = styled.div`
   column-gap: 0.1rem;
@@ -12,11 +12,12 @@ export const Body: StyledComponent<'div', {}> = styled(Row)`
   overflow: auto;
 `;
 
-export const Cell: StyledComponent<'div', {}> = styled.div`
+export const Cell: StyledComponent<'div', {}, ICell> = styled.div`
   color: ${CHALK_WHITE};
   display: grid;
   font-size: 1.25rem;
-  grid-template-areas: '. content emoji';
+  grid-template-areas: ${(props: ICell): string =>
+    props.reverse === true ? '"emoji content ."' : '". content emoji"'};
   grid-template-columns: repeat(3, 1fr);
   text-align: center;
   padding: 0.5rem;

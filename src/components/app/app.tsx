@@ -10,7 +10,7 @@ import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
 import { Toolbar } from '../toolbar';
 import { Felt, GlobalStyle, Grid } from './styles';
-import { IGame, IResult, ISet, Phases, Score, Team } from './types';
+import { IGame, IResult, ISet, Leader, Phases, Score, Team } from './types';
 
 const getInitialGame: () => IGame = (): IGame => {
   const teams: Team[] = ['vi', 'de'];
@@ -67,6 +67,15 @@ export const App: FunctionComponent = (): ReactElement => {
     }
   };
 
+  const getLeader: (totalScore: Score) => Leader = (
+    totalScore: Score,
+  ): Leader => {
+    const [ourScore, theirScore] = totalScore;
+
+    if (ourScore.points > theirScore.points) return ourScore.team;
+    if (theirScore.points > ourScore.points) return theirScore.team;
+  };
+
   const updateScore: (winner: IResult) => void = (winner: IResult): void => {
     if (!currentSet) return;
     const { bid } = currentSet;
@@ -88,8 +97,11 @@ export const App: FunctionComponent = (): ReactElement => {
       team,
     }));
 
+    const leader: Leader = getLeader(gameScore);
+
     setGame({
       ...game,
+      leader,
       phase: getNextPhase(),
       score: gameScore,
       sets: [...game.sets.slice(0, -1), { ...currentSet, score: setScore }],
@@ -99,6 +111,9 @@ export const App: FunctionComponent = (): ReactElement => {
       setRedoHistory([]);
     }
   };
+
+  const updateSet: (result: IResult) => void =
+    game.phase === Phases.Bidding ? updateBid : updateScore;
 
   const undo: () => void = (): void => {
     if (!currentSet) return;
@@ -136,11 +151,8 @@ export const App: FunctionComponent = (): ReactElement => {
     }
   };
 
-  const updateSet: (result: IResult) => void =
-    game.phase === Phases.Bidding ? updateBid : updateScore;
-
-  const canRedo: boolean = redoHistory.length > 0;
   const canUndo: boolean = game.sets.length > 0;
+  const canRedo: boolean = redoHistory.length > 0;
 
   return (
     <>

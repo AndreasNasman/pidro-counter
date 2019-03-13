@@ -1,9 +1,11 @@
+export type Team = 'vi' | 'de';
+
+export type Leader = Team | undefined;
+
 export enum Phases {
   Bidding,
   Score,
 }
-
-export type Team = 'vi' | 'de';
 
 export interface IResult {
   points: number;
@@ -19,6 +21,7 @@ export interface ISet {
 }
 
 export interface IGame {
+  leader?: Team;
   phase: Phases;
   score: Score;
   sets: ISet[];
