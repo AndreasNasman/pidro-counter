@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { MAXIMUM_POINTS } from '../../constants/game';
+import { MAXIMUM_POINTS, WINNING_POINTS } from '../../constants/game';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
 import { Toolbar } from '../toolbar';
@@ -67,23 +67,45 @@ export const App: FunctionComponent = (): ReactElement => {
     }
   };
 
-  const getLeader: (totalScore: Score) => Team | undefined = (
-    totalScore: Score,
+  const getWinner: (gameScore: Score, bid: IResult) => IResult | undefined = (
+    gameScore: Score,
+    bid: IResult,
+  ): IResult | undefined => {
+    let winner: IResult | undefined = gameScore.find(
+      (teamScore: IResult) =>
+        teamScore.team === bid.team && teamScore.points >= WINNING_POINTS,
+    );
+
+    if (!winner) {
+      winner = gameScore.find(
+        (teamScore: IResult) => teamScore.points >= WINNING_POINTS,
+      );
+    }
+
+    return winner;
+  };
+
+  const getLeader: (gameScore: Score) => Team | undefined = (
+    gameScore: Score,
   ): Team | undefined => {
-    const [ourScore, theirScore] = totalScore;
+    const [ourScore, theirScore] = gameScore;
 
     if (ourScore.points > theirScore.points) return ourScore.team;
     if (theirScore.points > ourScore.points) return theirScore.team;
   };
 
-  const updateScore: (winner: IResult) => void = (winner: IResult): void => {
+  const updateScore: (setWinner: IResult) => void = (
+    setWinner: IResult,
+  ): void => {
     if (!currentSet) return;
     const { bid } = currentSet;
     const { points: biddingPoints, team: biddingTeam } = bid;
 
     const setScore: Score = game.teams.map((team: Team) => {
       let points: number =
-        team === winner.team ? winner.points : MAXIMUM_POINTS - winner.points;
+        team === setWinner.team
+          ? setWinner.points
+          : MAXIMUM_POINTS - setWinner.points;
 
       if (team === biddingTeam && points < biddingPoints) {
         points = -biddingPoints;
@@ -97,7 +119,8 @@ export const App: FunctionComponent = (): ReactElement => {
       team,
     }));
 
-    const leader: Team | undefined = getLeader(gameScore);
+    const winner: IResult | undefined = getWinner(gameScore, currentSet.bid);
+    const leader: Team | undefined = !winner ? getLeader(gameScore) : undefined;
 
     setGame({
       ...game,
@@ -105,6 +128,7 @@ export const App: FunctionComponent = (): ReactElement => {
       phase: getNextPhase(),
       score: gameScore,
       sets: [...game.sets.slice(0, -1), { ...currentSet, score: setScore }],
+      winner,
     });
 
     if (redoHistory.length > 0) {

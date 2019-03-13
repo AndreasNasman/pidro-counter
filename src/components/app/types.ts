@@ -24,4 +24,5 @@ export interface IGame {
   score: Score;
   sets: ISet[];
   teams: Team[];
+  winner?: IResult;
 }
