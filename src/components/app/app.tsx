@@ -10,7 +10,7 @@ import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
 import { Toolbar } from '../toolbar';
 import { Felt, GlobalStyle, Grid } from './styles';
-import { IGame, IResult, ISet, Leader, Phases, Score, Team } from './types';
+import { IGame, IResult, ISet, Phases, Score, Team } from './types';
 
 const getInitialGame: () => IGame = (): IGame => {
   const teams: Team[] = ['vi', 'de'];
@@ -67,9 +67,9 @@ export const App: FunctionComponent = (): ReactElement => {
     }
   };
 
-  const getLeader: (totalScore: Score) => Leader = (
+  const getLeader: (totalScore: Score) => Team | undefined = (
     totalScore: Score,
-  ): Leader => {
+  ): Team | undefined => {
     const [ourScore, theirScore] = totalScore;
 
     if (ourScore.points > theirScore.points) return ourScore.team;
@@ -97,7 +97,7 @@ export const App: FunctionComponent = (): ReactElement => {
       team,
     }));
 
-    const leader: Leader = getLeader(gameScore);
+    const leader: Team | undefined = getLeader(gameScore);
 
     setGame({
       ...game,

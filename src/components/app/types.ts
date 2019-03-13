@@ -1,7 +1,5 @@
 export type Team = 'vi' | 'de';
 
-export type Leader = Team | undefined;
-
 export enum Phases {
   Bidding,
   Score,
