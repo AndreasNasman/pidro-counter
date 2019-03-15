@@ -35,7 +35,7 @@ export const Scoreboard: FunctionComponent<IProps> = ({
     if (current === null) return undefined;
 
     current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-  }, [game.sets.length]);
+  });
 
   useLayoutEffect(() => {
     const { current: currentHeadRef } = headRef;
