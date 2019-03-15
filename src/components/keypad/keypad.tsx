@@ -1,3 +1,4 @@
+import range from 'lodash.range';
 import React, {
   FunctionComponent,
   ReactElement,
@@ -15,11 +16,7 @@ export const Keypad: FunctionComponent<IProps> = ({
   teams,
   updateSet,
 }: IProps): ReactElement => {
-  const [digits] = useState(() =>
-    Array.from(Array(MAXIMUM_POINTS - MINIMUM_POINTS + 1).keys()).map(
-      (digit: number) => digit + MINIMUM_POINTS,
-    ),
-  );
+  const [digits] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1));
   const [selectedTeam, setSelectedTeam] = useState<Team | undefined>(undefined);
   const [selectedDigit, setSelectedDigit] = useState<number | undefined>(
     undefined,
