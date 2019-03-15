@@ -57,7 +57,6 @@ export const App: FunctionComponent = (): ReactElement => {
   useEffect(() => {
     localStorage.setItem(ITEMS.GAME_HISTORY, JSON.stringify(gameHistory));
   }, [gameHistory]);
-
   useEffect(() => {
     localStorage.setItem(
       ITEMS.GAME_HISTORY_INDEX,
@@ -150,9 +149,6 @@ export const App: FunctionComponent = (): ReactElement => {
     updateGameHistory(updatedGame);
   };
 
-  const updateSet: (result: IResult) => void =
-    game.phase === Phases.Bidding ? updateBid : updateScore;
-
   const undo: () => void = (): void => {
     const nextGameHistoryIndex: number = gameHistoryIndex - 1;
     setGame(gameHistory[nextGameHistoryIndex]);
@@ -174,6 +170,9 @@ export const App: FunctionComponent = (): ReactElement => {
   const canUndo: boolean = gameHistoryIndex > 0;
   const canRedo: boolean = gameHistoryIndex < gameHistory.length - 1;
   const canResetScore: boolean = gameHistory.length > 1;
+
+  const updateSet: (result: IResult) => void =
+    game.phase === Phases.Bidding ? updateBid : updateScore;
 
   return (
     <>
