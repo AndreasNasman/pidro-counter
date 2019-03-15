@@ -5,7 +5,7 @@ import { ICell, ITable } from './types';
 const Row: StyledComponent<'div', {}> = styled.div`
   column-gap: 0.1rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
 `;
 
 export const Body: StyledComponent<'div', {}> = styled(Row)`

@@ -24,7 +24,7 @@ export const Button: StyledComponent<'button', {}, IButton> = styled.button`
 export const DigitContainer: StyledComponent<'div', {}> = styled.div`
   display: grid;
   grid-gap: ${BUTTON_GAP}rem;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 export const H2: StyledComponent<'h2', {}> = styled.h2`
@@ -44,6 +44,6 @@ export const Container: StyledComponent<'div', {}> = styled.div`
 export const TeamContainer: StyledComponent<'div', {}> = styled.div`
   column-gap: ${BUTTON_GAP}rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   margin-bottom: ${BUTTON_GAP}rem;
 `;

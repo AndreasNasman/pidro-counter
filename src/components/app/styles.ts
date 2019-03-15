@@ -18,7 +18,7 @@ export const Felt: StyledComponent<'div', {}> = styled.div`
 
 export const Grid: StyledComponent<'div', {}> = styled.div`
   display: grid;
-  grid-template: 1fr auto auto / 1fr;
+  grid-template: 1fr repeat(2, auto) / 1fr;
   grid-template-areas:
     'scoreboard'
     'toolbar'

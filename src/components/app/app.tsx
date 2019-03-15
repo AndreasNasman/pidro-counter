@@ -6,6 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { MAXIMUM_POINTS, WINNING_POINTS } from '../../constants/game';
+import { ITEMS } from '../../constants/session-storage';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
 import { Toolbar } from '../toolbar';
@@ -20,47 +21,47 @@ const INITIAL_GAME: () => IGame = (): IGame => {
 };
 const INITIAL_GAME_HISTORY_INDEX: number = 0;
 
+const initializeFromSessionStorage: (
+  item: string,
+  fallback: unknown,
+) => unknown = (item: string, fallback: unknown): unknown => {
+  const storedItem: string | null = sessionStorage.getItem(item);
+  if (storedItem !== null) {
+    return JSON.parse(storedItem);
+  }
+
+  return fallback;
+};
+
 export const App: FunctionComponent = (): ReactElement => {
-  const [game, setGame] = useState(() => {
-    const storedGame: string | null = localStorage.getItem('game');
-    if (storedGame !== null) {
-      return JSON.parse(storedGame) as IGame;
-    }
+  const [game, setGame] = useState(initializeFromSessionStorage(
+    ITEMS.GAME,
+    INITIAL_GAME(),
+  ) as IGame);
 
-    return INITIAL_GAME();
-  });
-
-  const [gameHistory, setGameHistory] = useState(() => {
-    const storedGameHistory: string | null = localStorage.getItem(
-      'gameHistory',
-    );
-    if (storedGameHistory !== null) {
-      return JSON.parse(storedGameHistory) as IGame[];
-    }
-
-    return [INITIAL_GAME()];
-  });
-  const [gameHistoryIndex, setGameHistoryIndex] = useState(() => {
-    const storedGameHistoryIndex: string | null = localStorage.getItem(
-      'gameHistoryIndex',
-    );
-    if (storedGameHistoryIndex !== null) {
-      return JSON.parse(storedGameHistoryIndex) as number;
-    }
-
-    return INITIAL_GAME_HISTORY_INDEX;
-  });
+  const [gameHistory, setGameHistory] = useState(initializeFromSessionStorage(
+    ITEMS.GAME_HISTORY,
+    [INITIAL_GAME()],
+  ) as IGame[]);
+  const [gameHistoryIndex, setGameHistoryIndex] = useState(
+    initializeFromSessionStorage(
+      ITEMS.GAME_HISTORY_INDEX,
+      INITIAL_GAME_HISTORY_INDEX,
+    ) as number,
+  );
 
   useEffect(() => {
-    localStorage.setItem('game', JSON.stringify(game));
+    sessionStorage.setItem(ITEMS.GAME, JSON.stringify(game));
   }, [game]);
 
   useEffect(() => {
-    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+    sessionStorage.setItem(ITEMS.GAME_HISTORY, JSON.stringify(gameHistory));
   }, [gameHistory]);
-
   useEffect(() => {
-    localStorage.setItem('gameHistoryIndex', JSON.stringify(gameHistoryIndex));
+    sessionStorage.setItem(
+      ITEMS.GAME_HISTORY_INDEX,
+      JSON.stringify(gameHistoryIndex),
+    );
   }, [gameHistoryIndex]);
 
   const getNextPhase: () => Phases = (): Phases =>
@@ -148,9 +149,6 @@ export const App: FunctionComponent = (): ReactElement => {
     updateGameHistory(updatedGame);
   };
 
-  const updateSet: (result: IResult) => void =
-    game.phase === Phases.Bidding ? updateBid : updateScore;
-
   const undo: () => void = (): void => {
     const nextGameHistoryIndex: number = gameHistoryIndex - 1;
     setGame(gameHistory[nextGameHistoryIndex]);
@@ -172,6 +170,9 @@ export const App: FunctionComponent = (): ReactElement => {
   const canUndo: boolean = gameHistoryIndex > 0;
   const canRedo: boolean = gameHistoryIndex < gameHistory.length - 1;
   const canResetScore: boolean = gameHistory.length > 1;
+
+  const updateSet: (result: IResult) => void =
+    game.phase === Phases.Bidding ? updateBid : updateScore;
 
   return (
     <>
