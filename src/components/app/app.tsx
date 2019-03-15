@@ -12,32 +12,43 @@ import { Toolbar } from '../toolbar';
 import { Felt, GlobalStyle, Grid } from './styles';
 import { IGame, IResult, ISet, Phases, Score, Team } from './types';
 
-const getInitialGame: () => IGame = (): IGame => {
+const INITIAL_GAME: () => IGame = (): IGame => {
   const teams: Team[] = ['vi', 'de'];
   const initialScore: Score = teams.map((team: Team) => ({ points: 0, team }));
 
   return { phase: Phases.Bidding, score: initialScore, sets: [], teams };
 };
+const INITIAL_GAME_HISTORY_INDEX: number = 0;
 
 export const App: FunctionComponent = (): ReactElement => {
-  const [game, setGame] = useState<IGame>(() => {
+  const [game, setGame] = useState(() => {
     const storedGame: string | null = localStorage.getItem('game');
     if (storedGame !== null) {
       return JSON.parse(storedGame) as IGame;
     }
 
-    return getInitialGame();
+    return INITIAL_GAME();
   });
 
-  const [redoHistory, setRedoHistory] = useState<IGame[] | []>(() => {
-    const storedRedoHistory: string | null = localStorage.getItem(
-      'redoHistory',
+  const [gameHistory, setGameHistory] = useState(() => {
+    const storedGameHistory: string | null = localStorage.getItem(
+      'gameHistory',
     );
-    if (storedRedoHistory !== null) {
-      return JSON.parse(storedRedoHistory) as IGame[];
+    if (storedGameHistory !== null) {
+      return JSON.parse(storedGameHistory) as IGame[];
     }
 
-    return [];
+    return [INITIAL_GAME()];
+  });
+  const [gameHistoryIndex, setGameHistoryIndex] = useState(() => {
+    const storedGameHistoryIndex: string | null = localStorage.getItem(
+      'gameHistoryIndex',
+    );
+    if (storedGameHistoryIndex !== null) {
+      return JSON.parse(storedGameHistoryIndex) as number;
+    }
+
+    return INITIAL_GAME_HISTORY_INDEX;
   });
 
   useEffect(() => {
@@ -45,58 +56,45 @@ export const App: FunctionComponent = (): ReactElement => {
   }, [game]);
 
   useEffect(() => {
-    localStorage.setItem('redoHistory', JSON.stringify(redoHistory));
-  }, [redoHistory]);
+    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+  }, [gameHistory]);
 
-  const currentSet: ISet | undefined = last(game.sets);
+  useEffect(() => {
+    localStorage.setItem('gameHistoryIndex', JSON.stringify(gameHistoryIndex));
+  }, [gameHistoryIndex]);
 
   const getNextPhase: () => Phases = (): Phases =>
     game.phase === Phases.Bidding ? Phases.Score : Phases.Bidding;
 
+  const updateGameHistory: (updatedGame: IGame) => void = (
+    updatedGame: IGame,
+  ): void => {
+    const nextGameHistoryIndex: number = gameHistoryIndex + 1;
+    setGameHistory([
+      ...gameHistory.slice(0, nextGameHistoryIndex),
+      updatedGame,
+    ]);
+    setGameHistoryIndex(nextGameHistoryIndex);
+  };
+
   const updateBid: (bid: IResult) => void = (bid: IResult): void => {
+    const currentSet: ISet | undefined = last(game.sets);
     const nextRound: number = currentSet ? currentSet.round + 1 : 1;
 
-    setGame({
+    const updatedGame: IGame = {
       ...game,
       phase: getNextPhase(),
       sets: [...game.sets, { bid, round: nextRound }],
-    });
+    };
 
-    if (redoHistory.length > 0) {
-      setRedoHistory([]);
-    }
-  };
-
-  const getWinner: (gameScore: Score, bid: IResult) => IResult | undefined = (
-    gameScore: Score,
-    bid: IResult,
-  ): IResult | undefined => {
-    let winner: IResult | undefined = gameScore.find(
-      (teamScore: IResult) =>
-        teamScore.team === bid.team && teamScore.points >= WINNING_POINTS,
-    );
-
-    if (!winner) {
-      winner = gameScore.find(
-        (teamScore: IResult) => teamScore.points >= WINNING_POINTS,
-      );
-    }
-
-    return winner;
-  };
-
-  const getLeader: (gameScore: Score) => Team | undefined = (
-    gameScore: Score,
-  ): Team | undefined => {
-    const [ourScore, theirScore] = gameScore;
-
-    if (ourScore.points > theirScore.points) return ourScore.team;
-    if (theirScore.points > ourScore.points) return theirScore.team;
+    setGame(updatedGame);
+    updateGameHistory(updatedGame);
   };
 
   const updateScore: (setWinner: IResult) => void = (
     setWinner: IResult,
   ): void => {
+    const currentSet: ISet | undefined = last(game.sets);
     if (!currentSet) return;
     const { bid } = currentSet;
     const { points: biddingPoints, team: biddingTeam } = bid;
@@ -119,64 +117,61 @@ export const App: FunctionComponent = (): ReactElement => {
       team,
     }));
 
-    const winner: IResult | undefined = getWinner(gameScore, currentSet.bid);
-    const leader: Team | undefined = !winner ? getLeader(gameScore) : undefined;
+    let winner: IResult | undefined = gameScore.find(
+      (teamScore: IResult) =>
+        teamScore.team === bid.team && teamScore.points >= WINNING_POINTS,
+    );
+    if (!winner) {
+      winner = gameScore.find(
+        (teamScore: IResult) => teamScore.points >= WINNING_POINTS,
+      );
+    }
 
-    setGame({
+    let leader: Team | undefined;
+    if (!winner) {
+      const [ourScore, theirScore] = gameScore;
+
+      if (ourScore.points > theirScore.points) leader = ourScore.team;
+      if (theirScore.points > ourScore.points) leader = theirScore.team;
+    }
+
+    const updatedGame: IGame = {
       ...game,
       leader,
       phase: getNextPhase(),
       score: gameScore,
       sets: [...game.sets.slice(0, -1), { ...currentSet, score: setScore }],
       winner,
-    });
+    };
 
-    if (redoHistory.length > 0) {
-      setRedoHistory([]);
-    }
+    setGame(updatedGame);
+    updateGameHistory(updatedGame);
   };
 
   const updateSet: (result: IResult) => void =
     game.phase === Phases.Bidding ? updateBid : updateScore;
 
   const undo: () => void = (): void => {
-    if (!currentSet) return;
-
-    if (game.phase === Phases.Bidding) {
-      setGame({
-        ...game,
-        phase: getNextPhase(),
-        sets: [...game.sets.slice(0, -1), { ...currentSet, score: undefined }],
-      });
-    } else if (game.phase === Phases.Score) {
-      setGame({
-        ...game,
-        phase: getNextPhase(),
-        sets: [...game.sets.slice(0, -1)],
-      });
-    }
-
-    setRedoHistory([...redoHistory, game]);
+    const nextGameHistoryIndex: number = gameHistoryIndex - 1;
+    setGame(gameHistory[nextGameHistoryIndex]);
+    setGameHistoryIndex(nextGameHistoryIndex);
   };
 
   const redo: () => void = (): void => {
-    const nextGameState: IGame | undefined = last(redoHistory);
-    if (!nextGameState) return;
-
-    setGame(nextGameState);
-    setRedoHistory(redoHistory.slice(0, -1));
+    const nextGameHistoryIndex: number = gameHistoryIndex + 1;
+    setGame(gameHistory[nextGameHistoryIndex]);
+    setGameHistoryIndex(nextGameHistoryIndex);
   };
 
   const resetScore: () => void = (): void => {
-    setGame(getInitialGame());
-
-    if (redoHistory.length > 0) {
-      setRedoHistory([]);
-    }
+    setGame(INITIAL_GAME());
+    setGameHistory([INITIAL_GAME()]);
+    setGameHistoryIndex(INITIAL_GAME_HISTORY_INDEX);
   };
 
-  const canUndo: boolean = game.sets.length > 0;
-  const canRedo: boolean = redoHistory.length > 0;
+  const canUndo: boolean = gameHistoryIndex > 0;
+  const canRedo: boolean = gameHistoryIndex < gameHistory.length - 1;
+  const canResetScore: boolean = gameHistory.length > 1;
 
   return (
     <>
@@ -186,6 +181,7 @@ export const App: FunctionComponent = (): ReactElement => {
           <Scoreboard game={game} />
           <Toolbar
             canRedo={canRedo}
+            canResetScore={canResetScore}
             canUndo={canUndo}
             redo={redo}
             resetScore={resetScore}

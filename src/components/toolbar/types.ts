@@ -1,5 +1,6 @@
 export interface IProps {
   canRedo: boolean;
+  canResetScore: boolean;
   canUndo: boolean;
   redo(): void;
   resetScore(): void;
