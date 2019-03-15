@@ -188,7 +188,13 @@ export const App: FunctionComponent = (): ReactElement => {
             resetScore={resetScore}
             undo={undo}
           />
-          <Keypad phase={game.phase} teams={game.teams} updateSet={updateSet} />
+          {!game.winner && (
+            <Keypad
+              phase={game.phase}
+              teams={game.teams}
+              updateSet={updateSet}
+            />
+          )}
         </Grid>
       </Felt>
     </>
