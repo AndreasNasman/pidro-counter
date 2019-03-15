@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { MAXIMUM_POINTS, WINNING_POINTS } from '../../constants/game';
-import { ITEMS } from '../../constants/local-storage';
+import { ITEMS } from '../../constants/session-storage';
 import { Keypad } from '../keypad';
 import { Scoreboard } from '../scoreboard';
 import { Toolbar } from '../toolbar';
@@ -21,11 +21,11 @@ const INITIAL_GAME: () => IGame = (): IGame => {
 };
 const INITIAL_GAME_HISTORY_INDEX: number = 0;
 
-const initializeFromLocalStorage: (
+const initializeFromSessionStorage: (
   item: string,
   fallback: unknown,
 ) => unknown = (item: string, fallback: unknown): unknown => {
-  const storedItem: string | null = localStorage.getItem(item);
+  const storedItem: string | null = sessionStorage.getItem(item);
   if (storedItem !== null) {
     return JSON.parse(storedItem);
   }
@@ -34,31 +34,31 @@ const initializeFromLocalStorage: (
 };
 
 export const App: FunctionComponent = (): ReactElement => {
-  const [game, setGame] = useState(initializeFromLocalStorage(
+  const [game, setGame] = useState(initializeFromSessionStorage(
     ITEMS.GAME,
     INITIAL_GAME(),
   ) as IGame);
 
-  const [gameHistory, setGameHistory] = useState(initializeFromLocalStorage(
+  const [gameHistory, setGameHistory] = useState(initializeFromSessionStorage(
     ITEMS.GAME_HISTORY,
     [INITIAL_GAME()],
   ) as IGame[]);
   const [gameHistoryIndex, setGameHistoryIndex] = useState(
-    initializeFromLocalStorage(
+    initializeFromSessionStorage(
       ITEMS.GAME_HISTORY_INDEX,
       INITIAL_GAME_HISTORY_INDEX,
     ) as number,
   );
 
   useEffect(() => {
-    localStorage.setItem(ITEMS.GAME, JSON.stringify(game));
+    sessionStorage.setItem(ITEMS.GAME, JSON.stringify(game));
   }, [game]);
 
   useEffect(() => {
-    localStorage.setItem(ITEMS.GAME_HISTORY, JSON.stringify(gameHistory));
+    sessionStorage.setItem(ITEMS.GAME_HISTORY, JSON.stringify(gameHistory));
   }, [gameHistory]);
   useEffect(() => {
-    localStorage.setItem(
+    sessionStorage.setItem(
       ITEMS.GAME_HISTORY_INDEX,
       JSON.stringify(gameHistoryIndex),
     );
