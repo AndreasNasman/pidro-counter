@@ -20,36 +20,34 @@ const INITIAL_GAME: () => IGame = (): IGame => {
 };
 const INITIAL_GAME_HISTORY_INDEX: number = 0;
 
+const initializeFromLocalStorage: (
+  item: string,
+  fallback: unknown,
+) => unknown = (item: string, fallback: unknown): unknown => {
+  const storedItem: string | null = localStorage.getItem(item);
+  if (storedItem !== null) {
+    return JSON.parse(storedItem);
+  }
+
+  return fallback;
+};
+
 export const App: FunctionComponent = (): ReactElement => {
-  const [game, setGame] = useState(() => {
-    const storedGame: string | null = localStorage.getItem('game');
-    if (storedGame !== null) {
-      return JSON.parse(storedGame) as IGame;
-    }
+  const [game, setGame] = useState(initializeFromLocalStorage(
+    'game',
+    INITIAL_GAME(),
+  ) as IGame);
 
-    return INITIAL_GAME();
-  });
-
-  const [gameHistory, setGameHistory] = useState(() => {
-    const storedGameHistory: string | null = localStorage.getItem(
-      'gameHistory',
-    );
-    if (storedGameHistory !== null) {
-      return JSON.parse(storedGameHistory) as IGame[];
-    }
-
-    return [INITIAL_GAME()];
-  });
-  const [gameHistoryIndex, setGameHistoryIndex] = useState(() => {
-    const storedGameHistoryIndex: string | null = localStorage.getItem(
+  const [gameHistory, setGameHistory] = useState(initializeFromLocalStorage(
+    'gameHistory',
+    [INITIAL_GAME()],
+  ) as IGame[]);
+  const [gameHistoryIndex, setGameHistoryIndex] = useState(
+    initializeFromLocalStorage(
       'gameHistoryIndex',
-    );
-    if (storedGameHistoryIndex !== null) {
-      return JSON.parse(storedGameHistoryIndex) as number;
-    }
-
-    return INITIAL_GAME_HISTORY_INDEX;
-  });
+      INITIAL_GAME_HISTORY_INDEX,
+    ) as number,
+  );
 
   useEffect(() => {
     localStorage.setItem('game', JSON.stringify(game));
