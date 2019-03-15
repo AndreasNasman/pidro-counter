@@ -1,8 +1,8 @@
 export type Team = 'vi' | 'de';
 
 export enum Phases {
-  Bidding,
-  Score,
+  Bidding = 'BIDDING',
+  Score = 'SCORE',
 }
 
 export interface IResult {

@@ -21,6 +21,7 @@ import { IProps } from './types';
 
 export const Toolbar: FunctionComponent<IProps> = ({
   canRedo,
+  canResetScore,
   canUndo,
   redo,
   resetScore,
@@ -74,7 +75,7 @@ export const Toolbar: FunctionComponent<IProps> = ({
         onClickOutside={closePopover}
         padding={0}
       >
-        <IconWrapper disabled={!canUndo} onClick={openPopover}>
+        <IconWrapper disabled={!canResetScore} onClick={openPopover}>
           <MdReplay />
         </IconWrapper>
       </Popover>
