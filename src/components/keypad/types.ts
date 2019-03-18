@@ -10,3 +10,7 @@ export interface IButton {
   active: boolean;
   activeColor: string;
 }
+
+export interface IPrompt {
+  minWidth: string;
+}

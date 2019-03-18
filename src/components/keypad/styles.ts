@@ -1,6 +1,6 @@
 import styled, { StyledComponent } from 'styled-components';
 import { PLAYING_CARD_WHITE } from '../../constants/colors';
-import { IButton } from './types';
+import { IButton, IPrompt } from './types';
 
 const BUTTON_GAP: number = 0.1;
 
@@ -27,18 +27,19 @@ export const DigitContainer: StyledComponent<'div', {}> = styled.div`
   grid-template-columns: repeat(3, 1fr);
 `;
 
-export const H2: StyledComponent<'h2', {}> = styled.h2`
-  color: ${PLAYING_CARD_WHITE};
-  margin-bottom: 0.5rem;
-  margin-top: 0;
-  text-align: center;
-`;
-
 export const Container: StyledComponent<'div', {}> = styled.div`
   align-content: center;
   display: grid;
   grid-area: keypad;
   min-width: max-content;
+`;
+
+export const Prompt: StyledComponent<'h2', {}, IPrompt> = styled.h2`
+  color: ${PLAYING_CARD_WHITE};
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  min-width: ${(props: IPrompt): string => props.minWidth};
+  text-align: center;
 `;
 
 export const TeamContainer: StyledComponent<'div', {}> = styled.div`
