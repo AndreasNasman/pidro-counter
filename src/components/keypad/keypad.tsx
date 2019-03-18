@@ -52,7 +52,7 @@ export const Keypad: FunctionComponent<IProps> = ({
   return (
     <Container>
       {phase === Phases.Bidding && <H2>Vem bjöud?</H2>}
-      {phase === Phases.Score && <H2>Vem vann?</H2>}
+      {phase === Phases.Score && <H2>Vem fick högst poäng?</H2>}
 
       <TeamContainer>
         {teams.map((team: Team) => (
