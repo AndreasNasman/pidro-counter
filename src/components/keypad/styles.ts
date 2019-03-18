@@ -4,6 +4,11 @@ import { IButton, IPrompt } from './types';
 
 const BUTTON_GAP: number = 0.1;
 
+const h2: StyledComponent<'h2', {}> = styled.h2`
+  color: ${PLAYING_CARD_WHITE};
+  text-align: center;
+`;
+
 export const Button: StyledComponent<'button', {}, IButton> = styled.button`
   background-color: ${(props: IButton): string =>
     props.active ? PLAYING_CARD_WHITE : 'transparent'};
@@ -34,12 +39,12 @@ export const Container: StyledComponent<'div', {}> = styled.div`
   min-width: max-content;
 `;
 
-export const Prompt: StyledComponent<'h2', {}, IPrompt> = styled.h2`
-  color: ${PLAYING_CARD_WHITE};
+export const H2: StyledComponent<'h2', {}> = h2;
+
+export const Prompt: StyledComponent<'h2', {}, IPrompt> = styled(h2)`
   margin-bottom: 0.5rem;
   margin-top: 0;
   min-width: ${(props: IPrompt): string => props.minWidth};
-  text-align: center;
 `;
 
 export const TeamContainer: StyledComponent<'div', {}> = styled.div`

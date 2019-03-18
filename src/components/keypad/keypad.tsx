@@ -12,6 +12,7 @@ import {
   Button,
   Container,
   DigitContainer,
+  H2,
   Prompt,
   TeamContainer,
 } from './styles';
@@ -26,6 +27,7 @@ export const Keypad: FunctionComponent<IProps> = ({
   phase,
   teams,
   updateSet,
+  winner,
 }: IProps): ReactElement => {
   const [digits] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1));
   const [selectedTeam, setSelectedTeam] = useState<Team | undefined>(undefined);
@@ -72,33 +74,39 @@ export const Keypad: FunctionComponent<IProps> = ({
 
   return (
     <Container>
-      <Prompt minWidth={promptMinWidth}>{PROMPTS[phase]}</Prompt>
+      {winner ? (
+        <H2>{winner.team} vann!</H2>
+      ) : (
+        <>
+          <Prompt minWidth={promptMinWidth}>{PROMPTS[phase]}</Prompt>
 
-      <TeamContainer>
-        {teams.map((team: Team) => (
-          <Button
-            active={team === selectedTeam}
-            activeColor={PLAYING_CARD_BLACK}
-            key={team}
-            onClick={handleTeamClick}
-          >
-            {team}
-          </Button>
-        ))}
-      </TeamContainer>
+          <TeamContainer>
+            {teams.map((team: Team) => (
+              <Button
+                active={team === selectedTeam}
+                activeColor={PLAYING_CARD_BLACK}
+                key={team}
+                onClick={handleTeamClick}
+              >
+                {team}
+              </Button>
+            ))}
+          </TeamContainer>
 
-      <DigitContainer>
-        {digits.map((digit: number) => (
-          <Button
-            active={digit === selectedDigit}
-            activeColor={PLAYING_CARD_RED}
-            key={digit}
-            onClick={handleDigitClick}
-          >
-            {digit}
-          </Button>
-        ))}
-      </DigitContainer>
+          <DigitContainer>
+            {digits.map((digit: number) => (
+              <Button
+                active={digit === selectedDigit}
+                activeColor={PLAYING_CARD_RED}
+                key={digit}
+                onClick={handleDigitClick}
+              >
+                {digit}
+              </Button>
+            ))}
+          </DigitContainer>
+        </>
+      )}
     </Container>
   );
 };
