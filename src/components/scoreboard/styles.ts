@@ -2,13 +2,13 @@ import styled, { StyledComponent } from 'styled-components';
 import { BLACK_BOARD, CHALK_WHITE } from '../../constants/colors';
 import { ICell, ITable } from './types';
 
-const Row: StyledComponent<'div', {}> = styled.div`
+const row: StyledComponent<'div', {}> = styled.div`
   column-gap: 0.1rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 `;
 
-export const Body: StyledComponent<'div', {}> = styled(Row)`
+export const Body: StyledComponent<'div', {}> = styled(row)`
   overflow: auto;
 `;
 
@@ -37,12 +37,12 @@ export const Emoji: StyledComponent<'span', {}> = styled.span`
   grid-area: emoji;
 `;
 
-export const Foot: StyledComponent<'div', {}> = styled(Row)`
+export const Foot: StyledComponent<'div', {}> = styled(row)`
   border-top: 0.2rem solid ${CHALK_WHITE};
   font-weight: bold;
 `;
 
-export const Head: StyledComponent<'div', {}> = styled(Row)`
+export const Head: StyledComponent<'div', {}> = styled(row)`
   border-bottom: 0.2rem solid ${CHALK_WHITE};
   font-weight: bold;
 `;

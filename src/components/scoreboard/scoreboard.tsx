@@ -61,14 +61,8 @@ export const Scoreboard: FunctionComponent<IProps> = ({
         {game.teams.map((team: Team) => (
           <Column key={team}>
             <Cell reverse={team === last(game.teams)}>
-              {game.leader === team ? (
-                <>
-                  <Content>{team}</Content>
-                  <Emoji>🏁</Emoji>
-                </>
-              ) : (
-                <Content>{team}</Content>
-              )}
+              <Content>{team}</Content>
+              {game.leader === team && <Emoji>🏁</Emoji>}
             </Cell>
           </Column>
         ))}
@@ -94,13 +88,9 @@ export const Scoreboard: FunctionComponent<IProps> = ({
         {game.score.map((score: IResult) => (
           <Column key={score.team}>
             <Cell ref={footCellRef} reverse={score.team === last(game.teams)}>
-              {game.winner !== undefined && game.winner.team === score.team ? (
-                <>
-                  <Content>{score.points}</Content>
-                  <Emoji>🏆</Emoji>
-                </>
-              ) : (
-                <Content>{score.points}</Content>
+              <Content>{score.points}</Content>
+              {game.winner !== undefined && game.winner.team === score.team && (
+                <Emoji>🏆</Emoji>
               )}
             </Cell>
           </Column>
