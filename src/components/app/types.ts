@@ -1,4 +1,4 @@
-export type Team = 'vi' | 'de';
+export type Team = 'VI' | 'DE';
 
 export enum Phases {
   Bidding = 'BIDDING',

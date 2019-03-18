@@ -14,7 +14,7 @@ import { Felt, GlobalStyle, Grid } from './styles';
 import { IGame, IResult, ISet, Phases, Score, Team } from './types';
 
 const INITIAL_GAME: () => IGame = (): IGame => {
-  const teams: Team[] = ['vi', 'de'];
+  const teams: Team[] = ['VI', 'DE'];
   const initialScore: Score = teams.map((team: Team) => ({ points: 0, team }));
 
   return { phase: Phases.Bidding, score: initialScore, sets: [], teams };
