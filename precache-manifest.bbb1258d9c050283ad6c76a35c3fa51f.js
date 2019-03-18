@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "a54de8baa0f2f7f11be0",
-    "url": "/pidro-counter/static/js/main.a54de8ba.chunk.js"
+    "revision": "98d2ad9bcd7a65105051",
+    "url": "/pidro-counter/static/js/main.98d2ad9b.chunk.js"
   },
   {
     "revision": "7df57f6ad20a58c6bafb",
     "url": "/pidro-counter/static/js/runtime~main.7df57f6a.js"
   },
   {
-    "revision": "f530307bcb6e7ccf1482",
+    "revision": "2c521d01ac33da049f81",
     "url": "/pidro-counter/static/css/2.362a4029.chunk.css"
   },
   {
-    "revision": "f530307bcb6e7ccf1482",
-    "url": "/pidro-counter/static/js/2.f530307b.chunk.js"
+    "revision": "2c521d01ac33da049f81",
+    "url": "/pidro-counter/static/js/2.2c521d01.chunk.js"
   },
   {
     "revision": "987b84570ea69ee660455b8d5e91f5f1",
@@ -40,12 +40,12 @@ self.__precacheManifest = [
     "url": "/pidro-counter/static/media/roboto-latin-900.19b7a0ad.woff2"
   },
   {
-    "revision": "e9dbbe8a693dd275c16d32feb101f1c1",
-    "url": "/pidro-counter/static/media/roboto-latin-100.e9dbbe8a.woff"
-  },
-  {
     "revision": "6232f43d15b0e7a0bf0fe82e295bdd06",
     "url": "/pidro-counter/static/media/roboto-latin-100italic.6232f43d.woff2"
+  },
+  {
+    "revision": "e9dbbe8a693dd275c16d32feb101f1c1",
+    "url": "/pidro-counter/static/media/roboto-latin-100.e9dbbe8a.woff"
   },
   {
     "revision": "d704bb3d579b7d5e40880c75705c8a71",
@@ -112,7 +112,7 @@ self.__precacheManifest = [
     "url": "/pidro-counter/static/media/roboto-latin-900italic.bc833e72.woff"
   },
   {
-    "revision": "5583d099a4efc4ea2bc4f1cde6cf2c82",
+    "revision": "4c01888403546f3360157dcc1f556c90",
     "url": "/pidro-counter/index.html"
   }
 ];
