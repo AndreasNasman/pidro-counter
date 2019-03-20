@@ -75,7 +75,7 @@ export const Keypad: FunctionComponent<IProps> = ({
   return (
     <Container>
       {winner ? (
-        <H2>{winner.team} vann!</H2>
+        <H2>🎉 {winner.team} vann! 🎉</H2>
       ) : (
         <>
           <Prompt minWidth={promptMinWidth}>{PROMPTS[phase]}</Prompt>
