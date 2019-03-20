@@ -198,13 +198,14 @@ export const App: FunctionComponent = (): ReactElement => {
     <>
       <GlobalStyle />
       <Felt>
-        {game.winner && (
-          <ReactConfetti // tslint:disable-line: no-unsafe-any
-            height={resolution.height}
-            width={resolution.width}
-            style={{ pointerEvents: 'none' }}
-          />
-        )}
+        <ReactConfetti // tslint:disable-line: no-unsafe-any
+          height={resolution.height}
+          width={resolution.width}
+          style={{
+            display: game.winner ? 'initial' : 'none',
+            pointerEvents: 'none',
+          }}
+        />
 
         <Grid>
           <Scoreboard game={game} />
