@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "98d2ad9bcd7a65105051",
-    "url": "/pidro-counter/static/js/main.98d2ad9b.chunk.js"
+    "revision": "9ee17be3e7434b97e009",
+    "url": "/pidro-counter/static/js/main.9ee17be3.chunk.js"
   },
   {
     "revision": "7df57f6ad20a58c6bafb",
     "url": "/pidro-counter/static/js/runtime~main.7df57f6a.js"
   },
   {
-    "revision": "2c521d01ac33da049f81",
+    "revision": "8161f22231ad9cf33d38",
     "url": "/pidro-counter/static/css/2.362a4029.chunk.css"
   },
   {
-    "revision": "2c521d01ac33da049f81",
-    "url": "/pidro-counter/static/js/2.2c521d01.chunk.js"
+    "revision": "8161f22231ad9cf33d38",
+    "url": "/pidro-counter/static/js/2.8161f222.chunk.js"
   },
   {
     "revision": "987b84570ea69ee660455b8d5e91f5f1",
@@ -104,15 +104,15 @@ self.__precacheManifest = [
     "url": "/pidro-counter/static/media/roboto-latin-900.8c2ade50.woff"
   },
   {
-    "revision": "7b770d6c53423deb1a8e49d3c9175184",
-    "url": "/pidro-counter/static/media/roboto-latin-900italic.7b770d6c.woff2"
-  },
-  {
     "revision": "bc833e725c137257c2c42a789845d82f",
     "url": "/pidro-counter/static/media/roboto-latin-900italic.bc833e72.woff"
   },
   {
-    "revision": "4c01888403546f3360157dcc1f556c90",
+    "revision": "7b770d6c53423deb1a8e49d3c9175184",
+    "url": "/pidro-counter/static/media/roboto-latin-900italic.7b770d6c.woff2"
+  },
+  {
+    "revision": "d33b5920e46a72f339131eba891e66fa",
     "url": "/pidro-counter/index.html"
   }
 ];
