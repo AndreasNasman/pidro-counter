@@ -19,6 +19,9 @@ import {
 } from './styles';
 import { IProps } from './types';
 
+const TRANSITION_DURATION: number = 0.35;
+const MILLI_SECOND_MULTIPLIER: number = 1000;
+
 export const Toolbar: FunctionComponent<IProps> = ({
   canRedo,
   canResetScore,
@@ -39,7 +42,10 @@ export const Toolbar: FunctionComponent<IProps> = ({
 
   const replay: () => void = (): void => {
     closePopover();
-    resetScore();
+
+    setTimeout(() => {
+      resetScore();
+    }, TRANSITION_DURATION * MILLI_SECOND_MULTIPLIER);
   };
 
   return (
@@ -74,6 +80,7 @@ export const Toolbar: FunctionComponent<IProps> = ({
         isOpen={popoverOpen}
         onClickOutside={closePopover}
         padding={0}
+        transitionDuration={TRANSITION_DURATION}
       >
         <IconWrapper disabled={!canResetScore} onClick={openPopover}>
           <MdReplay />

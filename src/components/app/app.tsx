@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import ReactConfetti from 'react-confetti';
 import { MAXIMUM_POINTS, WINNING_POINTS } from '../../constants/game';
 import { ITEMS } from '../../constants/session-storage';
 import { Keypad } from '../keypad';
@@ -63,6 +64,25 @@ export const App: FunctionComponent = (): ReactElement => {
       JSON.stringify(gameHistoryIndex),
     );
   }, [gameHistoryIndex]);
+
+  const [resolution, setResolution] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    const handler: () => void = (): void => {
+      setResolution({
+        height: document.body.clientHeight,
+        width: document.body.clientWidth,
+      });
+    };
+    window.addEventListener('resize', handler);
+
+    return (): void => {
+      window.removeEventListener('resize', handler);
+    };
+  }, []);
 
   const getNextPhase: () => Phases = (): Phases =>
     game.phase === Phases.Bidding ? Phases.Score : Phases.Bidding;
@@ -178,6 +198,15 @@ export const App: FunctionComponent = (): ReactElement => {
     <>
       <GlobalStyle />
       <Felt>
+        <ReactConfetti // tslint:disable-line: no-unsafe-any
+          height={resolution.height}
+          width={resolution.width}
+          style={{
+            display: game.winner ? 'initial' : 'none',
+            pointerEvents: 'none',
+          }}
+        />
+
         <Grid>
           <Scoreboard game={game} />
           <Toolbar
