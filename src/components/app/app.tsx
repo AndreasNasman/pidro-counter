@@ -21,6 +21,7 @@ const INITIAL_GAME: () => IGame = (): IGame => {
   return { phase: Phases.Bidding, score: initialScore, sets: [], teams };
 };
 const INITIAL_GAME_HISTORY_INDEX: number = 0;
+const NUMBER_OF_PIECES: number = 200;
 
 const initializeFromSessionStorage: (
   item: string,
@@ -198,13 +199,14 @@ export const App: FunctionComponent = (): ReactElement => {
     <>
       <GlobalStyle />
       <Felt>
-        <ReactConfetti // tslint:disable-line: no-unsafe-any
+        <ReactConfetti
+          confettiSource={{ h: 0, w: resolution.width, x: 0, y: 0 }}
           height={resolution.height}
-          width={resolution.width}
+          numberOfPieces={game.winner ? NUMBER_OF_PIECES : 0}
           style={{
-            display: game.winner ? 'initial' : 'none',
             pointerEvents: 'none',
           }}
+          width={resolution.width}
         />
 
         <Grid>
