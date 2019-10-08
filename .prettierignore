@@ -1,0 +1,11 @@
+# dotfiles
+.*ignore
+
+# images
+*.ico
+*.png
+*.svg
+
+# misc
+*.lock
+*.txt
