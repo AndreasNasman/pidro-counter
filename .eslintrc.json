@@ -1,3 +1,4 @@
 {
-  "extends": ["react-app", "eslint:all", "plugin:prettier/recommended"]
+  "extends": ["react-app", "eslint:all", "plugin:prettier/recommended"],
+  "rules": { "sort-imports": "off" }
 }
