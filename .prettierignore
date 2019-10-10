@@ -9,3 +9,9 @@
 # misc
 *.lock
 *.txt
+
+# production
+/build
+
+# vs code
+.vscode
