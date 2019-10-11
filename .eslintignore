@@ -1,0 +1,5 @@
+# declaration files
+*.d.ts
+
+# service worker
+/src/serviceWorker.ts
