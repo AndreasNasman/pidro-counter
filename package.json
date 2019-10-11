@@ -21,9 +21,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -37,11 +34,13 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-prettier": "^6.4.0",
     "husky": "^3.0.8",
     "lint-staged": "^9.4.2",
     "prettier": "^1.18.2",
     "stylelint": "^11.0.0",
-    "stylelint-config-recommended": "^3.0.0"
+    "stylelint-config-prettier": "^6.0.0",
+    "stylelint-config-standard": "^19.0.0"
   },
   "husky": {
     "hooks": {
