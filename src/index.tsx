@@ -1,7 +1,7 @@
 import "./index.css";
 import "typeface-source-code-pro";
 import * as serviceWorker from "./serviceWorker";
-import App from "./App";
+import { App } from "components/app";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -10,8 +10,8 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 
 if (module.hot) {
-  module.hot.accept("./App", () => {
-    const NextApp = require("./App").default; // eslint-disable-line global-require
+  module.hot.accept("components/app", () => {
+    const NextApp = require("components/app").default; // eslint-disable-line global-require
     ReactDOM.render(<NextApp />, rootElement);
   });
 }
