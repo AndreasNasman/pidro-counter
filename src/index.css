@@ -1,5 +1,9 @@
 @import-normalize;
 
+* {
+  font-family: source-code-pro, monospace;
+}
+
 body {
   margin: 0;
 }

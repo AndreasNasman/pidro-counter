@@ -11,6 +11,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",
+    "typeface-source-code-pro": "^0.0.71",
     "typescript": "3.6.3"
   },
   "scripts": {

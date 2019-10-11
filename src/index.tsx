@@ -1,4 +1,5 @@
 import "./index.css";
+import "typeface-source-code-pro";
 import * as serviceWorker from "./serviceWorker";
 import App from "./App";
 import React from "react";
