@@ -1,0 +1,51 @@
+:root {
+  --button-gap: 0.1rem;
+  --playing-card-black: #000;
+  --playing-card-red: #ff534f;
+  --playing-card-white: #fff;
+}
+
+.button {
+  background-color: transparent;
+  border: 0.25rem solid var(--playing-card-white);
+  border-radius: 0.5rem;
+  color: var(--playing-card-white);
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  text-transform: uppercase;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button.black {
+  background-color: var(--playing-card-white);
+  color: var(--playing-card-black);
+}
+
+.button.red {
+  background-color: var(--playing-card-white);
+  color: var(--playing-card-red);
+}
+
+.container {
+  align-content: center;
+  display: grid;
+  grid-area: keypad;
+  min-width: max-content;
+}
+
+.number {
+  display: grid;
+  grid-gap: var(--button-gap);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.team {
+  column-gap: var(--button-gap);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: var(--button-gap);
+}

@@ -14,5 +14,8 @@
 # production
 /build
 
+# testing
+/coverage
+
 # vs code
 /.vscode
