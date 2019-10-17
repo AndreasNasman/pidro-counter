@@ -23,7 +23,9 @@ export const Keypad: FC = () => {
               [styles.black]: activeTeam === team
             })}
             key={team}
-            onClick={(): void => setActiveTeam(team)}
+            onClick={(): void =>
+              setActiveTeam(activeTeam === team ? null : team)
+            }
           >
             {team}
           </button>
@@ -37,7 +39,9 @@ export const Keypad: FC = () => {
               [styles.red]: activeNumber === number
             })}
             key={number}
-            onClick={(): void => setActiveNumber(number)}
+            onClick={(): void =>
+              setActiveNumber(activeNumber === number ? null : number)
+            }
           >
             {number}
           </button>
