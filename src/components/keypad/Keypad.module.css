@@ -7,6 +7,13 @@
 
 .button {
   background-color: transparent;
+  background-image: linear-gradient(
+    var(--playing-card-white),
+    var(--playing-card-white)
+  );
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0% 0%;
   border: 0.25rem solid var(--playing-card-white);
   border-radius: 0.5rem;
   color: var(--playing-card-white);
@@ -14,38 +21,45 @@
   font-weight: bold;
   padding: 0.5rem;
   text-transform: uppercase;
+  transition: background-size 0.2s ease-in-out 0s, color 0.3s linear 0s;
 }
 
 .button:focus {
   outline: none;
 }
 
+.button.black,
+.button.red {
+  background-size: 100% 100%;
+}
+
 .button.black {
-  background-color: var(--playing-card-white);
   color: var(--playing-card-black);
 }
 
 .button.red {
-  background-color: var(--playing-card-white);
   color: var(--playing-card-red);
+}
+
+.container,
+.number,
+.team {
+  display: grid;
 }
 
 .container {
   align-content: center;
-  display: grid;
   grid-area: keypad;
   min-width: max-content;
 }
 
 .number {
-  display: grid;
   grid-gap: var(--button-gap);
   grid-template-columns: repeat(3, 1fr);
 }
 
 .team {
   column-gap: var(--button-gap);
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-bottom: var(--button-gap);
 }
