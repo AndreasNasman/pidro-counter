@@ -1,25 +1,14 @@
 {
-  "files": {
-    "main.css": "/pidro-counter/static/css/main.8c8e40c8.chunk.css",
-    "main.js": "/pidro-counter/static/js/main.50cecdd8.chunk.js",
-    "main.js.map": "/pidro-counter/static/js/main.50cecdd8.chunk.js.map",
-    "runtime-main.js": "/pidro-counter/static/js/runtime-main.994103b1.js",
-    "runtime-main.js.map": "/pidro-counter/static/js/runtime-main.994103b1.js.map",
-    "static/css/2.3f028da9.chunk.css": "/pidro-counter/static/css/2.3f028da9.chunk.css",
-    "static/js/2.c44dbda5.chunk.js": "/pidro-counter/static/js/2.c44dbda5.chunk.js",
-    "static/js/2.c44dbda5.chunk.js.map": "/pidro-counter/static/js/2.c44dbda5.chunk.js.map",
-    "index.html": "/pidro-counter/index.html",
-    "precache-manifest.9a9da2f88db5fe3e905767058887f482.js": "/pidro-counter/precache-manifest.9a9da2f88db5fe3e905767058887f482.js",
-    "service-worker.js": "/pidro-counter/service-worker.js",
-    "static/css/2.3f028da9.chunk.css.map": "/pidro-counter/static/css/2.3f028da9.chunk.css.map",
-    "static/css/main.8c8e40c8.chunk.css.map": "/pidro-counter/static/css/main.8c8e40c8.chunk.css.map",
-    "static/media/index.css": "/pidro-counter/static/media/roboto-latin-900italic.ebf6d164.woff2"
-  },
-  "entrypoints": [
-    "static/js/runtime-main.994103b1.js",
-    "static/css/2.3f028da9.chunk.css",
-    "static/js/2.c44dbda5.chunk.js",
-    "static/css/main.8c8e40c8.chunk.css",
-    "static/js/main.50cecdd8.chunk.js"
-  ]
+  "main.js": "/pidro-counter/static/js/main.3fe2ce03.chunk.js",
+  "main.js.map": "/pidro-counter/static/js/main.3fe2ce03.chunk.js.map",
+  "runtime~main.js": "/pidro-counter/static/js/runtime~main.7df57f6a.js",
+  "runtime~main.js.map": "/pidro-counter/static/js/runtime~main.7df57f6a.js.map",
+  "static/css/2.99f6c1af.chunk.css": "/pidro-counter/static/css/2.99f6c1af.chunk.css",
+  "static/js/2.d3e63374.chunk.js": "/pidro-counter/static/js/2.d3e63374.chunk.js",
+  "static/js/2.d3e63374.chunk.js.map": "/pidro-counter/static/js/2.d3e63374.chunk.js.map",
+  "index.html": "/pidro-counter/index.html",
+  "precache-manifest.3c395c88db2f5cc14cef228c24aae21b.js": "/pidro-counter/precache-manifest.3c395c88db2f5cc14cef228c24aae21b.js",
+  "service-worker.js": "/pidro-counter/service-worker.js",
+  "static/css/2.99f6c1af.chunk.css.map": "/pidro-counter/static/css/2.99f6c1af.chunk.css.map",
+  "static/media/index.css": "/pidro-counter/static/media/roboto-latin-900italic.bc833e72.woff"
 }
