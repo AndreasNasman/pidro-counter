@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pidro-counter/precache-manifest.8a76452f119f78e41e41c57219b22750.js"
+  "/pidro-counter/precache-manifest.3105721cd2211063840a282830966436.js"
 );
 
 self.addEventListener('message', (event) => {
