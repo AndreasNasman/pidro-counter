@@ -11,7 +11,7 @@ export const Keypad: FC = () => {
   const [teams] = useState<Team[]>(["us", "they"]);
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
 
-  const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1));
+  const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1)); // eslint-disable-line no-magic-numbers
   const [activeNumber, setActiveNumber] = useState<number | null>(null);
 
   return (

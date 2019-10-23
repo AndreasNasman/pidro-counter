@@ -6,7 +6,6 @@
     "prettier"
   ],
   "rules": {
-    "no-magic-numbers": ["error", { "ignore": [1] }],
     "no-ternary": "off",
     "one-var": "off"
   }
