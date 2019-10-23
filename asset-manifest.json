@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/pidro-counter/static/css/main.f855498e.chunk.css",
+    "main.css": "/pidro-counter/static/css/main.8c8e40c8.chunk.css",
     "main.js": "/pidro-counter/static/js/main.50cecdd8.chunk.js",
     "main.js.map": "/pidro-counter/static/js/main.50cecdd8.chunk.js.map",
     "runtime-main.js": "/pidro-counter/static/js/runtime-main.994103b1.js",
@@ -9,17 +9,17 @@
     "static/js/2.c44dbda5.chunk.js": "/pidro-counter/static/js/2.c44dbda5.chunk.js",
     "static/js/2.c44dbda5.chunk.js.map": "/pidro-counter/static/js/2.c44dbda5.chunk.js.map",
     "index.html": "/pidro-counter/index.html",
-    "precache-manifest.3105721cd2211063840a282830966436.js": "/pidro-counter/precache-manifest.3105721cd2211063840a282830966436.js",
+    "precache-manifest.9a9da2f88db5fe3e905767058887f482.js": "/pidro-counter/precache-manifest.9a9da2f88db5fe3e905767058887f482.js",
     "service-worker.js": "/pidro-counter/service-worker.js",
     "static/css/2.3f028da9.chunk.css.map": "/pidro-counter/static/css/2.3f028da9.chunk.css.map",
-    "static/css/main.f855498e.chunk.css.map": "/pidro-counter/static/css/main.f855498e.chunk.css.map",
+    "static/css/main.8c8e40c8.chunk.css.map": "/pidro-counter/static/css/main.8c8e40c8.chunk.css.map",
     "static/media/index.css": "/pidro-counter/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.994103b1.js",
     "static/css/2.3f028da9.chunk.css",
     "static/js/2.c44dbda5.chunk.js",
-    "static/css/main.f855498e.chunk.css",
+    "static/css/main.8c8e40c8.chunk.css",
     "static/js/main.50cecdd8.chunk.js"
   ]
 }
