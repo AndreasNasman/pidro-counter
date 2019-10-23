@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { Team } from "./types";
+import { Team } from "types";
 import classNames from "classnames";
 import range from "lodash.range";
 import styles from "./Keypad.module.css";
