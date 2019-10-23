@@ -1,3 +1,13 @@
 {
-  "extends": ["react-app", "eslint:all", "prettier"]
+  "extends": [
+    "react-app",
+    "eslint:all",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-magic-numbers": ["error", { "ignore": [1] }],
+    "no-ternary": "off",
+    "one-var": "off"
+  }
 }

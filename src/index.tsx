@@ -1,5 +1,5 @@
 import "./index.css";
-import "typeface-source-code-pro";
+import "typeface-roboto";
 import * as serviceWorker from "./serviceWorker";
 import { App } from "components/app";
 import React from "react";
