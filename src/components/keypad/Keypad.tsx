@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
+import { Button } from "components/button";
 import { Team } from "types";
-import classNames from "classnames";
+import buttonStyles from "components/button/Button.module.css";
 import range from "lodash.range";
 import styles from "./Keypad.module.css";
 
@@ -14,37 +15,37 @@ export const Keypad: FC = () => {
   const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1)); // eslint-disable-line no-magic-numbers
   const [activeNumber, setActiveNumber] = useState<number | null>(null);
 
+  const handleClick = (value: Team | number): void => {
+    if (typeof value === "string") {
+      setActiveTeam(activeTeam === value ? null : value);
+    } else {
+      setActiveNumber(activeNumber === value ? null : value);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.team}>
         {teams.map(team => (
-          <button
-            className={classNames(styles.button, {
-              [styles.black]: activeTeam === team
-            })}
+          <Button
+            activeColor={buttonStyles.black}
+            activeValue={activeTeam}
+            handleClick={handleClick}
             key={team}
-            onClick={(): void =>
-              setActiveTeam(activeTeam === team ? null : team)
-            }
-          >
-            {team}
-          </button>
+            value={team}
+          />
         ))}
       </div>
 
       <div className={styles.number}>
         {numbers.map(number => (
-          <button
-            className={classNames(styles.button, {
-              [styles.red]: activeNumber === number
-            })}
+          <Button
+            activeColor={buttonStyles.red}
+            activeValue={activeNumber}
+            handleClick={handleClick}
             key={number}
-            onClick={(): void =>
-              setActiveNumber(activeNumber === number ? null : number)
-            }
-          >
-            {number}
-          </button>
+            value={number}
+          />
         ))}
       </div>
     </div>
