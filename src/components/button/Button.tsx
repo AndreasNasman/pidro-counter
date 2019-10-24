@@ -6,6 +6,7 @@ import styles from "./Button.module.css";
 export const Button: FC<Props> = ({
   activeColor,
   activeValue,
+  disabled,
   handleClick,
   value
 }) => (
@@ -13,6 +14,7 @@ export const Button: FC<Props> = ({
     className={classNames(styles.button, {
       [activeColor]: activeValue === value
     })}
+    disabled={disabled}
     onClick={(): void => handleClick(value)}
   >
     {value}

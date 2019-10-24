@@ -6,6 +6,7 @@
     "prettier"
   ],
   "rules": {
+    "max-lines-per-function": ["error", { "max": 100 }],
     "no-ternary": "off",
     "one-var": "off"
   }
