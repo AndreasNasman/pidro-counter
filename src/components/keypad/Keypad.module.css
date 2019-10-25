@@ -1,45 +1,4 @@
-:root {
-  --button-gap: 0.1rem;
-  --playing-card-black: #000;
-  --playing-card-red: #ff534f;
-  --playing-card-white: #fff;
-}
-
-.button {
-  background-color: transparent;
-  background-image: linear-gradient(
-    var(--playing-card-white),
-    var(--playing-card-white)
-  );
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 0% 0%;
-  border: 0.25rem solid var(--playing-card-white);
-  border-radius: 0.5rem;
-  color: var(--playing-card-white);
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 0.5rem;
-  text-transform: uppercase;
-  transition: background-size 0.2s ease-in-out 0s, color 0.3s linear 0s;
-}
-
-.button:focus {
-  outline: none;
-}
-
-.button.black,
-.button.red {
-  background-size: 100% 100%;
-}
-
-.button.black {
-  color: var(--playing-card-black);
-}
-
-.button.red {
-  color: var(--playing-card-red);
-}
+@value buttonGap: 0.1rem;
 
 .container,
 .number,
@@ -54,12 +13,12 @@
 }
 
 .number {
-  grid-gap: var(--button-gap);
+  grid-gap: buttonGap;
   grid-template-columns: repeat(3, 1fr);
 }
 
 .team {
-  column-gap: var(--button-gap);
+  column-gap: buttonGap;
   grid-template-columns: repeat(2, 1fr);
-  margin-bottom: var(--button-gap);
+  margin-bottom: buttonGap;
 }

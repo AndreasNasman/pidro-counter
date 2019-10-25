@@ -6,7 +6,7 @@
     "prettier"
   ],
   "rules": {
-    "no-magic-numbers": ["error", { "ignore": [1] }],
+    "max-lines-per-function": ["error", { "max": 100 }],
     "no-ternary": "off",
     "one-var": "off"
   }

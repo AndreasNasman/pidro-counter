@@ -1,0 +1,37 @@
+@value duration: 0.3s;
+@value playingCardBlack: #000;
+@value playingCardRed: #ff534f;
+@value playingCardWhite: #fff;
+
+.button {
+  background-color: transparent;
+  background-image: linear-gradient(playingCardWhite, playingCardWhite);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0% 0%;
+  border: 0.25rem solid playingCardWhite;
+  border-radius: 0.5rem;
+  color: playingCardWhite;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  transition: background-size duration ease-in-out 0s, color duration linear 0s;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button.black,
+.button.red {
+  background-size: 100% 100%;
+}
+
+.button.black {
+  color: playingCardBlack;
+}
+
+.button.red {
+  color: playingCardRed;
+}
