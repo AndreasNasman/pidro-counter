@@ -1,13 +1,11 @@
+import { MAXIMUM_POINTS, MINIMUM_POINTS } from "shared/constants";
 import React, { FC, useEffect, useState } from "react";
 import { Button } from "./button";
 import { Props } from "./types";
-import { Team } from "types";
+import { Team } from "shared/types";
 import buttonStyles from "./button/Button.module.css";
 import range from "lodash.range";
 import styles from "./Keypad.module.css";
-
-const MAXIMUM_POINTS = 14;
-const MINIMUM_POINTS = 6;
 
 const DELAY = 200;
 const MAGNITUDE = 1000;

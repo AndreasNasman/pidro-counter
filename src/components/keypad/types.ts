@@ -1,4 +1,4 @@
-import { Score, Team } from "types";
+import { Score, Team } from "shared/types";
 
 export interface Props {
   teams: Team[];
