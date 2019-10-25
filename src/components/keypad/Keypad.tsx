@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from "react";
-import { Button } from "components/button";
+import { Button } from "./button";
 import { Props } from "./types";
 import { Team } from "types";
-import buttonStyles from "components/button/Button.module.css";
+import buttonStyles from "./button/Button.module.css";
 import range from "lodash.range";
 import styles from "./Keypad.module.css";
 
