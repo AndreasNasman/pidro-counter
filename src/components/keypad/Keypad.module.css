@@ -1,6 +1,4 @@
-:root {
-  --button-gap: 0.1rem;
-}
+@value buttonGap: 0.1rem;
 
 .container,
 .number,
@@ -15,12 +13,12 @@
 }
 
 .number {
-  grid-gap: var(--button-gap);
+  grid-gap: buttonGap;
   grid-template-columns: repeat(3, 1fr);
 }
 
 .team {
-  column-gap: var(--button-gap);
+  column-gap: buttonGap;
   grid-template-columns: repeat(2, 1fr);
-  margin-bottom: var(--button-gap);
+  margin-bottom: buttonGap;
 }
