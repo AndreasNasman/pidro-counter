@@ -13,8 +13,7 @@ const DELAY = 200;
 const MAGNITUDE = 1000;
 const TIMEOUT = parseFloat(buttonStyles.duration) * MAGNITUDE + DELAY;
 
-export const Keypad: FC<Props> = ({ updateRounds }) => {
-  const [teams] = useState<Team[]>(["us", "they"]);
+export const Keypad: FC<Props> = ({ teams, updateRounds }) => {
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
 
   const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1)); // eslint-disable-line no-magic-numbers
