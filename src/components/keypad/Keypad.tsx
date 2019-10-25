@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { Button } from "components/button";
+import { Props } from "./types";
 import { Team } from "types";
 import buttonStyles from "components/button/Button.module.css";
 import range from "lodash.range";
@@ -12,7 +13,7 @@ const DELAY = 200;
 const MAGNITUDE = 1000;
 const TIMEOUT = parseFloat(buttonStyles.duration) * MAGNITUDE + DELAY;
 
-export const Keypad: FC = () => {
+export const Keypad: FC<Props> = ({ updateRounds }) => {
   const [teams] = useState<Team[]>(["us", "they"]);
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
 
@@ -29,14 +30,16 @@ export const Keypad: FC = () => {
         setActiveTeam(null);
         setActiveNumber(null);
         setDisableButton(false);
+
+        updateRounds({ points: activeNumber, team: activeTeam });
       }, TIMEOUT);
     }
-  }, [activeTeam, activeNumber]);
+  }, [activeTeam, activeNumber, updateRounds]);
 
   const handleClick = (value: Team | number): void => {
     if (typeof value === "string") {
       setActiveTeam(activeTeam === value ? null : value);
-    } else {
+    } else if (typeof value === "number") {
       setActiveNumber(activeNumber === value ? null : value);
     }
   };
