@@ -1,25 +1,23 @@
-import { Phase, Result, Round, Score, Team } from "shared/types";
 import React, { useState } from "react";
+import { Result, Round, Score, Team } from "shared/types";
 import { Keypad } from "components/keypad";
 import { MAXIMUM_POINTS } from "shared/constants";
+import { Phase } from "./types";
 import dropRight from "lodash.dropright";
 import last from "lodash.last";
 import styles from "./App.module.css";
 
 const determineResult = (bid: Score, winner: Score): Result => {
-  const loser: Score = {
-    points: MAXIMUM_POINTS - winner.points,
-    team: winner.team === "us" ? "they" : "us"
+  const result = {
+    [winner.team]: winner.points,
+    [winner.team === "us" ? "they" : "us"]: MAXIMUM_POINTS - winner.points
   };
 
-  if (loser.team === bid.team && loser.points < bid.points) {
-    loser.points = -bid.points;
+  if (result[bid.team] < bid.points) {
+    result[bid.team] = -bid.points;
   }
 
-  return {
-    loser,
-    winner
-  };
+  return { they: result.they, us: result.us };
 };
 
 export const App: React.FC = () => {
