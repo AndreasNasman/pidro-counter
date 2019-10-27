@@ -1,0 +1,68 @@
+@value blackBoard: #282828;
+@value chalkWhite: #fefeff;
+
+.body,
+.cell,
+.foot,
+.head,
+.table {
+  display: grid;
+}
+
+.body,
+.foot,
+.head {
+  column-gap: 0.1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.body {
+  overflow: auto;
+}
+
+.cell {
+  color: chalkWhite;
+  font-size: 1.25rem;
+  grid-column-gap: 0.25rem;
+  grid-template-areas: ". content emoji";
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  padding: 0.5rem;
+  text-transform: uppercase;
+}
+
+.cell.reverse {
+  grid-template-areas: "emoji content .";
+}
+
+.column {
+  background-color: blackBoard;
+}
+
+.content {
+  grid-area: content;
+}
+
+.emoji {
+  grid-area: emoji;
+}
+
+.foot,
+.head {
+  font-weight: bold;
+}
+
+.foot {
+  border-top: 0.2rem solid chalkWhite;
+}
+
+.head {
+  border-bottom: 0.2rem solid chalkWhite;
+}
+
+.table {
+  background-color: chalkWhite;
+  grid-area: scoreboard;
+  grid-template-rows: auto 1fr auto;
+  min-width: max-content;
+}

@@ -1,8 +1,3 @@
-import { Score } from "types";
+import { Round } from "shared/types";
 
-export interface Round {
-  bid?: Score;
-  winner?: Score;
-}
-
-export type Phase = "bid" | "result";
+export type Phase = keyof Round;
