@@ -59,14 +59,14 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
         {teams.map(team => (
           <div className={styles.column} key={team}>
             {rounds.map((round, index) => (
-              <>
+              <div
+                className={classNames(styles.cell, {
+                  [styles.reverse]: last(teams) === team
+                })}
+                key={index}
+              >
                 {!round.result && round.bid && round.bid.team === team && (
-                  <div
-                    className={classNames(styles.cell, {
-                      [styles.reverse]: last(teams) === team
-                    })}
-                    key={index}
-                  >
+                  <>
                     <div className={styles.content}>{round.bid.points}</div>
                     <span
                       aria-label="Megaphone"
@@ -75,15 +75,13 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
                     >
                       📣
                     </span>
-                  </div>
+                  </>
                 )}
 
                 {round.result && (
-                  <div className={styles.cell}>
-                    <div className={styles.content}>{round.result[team]}</div>
-                  </div>
+                  <div className={styles.content}>{round.result[team]}</div>
                 )}
-              </>
+              </div>
             ))}
           </div>
         ))}
