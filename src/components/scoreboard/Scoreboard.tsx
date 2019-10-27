@@ -1,4 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
+/* eslint-disable max-lines-per-function */
+/* eslint-disable max-statements */
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Result, Team } from "shared/types";
 import { Props } from "./types";
 import classNames from "classnames";
@@ -29,9 +31,39 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
     else setLeader(null);
   }, [rounds]);
 
+  const bodyColumnRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const { current } = bodyColumnRef;
+    if (!current) return;
+
+    current.scrollIntoView({ behavior: "smooth", block: "end" });
+  });
+
+  const [minHeight, setMinHeight] = useState<number>();
+  const headRef = useRef<HTMLDivElement | null>(null);
+  const footRef = useRef<HTMLDivElement | null>(null);
+  const footCellRef = useRef<HTMLDivElement | null>(null);
+  useLayoutEffect(() => {
+    const { current: currentHeadRef } = headRef;
+    const { current: currentFootRef } = footRef;
+    const { current: currentCellRef } = footCellRef;
+    if (
+      currentHeadRef === null ||
+      currentFootRef === null ||
+      currentCellRef === null
+    )
+      return;
+
+    const newMinHeight =
+      currentHeadRef.offsetHeight +
+      currentFootRef.offsetHeight +
+      currentCellRef.offsetHeight;
+    setMinHeight(newMinHeight);
+  }, []);
+
   return (
-    <div className={styles.table}>
-      <div className={styles.head}>
+    <div className={styles.table} style={{ minHeight }}>
+      <div className={styles.head} ref={headRef}>
         {teams.map(team => (
           <div className={styles.column} key={team}>
             <div
@@ -57,7 +89,7 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
 
       <div className={styles.body}>
         {teams.map(team => (
-          <div className={styles.column} key={team}>
+          <div className={styles.column} key={team} ref={bodyColumnRef}>
             {rounds.map((round, index) => (
               <div
                 className={classNames(styles.cell, {
@@ -87,10 +119,10 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
         ))}
       </div>
 
-      <div className={styles.foot}>
+      <div className={styles.foot} ref={footRef}>
         {teams.map(team => (
           <div className={styles.column} key={team}>
-            <div className={styles.cell}>
+            <div className={styles.cell} ref={footCellRef}>
               <div className={styles.content}>{score[team]}</div>
             </div>
           </div>
