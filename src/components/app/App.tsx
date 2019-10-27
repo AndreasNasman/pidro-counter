@@ -3,6 +3,7 @@ import { Result, Round, Score, Team } from "shared/types";
 import { Keypad } from "components/keypad";
 import { MAXIMUM_POINTS } from "shared/constants";
 import { Phase } from "./types";
+import { Scoreboard } from "components/scoreboard";
 import dropRight from "lodash.dropright";
 import last from "lodash.last";
 import styles from "./App.module.css";
@@ -54,6 +55,7 @@ export const App: React.FC = () => {
   return (
     <div className={styles.felt}>
       <div className={styles.grid}>
+        <Scoreboard rounds={rounds} teams={teams} />
         <Keypad teams={teams} updateRounds={updateRounds} />
       </div>
     </div>
