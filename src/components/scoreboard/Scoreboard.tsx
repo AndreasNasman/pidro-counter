@@ -3,10 +3,10 @@ import { Body } from "./body";
 import { Foot } from "./foot";
 import { Head } from "./head";
 import { Props } from "./types";
-import { Result } from "shared/types";
+import { Result } from "components/common";
 import styles from "./Scoreboard.module.css";
 
-export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
+export const Scoreboard: FC<Props> = ({ rounds }) => {
   const [score, setScore] = useState<Result>({ they: 0, us: 0 });
   useEffect(() => {
     const currentScore = rounds.reduce(
@@ -48,14 +48,9 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
 
   return (
     <div className={styles.table} style={{ minHeight }}>
-      <Head headRef={headRef} score={score} teams={teams} />
-      <Body rounds={rounds} teams={teams} />
-      <Foot
-        footCellRef={footCellRef}
-        footRef={footRef}
-        score={score}
-        teams={teams}
-      />
+      <Head headRef={headRef} score={score} />
+      <Body rounds={rounds} />
+      <Foot footCellRef={footCellRef} footRef={footRef} score={score} />
     </div>
   );
 };

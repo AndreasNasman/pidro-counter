@@ -1,12 +1,11 @@
 import React, { FC, useEffect, useState } from "react";
+import { TEAMS, Team } from "components/common";
 import { Props } from "./types";
-import { Team } from "shared/types";
 import classNames from "classnames";
 import { last } from "lodash";
-import scoreboardStyles from "../Scoreboard.module.css";
-import styles from "./Head.module.css";
+import styles from "../Scoreboard.module.css";
 
-export const Head: FC<Props> = ({ headRef, score, teams }) => {
+export const Head: FC<Props> = ({ headRef, score }) => {
   const [leader, setLeader] = useState<Team | null>(null);
 
   useEffect(() => {
@@ -17,18 +16,18 @@ export const Head: FC<Props> = ({ headRef, score, teams }) => {
 
   return (
     <div className={styles.head} ref={headRef}>
-      {teams.map(team => (
-        <div className={scoreboardStyles.column} key={team}>
+      {TEAMS.map(team => (
+        <div className={styles.column} key={team}>
           <div
-            className={classNames(scoreboardStyles.cell, {
-              [scoreboardStyles.reverse]: last(teams) === team
+            className={classNames(styles.cell, {
+              [styles.reverse]: last(TEAMS) === team
             })}
           >
-            <div className={scoreboardStyles.content}>{team}</div>
+            <div className={styles.content}>{team}</div>
             {leader === team && (
               <span
                 aria-label="Chequered Flag"
-                className={scoreboardStyles.emoji}
+                className={styles.emoji}
                 role="img"
               >
                 🏁

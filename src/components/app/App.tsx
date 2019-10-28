@@ -1,25 +1,12 @@
 import React, { useState } from "react";
-import { Result, Round, Score, Team } from "shared/types";
+import { Round, Score } from "components/common";
 import { Keypad } from "components/keypad";
-import { MAXIMUM_POINTS } from "shared/constants";
 import { Phase } from "./types";
 import { Scoreboard } from "components/scoreboard";
+import { determineResult } from "./logic";
 import dropRight from "lodash.dropright";
 import last from "lodash.last";
 import styles from "./App.module.css";
-
-const determineResult = (bid: Score, winner: Score): Result => {
-  const result = {
-    [winner.team]: winner.points,
-    [winner.team === "us" ? "they" : "us"]: MAXIMUM_POINTS - winner.points
-  };
-
-  if (result[bid.team] < bid.points) {
-    result[bid.team] = -bid.points;
-  }
-
-  return { they: result.they, us: result.us };
-};
 
 export const App: React.FC = () => {
   const [phase, setPhase] = useState<Phase>("bid");
@@ -50,13 +37,11 @@ export const App: React.FC = () => {
     }
   };
 
-  const [teams] = useState<Team[]>(["us", "they"]);
-
   return (
     <div className={styles.felt}>
       <div className={styles.grid}>
-        <Scoreboard rounds={rounds} teams={teams} />
-        <Keypad teams={teams} updateRounds={updateRounds} />
+        <Scoreboard rounds={rounds} />
+        <Keypad updateRounds={updateRounds} />
       </div>
     </div>
   );

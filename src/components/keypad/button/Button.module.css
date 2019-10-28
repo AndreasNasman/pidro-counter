@@ -1,6 +1,4 @@
 @value duration: 0.3s;
-@value playingCardBlack: #000;
-@value playingCardRed: #ff534f;
 @value playingCardWhite: #fff;
 
 .button {
@@ -29,9 +27,9 @@
 }
 
 .button.black {
-  color: playingCardBlack;
+  color: #000;
 }
 
 .button.red {
-  color: playingCardRed;
+  color: #ff534f;
 }
