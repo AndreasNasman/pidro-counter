@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useRef } from "react";
 import { Props } from "./types";
+import { TEAMS } from "components/common";
 import classNames from "classnames";
 import { last } from "lodash";
 import styles from "../Scoreboard.module.css";
 
-export const Body: FC<Props> = ({ rounds, teams }) => {
+export const Body: FC<Props> = ({ rounds }) => {
   const bodyColumnRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const { current } = bodyColumnRef;
@@ -15,12 +16,12 @@ export const Body: FC<Props> = ({ rounds, teams }) => {
 
   return (
     <div className={styles.body}>
-      {teams.map(team => (
+      {TEAMS.map(team => (
         <div className={styles.column} key={team} ref={bodyColumnRef}>
           {rounds.map((round, index) => (
             <div
               className={classNames(styles.cell, {
-                [styles.reverse]: last(teams) === team
+                [styles.reverse]: last(TEAMS) === team
               })}
               key={index}
             >

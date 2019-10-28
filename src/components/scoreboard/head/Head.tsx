@@ -1,11 +1,11 @@
 import React, { FC, useEffect, useState } from "react";
+import { TEAMS, Team } from "components/common";
 import { Props } from "./types";
-import { Team } from "shared/types";
 import classNames from "classnames";
 import { last } from "lodash";
 import styles from "../Scoreboard.module.css";
 
-export const Head: FC<Props> = ({ headRef, score, teams }) => {
+export const Head: FC<Props> = ({ headRef, score }) => {
   const [leader, setLeader] = useState<Team | null>(null);
 
   useEffect(() => {
@@ -16,11 +16,11 @@ export const Head: FC<Props> = ({ headRef, score, teams }) => {
 
   return (
     <div className={styles.head} ref={headRef}>
-      {teams.map(team => (
+      {TEAMS.map(team => (
         <div className={styles.column} key={team}>
           <div
             className={classNames(styles.cell, {
-              [styles.reverse]: last(teams) === team
+              [styles.reverse]: last(TEAMS) === team
             })}
           >
             <div className={styles.content}>{team}</div>

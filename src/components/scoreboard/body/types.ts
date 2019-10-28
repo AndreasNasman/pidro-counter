@@ -1,6 +1,5 @@
-import { Round, Team } from "shared/types";
+import { Round } from "components/common";
 
 export interface Props {
   rounds: Round[];
-  teams: Team[];
 }

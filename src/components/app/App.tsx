@@ -1,7 +1,6 @@
+import { MAXIMUM_POINTS, Result, Round, Score } from "components/common";
 import React, { useState } from "react";
-import { Result, Round, Score, Team } from "shared/types";
 import { Keypad } from "components/keypad";
-import { MAXIMUM_POINTS } from "shared/constants";
 import { Phase } from "./types";
 import { Scoreboard } from "components/scoreboard";
 import dropRight from "lodash.dropright";
@@ -50,13 +49,11 @@ export const App: React.FC = () => {
     }
   };
 
-  const [teams] = useState<Team[]>(["us", "they"]);
-
   return (
     <div className={styles.felt}>
       <div className={styles.grid}>
-        <Scoreboard rounds={rounds} teams={teams} />
-        <Keypad teams={teams} updateRounds={updateRounds} />
+        <Scoreboard rounds={rounds} />
+        <Keypad updateRounds={updateRounds} />
       </div>
     </div>
   );

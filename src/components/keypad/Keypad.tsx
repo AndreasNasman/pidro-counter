@@ -1,8 +1,7 @@
-import { MAXIMUM_POINTS, MINIMUM_POINTS } from "shared/constants";
+import { MAXIMUM_POINTS, MINIMUM_POINTS, TEAMS, Team } from "components/common";
 import React, { FC, useEffect, useState } from "react";
 import { Button } from "./button";
 import { Props } from "./types";
-import { Team } from "shared/types";
 import buttonStyles from "./button/Button.module.css";
 import range from "lodash.range";
 import styles from "./Keypad.module.css";
@@ -11,7 +10,7 @@ const DELAY = 200;
 const MAGNITUDE = 1000;
 const TIMEOUT = parseFloat(buttonStyles.duration) * MAGNITUDE + DELAY;
 
-export const Keypad: FC<Props> = ({ teams, updateRounds }) => {
+export const Keypad: FC<Props> = ({ updateRounds }) => {
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
 
   const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1)); // eslint-disable-line no-magic-numbers
@@ -44,7 +43,7 @@ export const Keypad: FC<Props> = ({ teams, updateRounds }) => {
   return (
     <div className={styles.container}>
       <div className={styles.team}>
-        {teams.map(team => (
+        {TEAMS.map(team => (
           <Button
             activeColor={buttonStyles.black}
             activeValue={activeTeam}
