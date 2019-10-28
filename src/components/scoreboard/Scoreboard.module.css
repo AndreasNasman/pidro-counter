@@ -3,18 +3,13 @@
 
 .body,
 .cell,
-.head,
 .table {
   display: grid;
 }
 
-.body,
-.head {
+.body {
   column-gap: 0.1rem;
   grid-template-columns: repeat(2, 1fr);
-}
-
-.body {
   overflow: auto;
 }
 
@@ -43,11 +38,6 @@
 
 .emoji {
   grid-area: emoji;
-}
-
-.head {
-  font-weight: bold;
-  border-bottom: 0.2rem solid chalkWhite;
 }
 
 .table {
