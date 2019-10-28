@@ -1,9 +1,0 @@
-@value chalkWhite from "../Scoreboard.module.css";
-
-.head {
-  border-bottom: 0.2rem solid chalkWhite;
-  column-gap: 0.1rem;
-  display: grid;
-  font-weight: bold;
-  grid-template-columns: repeat(2, 1fr);
-}

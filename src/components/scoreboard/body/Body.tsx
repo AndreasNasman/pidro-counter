@@ -2,8 +2,7 @@ import React, { FC, useEffect, useRef } from "react";
 import { Props } from "./types";
 import classNames from "classnames";
 import { last } from "lodash";
-import scoreboardStyles from "../Scoreboard.module.css";
-import styles from "./Body.module.css";
+import styles from "../Scoreboard.module.css";
 
 export const Body: FC<Props> = ({ rounds, teams }) => {
   const bodyColumnRef = useRef<HTMLDivElement | null>(null);
@@ -17,22 +16,20 @@ export const Body: FC<Props> = ({ rounds, teams }) => {
   return (
     <div className={styles.body}>
       {teams.map(team => (
-        <div className={scoreboardStyles.column} key={team} ref={bodyColumnRef}>
+        <div className={styles.column} key={team} ref={bodyColumnRef}>
           {rounds.map((round, index) => (
             <div
-              className={classNames(scoreboardStyles.cell, {
-                [scoreboardStyles.reverse]: last(teams) === team
+              className={classNames(styles.cell, {
+                [styles.reverse]: last(teams) === team
               })}
               key={index}
             >
               {!round.result && round.bid && round.bid.team === team && (
                 <>
-                  <div className={scoreboardStyles.content}>
-                    {round.bid.points}
-                  </div>
+                  <div className={styles.content}>{round.bid.points}</div>
                   <span
                     aria-label="Megaphone"
-                    className={scoreboardStyles.emoji}
+                    className={styles.emoji}
                     role="img"
                   >
                     📣
@@ -40,9 +37,7 @@ export const Body: FC<Props> = ({ rounds, teams }) => {
                 </>
               )}
               {round.result && (
-                <div className={scoreboardStyles.content}>
-                  {round.result[team]}
-                </div>
+                <div className={styles.content}>{round.result[team]}</div>
               )}
             </div>
           ))}
