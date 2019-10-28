@@ -1,23 +1,9 @@
 @value blackBoard: #282828;
 @value chalkWhite: #fefeff;
 
-.body,
 .cell,
-.foot,
-.head,
 .table {
   display: grid;
-}
-
-.body,
-.foot,
-.head {
-  column-gap: 0.1rem;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.body {
-  overflow: auto;
 }
 
 .cell {
@@ -45,19 +31,6 @@
 
 .emoji {
   grid-area: emoji;
-}
-
-.foot,
-.head {
-  font-weight: bold;
-}
-
-.foot {
-  border-top: 0.2rem solid chalkWhite;
-}
-
-.head {
-  border-bottom: 0.2rem solid chalkWhite;
 }
 
 .table {

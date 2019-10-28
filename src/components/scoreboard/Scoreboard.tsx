@@ -1,14 +1,13 @@
-import React, { FC, useEffect, useState } from "react";
-import { Result, Team } from "shared/types";
+import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Body } from "./body";
+import { Foot } from "./foot";
+import { Head } from "./head";
 import { Props } from "./types";
-import classNames from "classnames";
-import { last } from "lodash";
+import { Result } from "shared/types";
 import styles from "./Scoreboard.module.css";
 
 export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
-  const [leader, setLeader] = useState<Team | null>(null);
   const [score, setScore] = useState<Result>({ they: 0, us: 0 });
-
   useEffect(() => {
     const currentScore = rounds.reduce(
       (result, round) => {
@@ -23,81 +22,40 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
     );
 
     setScore(currentScore);
-
-    if (currentScore.us > currentScore.they) setLeader("us");
-    else if (currentScore.us < currentScore.they) setLeader("they");
-    else setLeader(null);
   }, [rounds]);
 
+  const [minHeight, setMinHeight] = useState<number>();
+  const headRef = useRef<HTMLDivElement | null>(null);
+  const footRef = useRef<HTMLDivElement | null>(null);
+  const footCellRef = useRef<HTMLDivElement | null>(null);
+  useLayoutEffect(() => {
+    const { current: currentHeadRef } = headRef;
+    const { current: currentFootRef } = footRef;
+    const { current: currentFootCellRef } = footCellRef;
+    if (
+      currentHeadRef === null ||
+      currentFootRef === null ||
+      currentFootCellRef === null
+    )
+      return;
+
+    const newMinHeight =
+      currentHeadRef.offsetHeight +
+      currentFootRef.offsetHeight +
+      currentFootCellRef.offsetHeight;
+    setMinHeight(newMinHeight);
+  }, []);
+
   return (
-    <div className={styles.table}>
-      <div className={styles.head}>
-        {teams.map(team => (
-          <div className={styles.column} key={team}>
-            <div
-              className={classNames(styles.cell, {
-                [styles.reverse]: last(teams) === team
-              })}
-            >
-              <div className={styles.content}>{team}</div>
-
-              {leader === team && (
-                <span
-                  aria-label="Chequered Flag"
-                  className={styles.emoji}
-                  role="img"
-                >
-                  🏁
-                </span>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className={styles.body}>
-        {teams.map(team => (
-          <div className={styles.column} key={team}>
-            {rounds.map((round, index) => (
-              <>
-                {!round.result && round.bid && round.bid.team === team && (
-                  <div
-                    className={classNames(styles.cell, {
-                      [styles.reverse]: last(teams) === team
-                    })}
-                    key={index}
-                  >
-                    <div className={styles.content}>{round.bid.points}</div>
-                    <span
-                      aria-label="Megaphone"
-                      className={styles.emoji}
-                      role="img"
-                    >
-                      📣
-                    </span>
-                  </div>
-                )}
-
-                {round.result && (
-                  <div className={styles.cell}>
-                    <div className={styles.content}>{round.result[team]}</div>
-                  </div>
-                )}
-              </>
-            ))}
-          </div>
-        ))}
-      </div>
-
-      <div className={styles.foot}>
-        {teams.map(team => (
-          <div className={styles.column} key={team}>
-            <div className={styles.cell}>
-              <div className={styles.content}>{score[team]}</div>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className={styles.table} style={{ minHeight }}>
+      <Head headRef={headRef} score={score} teams={teams} />
+      <Body rounds={rounds} teams={teams} />
+      <Foot
+        footCellRef={footCellRef}
+        footRef={footRef}
+        score={score}
+        teams={teams}
+      />
     </div>
   );
 };
