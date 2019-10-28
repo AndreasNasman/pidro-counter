@@ -1,4 +1,5 @@
-import { MAXIMUM_POINTS, Result, Score } from "components/common";
+import { Result, Score } from "components/common/types";
+import { MAXIMUM_POINTS } from "components/common/constants";
 
 export const determineResult = (bid: Score, winner: Score): Result => {
   const result = {

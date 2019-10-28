@@ -1,4 +1,4 @@
-import { Team } from "components/common";
+import { Team } from "components/common/types";
 
 type Value = Team | number;
 

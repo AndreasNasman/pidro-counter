@@ -1,4 +1,4 @@
-import { Round } from "components/common";
+import { Round } from "components/common/types";
 
 export interface Props {
   rounds: Round[];

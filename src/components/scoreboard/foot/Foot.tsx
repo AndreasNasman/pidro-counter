@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Props } from "./types";
-import { TEAMS } from "components/common";
+import { TEAMS } from "components/common/constants";
 import styles from "../Scoreboard.module.css";
 
 export const Foot: FC<Props> = ({ footCellRef, footRef, score }) => (

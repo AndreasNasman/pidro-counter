@@ -1,5 +1,6 @@
+@value playingCardBlack, playingCardRed, playingCardWhite from "../../common/colors.css";
+
 @value duration: 0.3s;
-@value playingCardWhite: #fff;
 
 .button {
   background-color: transparent;
@@ -27,9 +28,9 @@
 }
 
 .button.black {
-  color: #000;
+  color: playingCardBlack;
 }
 
 .button.red {
-  color: #ff534f;
+  color: playingCardRed;
 }

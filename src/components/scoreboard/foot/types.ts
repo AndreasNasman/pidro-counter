@@ -1,5 +1,5 @@
 import { MutableRefObject } from "react";
-import { Result } from "components/common";
+import { Result } from "components/common/types";
 
 export interface Props {
   footCellRef: MutableRefObject<HTMLDivElement | null>;

@@ -1,8 +1,13 @@
-import { MAXIMUM_POINTS, MINIMUM_POINTS, TEAMS, Team } from "components/common";
+import {
+  MAXIMUM_POINTS,
+  MINIMUM_POINTS,
+  TEAMS
+} from "components/common/constants";
 import React, { FC, useEffect, useState } from "react";
 import { Button } from "./button";
 import { Props } from "./types";
 import { TIMEOUT } from "./constants";
+import { Team } from "components/common/types";
 import buttonStyles from "./button/Button.module.css";
 import range from "lodash.range";
 import styles from "./Keypad.module.css";

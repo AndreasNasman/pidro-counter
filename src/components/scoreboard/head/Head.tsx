@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import { TEAMS, Team } from "components/common";
 import { Props } from "./types";
+import { TEAMS } from "components/common/constants";
+import { Team } from "components/common/types";
 import classNames from "classnames";
 import { last } from "lodash";
 import styles from "../Scoreboard.module.css";

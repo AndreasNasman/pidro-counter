@@ -1,4 +1,4 @@
-@value chalkWhite: #fefeff;
+@value blackBoard, chalkWhite from "../common/colors.css";
 
 .body,
 .cell,
@@ -35,7 +35,7 @@
 }
 
 .column {
-  background-color: #282828;
+  background-color: blackBoard;
 }
 
 .content {

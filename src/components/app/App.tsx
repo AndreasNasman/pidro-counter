@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Round, Score } from "components/common";
+import { Round, Score } from "components/common/types";
 import { Keypad } from "components/keypad";
 import { Phase } from "./types";
 import { Scoreboard } from "components/scoreboard";
