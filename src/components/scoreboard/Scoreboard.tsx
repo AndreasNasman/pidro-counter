@@ -8,7 +8,6 @@ import styles from "./Scoreboard.module.css";
 
 export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
   const [score, setScore] = useState<Result>({ they: 0, us: 0 });
-
   useEffect(() => {
     const currentScore = rounds.reduce(
       (result, round) => {
