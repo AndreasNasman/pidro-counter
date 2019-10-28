@@ -2,13 +2,10 @@ import { MAXIMUM_POINTS, MINIMUM_POINTS, TEAMS, Team } from "components/common";
 import React, { FC, useEffect, useState } from "react";
 import { Button } from "./button";
 import { Props } from "./types";
+import { TIMEOUT } from "./constants";
 import buttonStyles from "./button/Button.module.css";
 import range from "lodash.range";
 import styles from "./Keypad.module.css";
-
-const DELAY = 200;
-const MAGNITUDE = 1000;
-const TIMEOUT = parseFloat(buttonStyles.duration) * MAGNITUDE + DELAY;
 
 export const Keypad: FC<Props> = ({ updateRounds }) => {
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
