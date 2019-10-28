@@ -1,4 +1,3 @@
-@value feltGreen: #006e3b;
 @value spacing: 1rem;
 
 .felt,
@@ -7,7 +6,7 @@
 }
 
 .felt {
-  background-color: feltGreen;
+  background-color: #006e3b;
   box-shadow: inset 0 0 10rem black;
   height: calc(100vh - 2 * spacing);
   padding: spacing;
