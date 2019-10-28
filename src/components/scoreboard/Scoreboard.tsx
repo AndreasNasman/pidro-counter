@@ -2,6 +2,7 @@
 /* eslint-disable max-statements */
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Result, Team } from "shared/types";
+import { Foot } from "./foot";
 import { Props } from "./types";
 import classNames from "classnames";
 import { last } from "lodash";
@@ -119,15 +120,12 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
         ))}
       </div>
 
-      <div className={styles.foot} ref={footRef}>
-        {teams.map(team => (
-          <div className={styles.column} key={team}>
-            <div className={styles.cell} ref={footCellRef}>
-              <div className={styles.content}>{score[team]}</div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Foot
+        footCellRef={footCellRef}
+        footRef={footRef}
+        score={score}
+        teams={teams}
+      />
     </div>
   );
 };
