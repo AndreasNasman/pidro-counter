@@ -31,7 +31,6 @@ export const Body: FC<Props> = ({ bodyColumnRef, rounds, teams }) => {
                   </span>
                 </>
               )}
-
               {round.result && (
                 <div className={scoreboardStyles.content}>
                   {round.result[team]}
