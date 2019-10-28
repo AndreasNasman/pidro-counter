@@ -8,13 +8,11 @@ import range from "lodash.range";
 import styles from "./Keypad.module.css";
 
 export const Keypad: FC<Props> = ({ updateRounds }) => {
-  const [activeTeam, setActiveTeam] = useState<Team | null>(null);
-
   const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1)); // eslint-disable-line no-magic-numbers
+
+  const [activeTeam, setActiveTeam] = useState<Team | null>(null);
   const [activeNumber, setActiveNumber] = useState<number | null>(null);
-
   const [disableButton, setDisableButton] = useState(false);
-
   useEffect(() => {
     if (activeTeam && activeNumber) {
       setDisableButton(true);
