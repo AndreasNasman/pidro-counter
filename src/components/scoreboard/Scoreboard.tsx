@@ -40,18 +40,18 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
   useLayoutEffect(() => {
     const { current: currentHeadRef } = headRef;
     const { current: currentFootRef } = footRef;
-    const { current: currentCellRef } = footCellRef;
+    const { current: currentFootCellRef } = footCellRef;
     if (
       currentHeadRef === null ||
       currentFootRef === null ||
-      currentCellRef === null
+      currentFootCellRef === null
     )
       return;
 
     const newMinHeight =
       currentHeadRef.offsetHeight +
       currentFootRef.offsetHeight +
-      currentCellRef.offsetHeight;
+      currentFootCellRef.offsetHeight;
     setMinHeight(newMinHeight);
   }, []);
 
