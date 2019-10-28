@@ -25,14 +25,6 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
     setScore(currentScore);
   }, [rounds]);
 
-  const bodyColumnRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    const { current } = bodyColumnRef;
-    if (!current) return;
-
-    current.scrollIntoView({ behavior: "smooth", block: "end" });
-  });
-
   const [minHeight, setMinHeight] = useState<number>();
   const headRef = useRef<HTMLDivElement | null>(null);
   const footRef = useRef<HTMLDivElement | null>(null);
@@ -58,7 +50,7 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
   return (
     <div className={styles.table} style={{ minHeight }}>
       <Head headRef={headRef} score={score} teams={teams} />
-      <Body bodyColumnRef={bodyColumnRef} rounds={rounds} teams={teams} />
+      <Body rounds={rounds} teams={teams} />
       <Foot
         footCellRef={footCellRef}
         footRef={footRef}

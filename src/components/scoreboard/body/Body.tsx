@@ -1,11 +1,19 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import { Props } from "./types";
 import classNames from "classnames";
 import { last } from "lodash";
 import scoreboardStyles from "../Scoreboard.module.css";
 import styles from "./Body.module.css";
 
-export const Body: FC<Props> = ({ bodyColumnRef, rounds, teams }) => {
+export const Body: FC<Props> = ({ rounds, teams }) => {
+  const bodyColumnRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const { current } = bodyColumnRef;
+    if (!current) return;
+
+    current.scrollIntoView({ behavior: "smooth", block: "end" });
+  });
+
   return (
     <div className={styles.body}>
       {teams.map(team => (
