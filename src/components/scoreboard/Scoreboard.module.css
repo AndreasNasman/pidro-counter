@@ -1,16 +1,9 @@
 @value blackBoard: #282828;
 @value chalkWhite: #fefeff;
 
-.body,
 .cell,
 .table {
   display: grid;
-}
-
-.body {
-  column-gap: 0.1rem;
-  grid-template-columns: repeat(2, 1fr);
-  overflow: auto;
 }
 
 .cell {

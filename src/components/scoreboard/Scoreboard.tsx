@@ -1,12 +1,9 @@
-/* eslint-disable max-lines-per-function */
-/* eslint-disable max-statements */
 import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Body } from "./body";
 import { Foot } from "./foot";
 import { Head } from "./head";
 import { Props } from "./types";
 import { Result } from "shared/types";
-import classNames from "classnames";
-import { last } from "lodash";
 import styles from "./Scoreboard.module.css";
 
 export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
@@ -61,39 +58,7 @@ export const Scoreboard: FC<Props> = ({ rounds, teams }) => {
   return (
     <div className={styles.table} style={{ minHeight }}>
       <Head headRef={headRef} score={score} teams={teams} />
-
-      <div className={styles.body}>
-        {teams.map(team => (
-          <div className={styles.column} key={team} ref={bodyColumnRef}>
-            {rounds.map((round, index) => (
-              <div
-                className={classNames(styles.cell, {
-                  [styles.reverse]: last(teams) === team
-                })}
-                key={index}
-              >
-                {!round.result && round.bid && round.bid.team === team && (
-                  <>
-                    <div className={styles.content}>{round.bid.points}</div>
-                    <span
-                      aria-label="Megaphone"
-                      className={styles.emoji}
-                      role="img"
-                    >
-                      📣
-                    </span>
-                  </>
-                )}
-
-                {round.result && (
-                  <div className={styles.content}>{round.result[team]}</div>
-                )}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-
+      <Body bodyColumnRef={bodyColumnRef} rounds={rounds} teams={teams} />
       <Foot
         footCellRef={footCellRef}
         footRef={footRef}
