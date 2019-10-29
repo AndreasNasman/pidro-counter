@@ -4,14 +4,14 @@ import { Props } from "./types";
 import classNames from "classnames";
 import styles from "./Toolbar.module.css";
 
-export const Toolbar: FC<Props> = ({ canRedo, canUndo, redo, undo }) => (
+export const Toolbar: FC<Props> = ({ canRedo, canUndo, undoRedo }) => (
   <div className={styles.container}>
     <span
       className={classNames(styles.iconWrapper, {
         [styles.disabled]: !canUndo
       })}
     >
-      <MdUndo onClick={undo} />
+      <MdUndo onClick={(): void => undoRedo(-1)} />
     </span>
 
     <span
@@ -19,7 +19,7 @@ export const Toolbar: FC<Props> = ({ canRedo, canUndo, redo, undo }) => (
         [styles.disabled]: !canRedo
       })}
     >
-      <MdRedo onClick={redo} />
+      <MdRedo onClick={(): void => undoRedo(1)} />
     </span>
   </div>
 );
