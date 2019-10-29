@@ -4,16 +4,14 @@ import classNames from "classnames";
 import styles from "./Button.module.css";
 
 export const Button: FC<Props> = ({
+  active,
   activeColor,
-  activeValue,
   disabled,
   handleClick,
   value
 }) => (
   <button
-    className={classNames(styles.button, {
-      [activeColor]: activeValue === value
-    })}
+    className={classNames(styles.button, { [activeColor]: active })}
     disabled={disabled}
     onClick={(): void => handleClick(value)}
   >

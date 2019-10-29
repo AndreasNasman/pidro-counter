@@ -45,8 +45,8 @@ export const Keypad: FC<Props> = ({ updateRounds }) => {
       <div className={styles.team}>
         {TEAMS.map(team => (
           <Button
+            active={team === activeTeam}
             activeColor={buttonStyles.black}
-            activeValue={activeTeam}
             disabled={disableButton}
             handleClick={handleClick}
             key={team}
@@ -58,8 +58,8 @@ export const Keypad: FC<Props> = ({ updateRounds }) => {
       <div className={styles.number}>
         {numbers.map(number => (
           <Button
+            active={number === activeNumber}
             activeColor={buttonStyles.red}
-            activeValue={activeNumber}
             disabled={disableButton}
             handleClick={handleClick}
             key={number}

@@ -3,8 +3,8 @@ import { Team } from "components/common/types";
 type Value = Team | number;
 
 export interface Props {
+  active: boolean;
   activeColor: string;
-  activeValue: Value | null;
   disabled: boolean;
   handleClick: (value: Value) => void;
   value: Value;
