@@ -1,5 +1,6 @@
 import { NUMBERS, TIMEOUT } from "./constants";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useReducer } from "react";
+import { initialState, reducer } from "./reducer";
 import { Button } from "./button";
 import { Props } from "./types";
 import { TEAMS } from "components/common/constants";
@@ -8,28 +9,29 @@ import buttonStyles from "./button/Button.module.css";
 import styles from "./Keypad.module.css";
 
 export const Keypad: FC<Props> = ({ updateRounds }) => {
-  const [activeTeam, setActiveTeam] = useState<Team | null>(null);
-  const [activeNumber, setActiveNumber] = useState<number | null>(null);
-  const [disableButton, setDisableButton] = useState(false);
-  useEffect(() => {
-    if (activeTeam && activeNumber) {
-      setDisableButton(true);
+  const [{ activeTeam, activeNumber, disableButtons }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
-      setTimeout(() => {
-        setActiveTeam(null);
-        setActiveNumber(null);
-        setDisableButton(false);
+  const update = (points: number, team: Team): void => {
+    dispatch({ type: "DISABLE_BUTTONS" });
 
-        updateRounds({ points: activeNumber, team: activeTeam });
-      }, TIMEOUT);
-    }
-  }, [activeTeam, activeNumber, updateRounds]);
+    setTimeout(() => {
+      updateRounds({ points, team });
+      dispatch({ type: "RESET" });
+    }, TIMEOUT);
+  };
 
   const handleClick = (value: Team | number): void => {
     if (typeof value === "string") {
-      setActiveTeam(activeTeam === value ? null : value);
+      const team = activeTeam === value ? null : value;
+      dispatch({ team, type: "SET_ACTIVE_TEAM" });
+      if (team && activeNumber) update(activeNumber, team);
     } else if (typeof value === "number") {
-      setActiveNumber(activeNumber === value ? null : value);
+      const number = activeNumber === value ? null : value;
+      dispatch({ number, type: "SET_ACTIVE_NUMBER" });
+      if (number && activeTeam) update(number, activeTeam);
     }
   };
 
@@ -40,7 +42,7 @@ export const Keypad: FC<Props> = ({ updateRounds }) => {
           <Button
             active={team === activeTeam}
             activeColor={buttonStyles.black}
-            disabled={disableButton}
+            disabled={disableButtons}
             handleClick={handleClick}
             key={team}
             value={team}
@@ -53,7 +55,7 @@ export const Keypad: FC<Props> = ({ updateRounds }) => {
           <Button
             active={number === activeNumber}
             activeColor={buttonStyles.red}
-            disabled={disableButton}
+            disabled={disableButtons}
             handleClick={handleClick}
             key={number}
             value={number}
