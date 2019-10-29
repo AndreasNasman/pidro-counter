@@ -1,20 +1,13 @@
-import {
-  MAXIMUM_POINTS,
-  MINIMUM_POINTS,
-  TEAMS
-} from "components/common/constants";
+import { NUMBERS, TIMEOUT } from "./constants";
 import React, { FC, useEffect, useState } from "react";
 import { Button } from "./button";
 import { Props } from "./types";
-import { TIMEOUT } from "./constants";
+import { TEAMS } from "components/common/constants";
 import { Team } from "components/common/types";
 import buttonStyles from "./button/Button.module.css";
-import range from "lodash.range";
 import styles from "./Keypad.module.css";
 
 export const Keypad: FC<Props> = ({ updateRounds }) => {
-  const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1));
-
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
   const [activeNumber, setActiveNumber] = useState<number | null>(null);
   const [disableButton, setDisableButton] = useState(false);
@@ -56,7 +49,7 @@ export const Keypad: FC<Props> = ({ updateRounds }) => {
       </div>
 
       <div className={styles.number}>
-        {numbers.map(number => (
+        {NUMBERS.map(number => (
           <Button
             active={number === activeNumber}
             activeColor={buttonStyles.red}
