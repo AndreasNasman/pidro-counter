@@ -1,0 +1,21 @@
+@value chalkWhite from "../common/colors.css";
+
+.container {
+  display: flex;
+  font-size: 1.5rem;
+  grid-area: toolbar;
+  justify-content: space-between;
+}
+
+.iconWrapper {
+  align-items: center;
+  color: chalkWhite;
+  display: flex;
+  padding: 0.5rem;
+  pointer-events: auto;
+}
+
+.iconWrapper.disabled {
+  color: gray;
+  pointer-events: none;
+}

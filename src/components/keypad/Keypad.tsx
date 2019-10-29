@@ -1,14 +1,19 @@
-import { MAXIMUM_POINTS, MINIMUM_POINTS, TEAMS, Team } from "components/common";
+import {
+  MAXIMUM_POINTS,
+  MINIMUM_POINTS,
+  TEAMS
+} from "components/common/constants";
 import React, { FC, useEffect, useState } from "react";
 import { Button } from "./button";
 import { Props } from "./types";
 import { TIMEOUT } from "./constants";
+import { Team } from "components/common/types";
 import buttonStyles from "./button/Button.module.css";
 import range from "lodash.range";
 import styles from "./Keypad.module.css";
 
 export const Keypad: FC<Props> = ({ updateRounds }) => {
-  const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1)); // eslint-disable-line no-magic-numbers
+  const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1));
 
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
   const [activeNumber, setActiveNumber] = useState<number | null>(null);

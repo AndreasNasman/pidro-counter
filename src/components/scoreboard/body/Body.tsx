@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef } from "react";
 import { Props } from "./types";
-import { TEAMS } from "components/common";
+import { TEAMS } from "components/common/constants";
 import classNames from "classnames";
 import { last } from "lodash";
 import styles from "../Scoreboard.module.css";

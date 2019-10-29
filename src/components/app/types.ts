@@ -1,3 +1,3 @@
-import { Round } from "components/common";
+import { Round } from "components/common/types";
 
 export type Phase = keyof Round;

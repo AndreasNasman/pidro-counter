@@ -3,7 +3,7 @@ import { Body } from "./body";
 import { Foot } from "./foot";
 import { Head } from "./head";
 import { Props } from "./types";
-import { Result } from "components/common";
+import { Result } from "components/common/types";
 import styles from "./Scoreboard.module.css";
 
 export const Scoreboard: FC<Props> = ({ rounds }) => {
