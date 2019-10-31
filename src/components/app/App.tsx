@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { Round, Score } from "components/common/types";
+import { initialState, reducer } from "./reducer";
 import { Keypad } from "components/keypad";
-import { Phase } from "./types";
 import { Scoreboard } from "components/scoreboard";
 import { Toolbar } from "components/toolbar";
 import { determineResult } from "./logic";
@@ -10,14 +10,10 @@ import last from "lodash.last";
 import styles from "./App.module.css";
 
 export const App: React.FC = () => {
+  const [{ phase }, dispatch] = useReducer(reducer, initialState);
   const [rounds, setRounds] = useState<Round[]>([]);
   const [history, setHistory] = useState<Round[][]>([rounds]);
   const [historyIndex, setHistoryIndex] = useState(0);
-
-  const [phase, setPhase] = useState<Phase>("bid");
-  const switchPhase = (): void => {
-    setPhase(phase === "bid" ? "result" : "bid");
-  };
 
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
@@ -47,7 +43,8 @@ export const App: React.FC = () => {
     }
 
     setRounds(updatedRounds);
-    switchPhase();
+
+    dispatch({ type: "TOGGLE_PHASE" });
 
     const updatedHistoryIndex = historyIndex + 1;
     const updatedHistory = [
@@ -63,7 +60,8 @@ export const App: React.FC = () => {
   const undoRedo = (step: number): void => {
     const nextHistoryIndex = historyIndex + step;
     setRounds(history[nextHistoryIndex]);
-    switchPhase();
+
+    dispatch({ type: "TOGGLE_PHASE" });
 
     setHistoryIndex(nextHistoryIndex);
     determineUndoRedo(history, nextHistoryIndex);
