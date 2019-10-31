@@ -42,8 +42,13 @@ export const reducer = (state: State, action: Action): State => {
       };
     }
     case "UPDATE_GAME": {
-      const historyIndex = state.historyIndex + 1;
-      const history = [...state.history.slice(0, historyIndex), action.game];
+      const step = 1;
+      const historyIndex = state.historyIndex + step;
+      const start = 0;
+      const history = [
+        ...state.history.slice(start, historyIndex),
+        action.game
+      ];
       return {
         ...state,
         canRedo: checkRedoPossibility(history, historyIndex),
