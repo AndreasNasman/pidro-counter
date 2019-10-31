@@ -1,43 +1,36 @@
-import {
-  MAXIMUM_POINTS,
-  MINIMUM_POINTS,
-  TEAMS
-} from "components/common/constants";
-import React, { FC, useEffect, useState } from "react";
+import { NUMBERS, TIMEOUT } from "./constants";
+import React, { FC, useReducer } from "react";
+import { initialState, reducer } from "./reducer";
 import { Button } from "./button";
 import { Props } from "./types";
-import { TIMEOUT } from "./constants";
+import { TEAMS } from "components/common/constants";
 import { Team } from "components/common/types";
 import buttonStyles from "./button/Button.module.css";
-import range from "lodash.range";
 import styles from "./Keypad.module.css";
 
-export const Keypad: FC<Props> = ({ updateRounds }) => {
-  const [numbers] = useState(range(MINIMUM_POINTS, MAXIMUM_POINTS + 1));
+export const Keypad: FC<Props> = ({ updateGame }) => {
+  const [{ activeTeam, activeNumber, disableButtons }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
-  const [activeTeam, setActiveTeam] = useState<Team | null>(null);
-  const [activeNumber, setActiveNumber] = useState<number | null>(null);
-  const [disableButton, setDisableButton] = useState(false);
-  useEffect(() => {
-    if (activeTeam && activeNumber) {
-      setDisableButton(true);
+  const update = (points: number, team: Team): void => {
+    dispatch({ type: "DISABLE_BUTTONS" });
 
-      setTimeout(() => {
-        setActiveTeam(null);
-        setActiveNumber(null);
-        setDisableButton(false);
+    setTimeout(() => {
+      updateGame({ points, team });
+      dispatch({ type: "RESET" });
+    }, TIMEOUT);
+  };
 
-        updateRounds({ points: activeNumber, team: activeTeam });
-      }, TIMEOUT);
-    }
-  }, [activeTeam, activeNumber, updateRounds]);
+  const handleTeamClick = (team: Team): void => {
+    dispatch({ team, type: "SET_ACTIVE_TEAM" });
+    if (activeNumber) update(activeNumber, team);
+  };
 
-  const handleClick = (value: Team | number): void => {
-    if (typeof value === "string") {
-      setActiveTeam(activeTeam === value ? null : value);
-    } else if (typeof value === "number") {
-      setActiveNumber(activeNumber === value ? null : value);
-    }
+  const handleNumberClick = (number: number): void => {
+    dispatch({ number, type: "SET_ACTIVE_NUMBER" });
+    if (activeTeam) update(number, activeTeam);
   };
 
   return (
@@ -45,10 +38,10 @@ export const Keypad: FC<Props> = ({ updateRounds }) => {
       <div className={styles.team}>
         {TEAMS.map(team => (
           <Button
+            active={team === activeTeam}
             activeColor={buttonStyles.black}
-            activeValue={activeTeam}
-            disabled={disableButton}
-            handleClick={handleClick}
+            disabled={disableButtons}
+            handleClick={handleTeamClick}
             key={team}
             value={team}
           />
@@ -56,12 +49,12 @@ export const Keypad: FC<Props> = ({ updateRounds }) => {
       </div>
 
       <div className={styles.number}>
-        {numbers.map(number => (
+        {NUMBERS.map(number => (
           <Button
+            active={number === activeNumber}
             activeColor={buttonStyles.red}
-            activeValue={activeNumber}
-            disabled={disableButton}
-            handleClick={handleClick}
+            disabled={disableButtons}
+            handleClick={handleNumberClick}
             key={number}
             value={number}
           />

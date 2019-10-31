@@ -1,11 +1,10 @@
 import { Team } from "components/common/types";
 
-type Value = Team | number;
-
-export interface Props {
+export type Value = Team | number;
+export type Props<T extends Value> = {
+  active: boolean;
   activeColor: string;
-  activeValue: Value | null;
   disabled: boolean;
-  handleClick: (value: Value) => void;
-  value: Value;
-}
+  handleClick: (value: T) => void;
+  value: T;
+};

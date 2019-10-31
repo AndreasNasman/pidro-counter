@@ -6,10 +6,10 @@ import { Props } from "./types";
 import { Result } from "components/common/types";
 import styles from "./Scoreboard.module.css";
 
-export const Scoreboard: FC<Props> = ({ rounds }) => {
+export const Scoreboard: FC<Props> = ({ game }) => {
   const [score, setScore] = useState<Result>({ they: 0, us: 0 });
   useEffect(() => {
-    const currentScore = rounds.reduce(
+    const currentScore = game.reduce(
       (result, round) => {
         if (!round.result) return result;
 
@@ -22,7 +22,7 @@ export const Scoreboard: FC<Props> = ({ rounds }) => {
     );
 
     setScore(currentScore);
-  }, [rounds]);
+  }, [game]);
 
   const [minHeight, setMinHeight] = useState<number>();
   const headRef = useRef<HTMLDivElement | null>(null);
@@ -49,7 +49,7 @@ export const Scoreboard: FC<Props> = ({ rounds }) => {
   return (
     <div className={styles.table} style={{ minHeight }}>
       <Head headRef={headRef} score={score} />
-      <Body rounds={rounds} />
+      <Body game={game} />
       <Foot footCellRef={footCellRef} footRef={footRef} score={score} />
     </div>
   );

@@ -7,8 +7,6 @@
   ],
   "rules": {
     "max-lines-per-function": ["error", { "max": 100 }],
-    "max-statements": ["error", 20],
-    "no-magic-numbers": ["error", { "ignore": [0, 1, -1] }],
     "no-ternary": "off",
     "one-var": "off"
   }
