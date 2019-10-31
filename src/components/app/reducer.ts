@@ -1,30 +1,59 @@
-import { Phase } from "./types";
-import { Round } from "components/common/types";
+import { History, Phase } from "./types";
+import {
+  changePhase,
+  checkRedoPossibility,
+  checkUndoPossibility
+} from "./logic";
+import { Game } from "components/common/types";
 
 interface State {
   canRedo: boolean;
   canUndo: boolean;
-  history: Round[][];
+  game: Game;
+  history: History;
   historyIndex: number;
   phase: Phase;
-  rounds: Round[];
 }
 
-type Action = { type: "TOGGLE_PHASE" };
+type Action =
+  | { step: number; type: "TRAVERSE_HISTORY" }
+  | { game: Game; type: "UPDATE_GAME" };
 
 export const initialState: State = {
   canRedo: false,
   canUndo: false,
+  game: [],
   history: [[]],
   historyIndex: 0,
-  phase: "bid",
-  rounds: []
+  phase: "bid"
 };
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case "TOGGLE_PHASE":
-      return { ...state, phase: state.phase === "bid" ? "result" : "bid" };
+    case "TRAVERSE_HISTORY": {
+      const historyIndex = state.historyIndex + action.step;
+      return {
+        ...state,
+        canRedo: checkRedoPossibility(state.history, historyIndex),
+        canUndo: checkUndoPossibility(historyIndex),
+        game: state.history[historyIndex],
+        historyIndex,
+        phase: changePhase(state.phase)
+      };
+    }
+    case "UPDATE_GAME": {
+      const historyIndex = state.historyIndex + 1;
+      const history = [...state.history.slice(0, historyIndex), action.game];
+      return {
+        ...state,
+        canRedo: checkRedoPossibility(history, historyIndex),
+        canUndo: checkUndoPossibility(historyIndex),
+        game: action.game,
+        history,
+        historyIndex,
+        phase: changePhase(state.phase)
+      };
+    }
     default:
       throw new Error();
   }

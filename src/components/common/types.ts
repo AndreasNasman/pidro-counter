@@ -9,3 +9,5 @@ export interface Round {
   bid?: Score;
   result?: Result;
 }
+
+export type Game = Round[];

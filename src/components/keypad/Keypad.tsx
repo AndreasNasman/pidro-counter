@@ -8,7 +8,7 @@ import { Team } from "components/common/types";
 import buttonStyles from "./button/Button.module.css";
 import styles from "./Keypad.module.css";
 
-export const Keypad: FC<Props> = ({ updateRounds }) => {
+export const Keypad: FC<Props> = ({ updateGame }) => {
   const [{ activeTeam, activeNumber, disableButtons }, dispatch] = useReducer(
     reducer,
     initialState
@@ -18,7 +18,7 @@ export const Keypad: FC<Props> = ({ updateRounds }) => {
     dispatch({ type: "DISABLE_BUTTONS" });
 
     setTimeout(() => {
-      updateRounds({ points, team });
+      updateGame({ points, team });
       dispatch({ type: "RESET" });
     }, TIMEOUT);
   };
