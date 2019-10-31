@@ -1,15 +1,15 @@
-import React, { FC } from "react";
-import { Props } from "./types";
+import { Props, Value } from "./types";
+import React from "react";
 import classNames from "classnames";
 import styles from "./Button.module.css";
 
-export const Button: FC<Props> = ({
+export const Button = <T extends Value>({
   active,
   activeColor,
   disabled,
   handleClick,
   value
-}) => (
+}: Props<T>): JSX.Element => (
   <button
     className={classNames(styles.button, { [activeColor]: active })}
     disabled={disabled}
