@@ -25,9 +25,16 @@ export const reducer = (state: State, action: Action): State => {
     case "RESET":
       return initialState;
     case "SET_ACTIVE_NUMBER":
-      return { ...state, activeNumber: action.number };
+      return {
+        ...state,
+        activeNumber:
+          action.number === state.activeNumber ? null : action.number
+      };
     case "SET_ACTIVE_TEAM":
-      return { ...state, activeTeam: action.team };
+      return {
+        ...state,
+        activeTeam: action.team === state.activeTeam ? null : action.team
+      };
     default:
       throw new Error();
   }

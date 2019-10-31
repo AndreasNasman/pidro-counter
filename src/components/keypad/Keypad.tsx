@@ -23,16 +23,14 @@ export const Keypad: FC<Props> = ({ updateGame }) => {
     }, TIMEOUT);
   };
 
-  const handleClick = (value: Team | number): void => {
-    if (typeof value === "string") {
-      const team = activeTeam === value ? null : value;
-      dispatch({ team, type: "SET_ACTIVE_TEAM" });
-      if (team && activeNumber) update(activeNumber, team);
-    } else if (typeof value === "number") {
-      const number = activeNumber === value ? null : value;
-      dispatch({ number, type: "SET_ACTIVE_NUMBER" });
-      if (number && activeTeam) update(number, activeTeam);
-    }
+  const handleTeamClick = (team: Team): void => {
+    dispatch({ team, type: "SET_ACTIVE_TEAM" });
+    if (activeNumber) update(activeNumber, team);
+  };
+
+  const handleNumberClick = (number: number): void => {
+    dispatch({ number, type: "SET_ACTIVE_NUMBER" });
+    if (activeTeam) update(number, activeTeam);
   };
 
   return (
@@ -43,7 +41,7 @@ export const Keypad: FC<Props> = ({ updateGame }) => {
             active={team === activeTeam}
             activeColor={buttonStyles.black}
             disabled={disableButtons}
-            handleClick={handleClick}
+            handleClick={handleTeamClick}
             key={team}
             value={team}
           />
@@ -56,7 +54,7 @@ export const Keypad: FC<Props> = ({ updateGame }) => {
             active={number === activeNumber}
             activeColor={buttonStyles.red}
             disabled={disableButtons}
-            handleClick={handleClick}
+            handleClick={handleNumberClick}
             key={number}
             value={number}
           />
