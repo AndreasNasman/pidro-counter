@@ -1,10 +1,12 @@
+import { Bid, Game, Score } from "components/common/types";
 import { History, Phase } from "./types";
 import {
   changePhase,
   checkRedoPossibility,
-  checkUndoPossibility
+  checkUndoPossibility,
+  incrementScore
 } from "./logic";
-import { Game } from "components/common/types";
+import { dropRight, last } from "lodash";
 
 interface State {
   canRedo: boolean;
@@ -16,8 +18,10 @@ interface State {
 }
 
 type Action =
+  | { bid: Bid; type: "ADD_BID" }
+  | { result: Score; type: "ADD_RESULT" }
   | { step: number; type: "TRAVERSE_HISTORY" }
-  | { game: Game; type: "UPDATE_GAME" };
+  | { type: "UPDATE_HISTORY" };
 
 const initialGame = { rounds: [], score: { they: 0, us: 0 } };
 export const initialState: State = {
@@ -31,6 +35,26 @@ export const initialState: State = {
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case "ADD_BID":
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          rounds: [...state.game.rounds, { bid: action.bid }]
+        }
+      };
+    case "ADD_RESULT": {
+      return {
+        ...state,
+        game: {
+          rounds: [
+            ...dropRight(state.game.rounds),
+            { ...last(state.game.rounds), result: action.result }
+          ],
+          score: incrementScore(state.game.score, action.result)
+        }
+      };
+    }
     case "TRAVERSE_HISTORY": {
       const historyIndex = state.historyIndex + action.step;
       return {
@@ -42,19 +66,15 @@ export const reducer = (state: State, action: Action): State => {
         phase: changePhase(state.phase)
       };
     }
-    case "UPDATE_GAME": {
+    case "UPDATE_HISTORY": {
       const step = 1;
       const historyIndex = state.historyIndex + step;
       const start = 0;
-      const history = [
-        ...state.history.slice(start, historyIndex),
-        action.game
-      ];
+      const history = [...state.history.slice(start, historyIndex), state.game];
       return {
         ...state,
         canRedo: checkRedoPossibility(history, historyIndex),
         canUndo: checkUndoPossibility(historyIndex),
-        game: action.game,
         history,
         historyIndex,
         phase: changePhase(state.phase)

@@ -1,11 +1,10 @@
 import { Bid, Winner } from "components/common/types";
 import React, { useReducer } from "react";
-import { determineResult, incrementScore } from "./logic";
 import { initialState, reducer } from "./reducer";
 import { Keypad } from "components/keypad";
 import { Scoreboard } from "components/scoreboard";
 import { Toolbar } from "components/toolbar";
-import dropRight from "lodash.dropright";
+import { determineResult } from "./logic";
 import last from "lodash.last";
 import styles from "./App.module.css";
 
@@ -16,8 +15,8 @@ export const App: React.FC = () => {
   );
 
   const updateBid = (bid: Bid): void => {
-    const updatedGame = { ...game, rounds: [...game.rounds, { bid }] };
-    dispatch({ game: updatedGame, type: "UPDATE_GAME" });
+    dispatch({ bid, type: "ADD_BID" });
+    dispatch({ type: "UPDATE_HISTORY" });
   };
 
   const updateResult = (winner: Winner): void => {
@@ -27,11 +26,8 @@ export const App: React.FC = () => {
     if (!bid) return;
 
     const result = determineResult(bid, winner);
-    const updatedGame = {
-      rounds: [...dropRight(game.rounds), { ...lastRound, result }],
-      score: incrementScore(game.score, result)
-    };
-    dispatch({ game: updatedGame, type: "UPDATE_GAME" });
+    dispatch({ result, type: "ADD_RESULT" });
+    dispatch({ type: "UPDATE_HISTORY" });
   };
 
   const redo = (): void => {
