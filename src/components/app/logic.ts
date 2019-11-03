@@ -1,5 +1,5 @@
+import { Bid, Result, Winner } from "components/common/types";
 import { History, Phase } from "./types";
-import { Result, Score } from "components/common/types";
 import { MAXIMUM_POINTS } from "components/common/constants";
 
 export const changePhase = (phase: Phase): Phase =>
@@ -19,7 +19,7 @@ export const checkUndoPossibility = (historyIndex: number): boolean => {
   return historyIndex > threshold;
 };
 
-export const determineResult = (bid: Score, winner: Score): Result => {
+export const determineResult = (bid: Bid, winner: Winner): Result => {
   const result = {
     [winner.team]: winner.points,
     [winner.team === "us" ? "they" : "us"]: MAXIMUM_POINTS - winner.points

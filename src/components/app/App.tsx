@@ -1,4 +1,4 @@
-import { Game, Score } from "components/common/types";
+import { Bid, Winner } from "components/common/types";
 import React, { useReducer } from "react";
 import { initialState, reducer } from "./reducer";
 import { Keypad } from "components/keypad";
@@ -15,20 +15,19 @@ export const App: React.FC = () => {
     initialState
   );
 
-  const updateGame = (score: Score): void => {
-    let updatedGame: Game = [];
-    if (phase === "bid") {
-      updatedGame = [...game, { bid: score }];
-    } else if (phase === "result") {
-      const lastGame = last(game);
-      if (!lastGame) return;
-      const { bid } = lastGame;
-      if (!bid) return;
+  const updateBid = (bid: Bid): void => {
+    const updatedGame = [...game, { bid }];
+    dispatch({ game: updatedGame, type: "UPDATE_GAME" });
+  };
 
-      const result = determineResult(bid, score);
-      updatedGame = [...dropRight(game), { ...lastGame, result }];
-    }
+  const updateResult = (winner: Winner): void => {
+    const lastGame = last(game);
+    if (!lastGame) return;
+    const { bid } = lastGame;
+    if (!bid) return;
 
+    const result = determineResult(bid, winner);
+    const updatedGame = [...dropRight(game), { ...lastGame, result }];
     dispatch({ game: updatedGame, type: "UPDATE_GAME" });
   };
 
@@ -47,7 +46,7 @@ export const App: React.FC = () => {
       <div className={styles.grid}>
         <Scoreboard game={game} />
         <Toolbar canRedo={canRedo} canUndo={canUndo} redo={redo} undo={undo} />
-        <Keypad updateGame={updateGame} />
+        <Keypad updateGame={phase === "bid" ? updateBid : updateResult} />
       </div>
     </div>
   );
