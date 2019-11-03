@@ -12,4 +12,4 @@ export interface Round {
   result?: Score;
 }
 
-export type Game = Round[];
+export type Game = { rounds: Round[]; score: Score };

@@ -5,7 +5,7 @@ import { Head } from "./head";
 import { Props } from "./types";
 import styles from "./Scoreboard.module.css";
 
-export const Scoreboard: FC<Props> = ({ game, score }) => {
+export const Scoreboard: FC<Props> = ({ game }) => {
   const [minHeight, setMinHeight] = useState<number>();
   const headRef = useRef<HTMLDivElement | null>(null);
   const footRef = useRef<HTMLDivElement | null>(null);
@@ -30,9 +30,9 @@ export const Scoreboard: FC<Props> = ({ game, score }) => {
 
   return (
     <div className={styles.table} style={{ minHeight }}>
-      <Head headRef={headRef} score={score} />
-      <Body game={game} />
-      <Foot footCellRef={footCellRef} footRef={footRef} score={score} />
+      <Head headRef={headRef} score={game.score} />
+      <Body rounds={game.rounds} />
+      <Foot footCellRef={footCellRef} footRef={footRef} score={game.score} />
     </div>
   );
 };

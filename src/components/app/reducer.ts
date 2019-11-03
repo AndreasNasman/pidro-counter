@@ -3,8 +3,7 @@ import { History, Phase } from "./types";
 import {
   changePhase,
   checkRedoPossibility,
-  checkUndoPossibility,
-  incrementScore
+  checkUndoPossibility
 } from "./logic";
 
 interface State {
@@ -14,21 +13,20 @@ interface State {
   history: History;
   historyIndex: number;
   phase: Phase;
-  score: Score;
 }
 
 type Action =
   | { step: number; type: "TRAVERSE_HISTORY" }
   | { game: Game; result?: Score; type: "UPDATE_GAME" };
 
+const initialGame = { rounds: [], score: { they: 0, us: 0 } };
 export const initialState: State = {
   canRedo: false,
   canUndo: false,
-  game: [],
-  history: [[]],
+  game: initialGame,
+  history: [initialGame],
   historyIndex: 0,
-  phase: "bid",
-  score: { they: 0, us: 0 }
+  phase: "bid"
 };
 
 export const reducer = (state: State, action: Action): State => {
@@ -59,10 +57,7 @@ export const reducer = (state: State, action: Action): State => {
         game: action.game,
         history,
         historyIndex,
-        phase: changePhase(state.phase),
-        score: action.result
-          ? incrementScore(state.score, action.result)
-          : state.score
+        phase: changePhase(state.phase)
       };
     }
     default:
