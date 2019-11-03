@@ -31,3 +31,8 @@ export const determineResult = (bid: Bid, winner: Winner): Result => {
 
   return { they: result.they, us: result.us };
 };
+
+export const incrementScore = (score: Result, result: Result): Result => ({
+  they: score.they + result.they,
+  us: score.us + result.us
+});

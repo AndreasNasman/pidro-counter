@@ -1,29 +1,11 @@
-import React, { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { FC, useLayoutEffect, useRef, useState } from "react";
 import { Body } from "./body";
 import { Foot } from "./foot";
 import { Head } from "./head";
 import { Props } from "./types";
-import { Result } from "components/common/types";
 import styles from "./Scoreboard.module.css";
 
-export const Scoreboard: FC<Props> = ({ game }) => {
-  const [score, setScore] = useState<Result>({ they: 0, us: 0 });
-  useEffect(() => {
-    const currentScore = game.reduce(
-      (result, round) => {
-        if (!round.result) return result;
-
-        return {
-          they: result.they + round.result.they,
-          us: result.us + round.result.us
-        };
-      },
-      { they: 0, us: 0 }
-    );
-
-    setScore(currentScore);
-  }, [game]);
-
+export const Scoreboard: FC<Props> = ({ game, score }) => {
   const [minHeight, setMinHeight] = useState<number>();
   const headRef = useRef<HTMLDivElement | null>(null);
   const footRef = useRef<HTMLDivElement | null>(null);

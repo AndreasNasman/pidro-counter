@@ -10,7 +10,7 @@ import last from "lodash.last";
 import styles from "./App.module.css";
 
 export const App: React.FC = () => {
-  const [{ canRedo, canUndo, game, phase }, dispatch] = useReducer(
+  const [{ canRedo, canUndo, game, phase, score }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -28,7 +28,7 @@ export const App: React.FC = () => {
 
     const result = determineResult(bid, winner);
     const updatedGame = [...dropRight(game), { ...lastGame, result }];
-    dispatch({ game: updatedGame, type: "UPDATE_GAME" });
+    dispatch({ game: updatedGame, result, type: "UPDATE_GAME" });
   };
 
   const redo = (): void => {
@@ -44,7 +44,7 @@ export const App: React.FC = () => {
   return (
     <div className={styles.felt}>
       <div className={styles.grid}>
-        <Scoreboard game={game} />
+        <Scoreboard game={game} score={score} />
         <Toolbar canRedo={canRedo} canUndo={canUndo} redo={redo} undo={undo} />
         <Keypad updateGame={phase === "bid" ? updateBid : updateResult} />
       </div>

@@ -1,10 +1,11 @@
+import { Game, Result } from "components/common/types";
 import { History, Phase } from "./types";
 import {
   changePhase,
   checkRedoPossibility,
-  checkUndoPossibility
+  checkUndoPossibility,
+  incrementScore
 } from "./logic";
-import { Game } from "components/common/types";
 
 interface State {
   canRedo: boolean;
@@ -13,11 +14,12 @@ interface State {
   history: History;
   historyIndex: number;
   phase: Phase;
+  score: Result;
 }
 
 type Action =
   | { step: number; type: "TRAVERSE_HISTORY" }
-  | { game: Game; type: "UPDATE_GAME" };
+  | { game: Game; result?: Result; type: "UPDATE_GAME" };
 
 export const initialState: State = {
   canRedo: false,
@@ -25,7 +27,8 @@ export const initialState: State = {
   game: [],
   history: [[]],
   historyIndex: 0,
-  phase: "bid"
+  phase: "bid",
+  score: { they: 0, us: 0 }
 };
 
 export const reducer = (state: State, action: Action): State => {
@@ -56,7 +59,10 @@ export const reducer = (state: State, action: Action): State => {
         game: action.game,
         history,
         historyIndex,
-        phase: changePhase(state.phase)
+        phase: changePhase(state.phase),
+        score: action.result
+          ? incrementScore(state.score, action.result)
+          : state.score
       };
     }
     default:
