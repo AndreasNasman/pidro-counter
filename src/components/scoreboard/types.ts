@@ -1,6 +1,6 @@
-import { Game, Result } from "components/common/types";
+import { Game, Score } from "components/common/types";
 
 export interface Props {
   game: Game;
-  score: Result;
+  score: Score;
 }

@@ -1,4 +1,4 @@
-import { Game, Result } from "components/common/types";
+import { Game, Score } from "components/common/types";
 import { History, Phase } from "./types";
 import {
   changePhase,
@@ -14,12 +14,12 @@ interface State {
   history: History;
   historyIndex: number;
   phase: Phase;
-  score: Result;
+  score: Score;
 }
 
 type Action =
   | { step: number; type: "TRAVERSE_HISTORY" }
-  | { game: Game; result?: Result; type: "UPDATE_GAME" };
+  | { game: Game; result?: Score; type: "UPDATE_GAME" };
 
 export const initialState: State = {
   canRedo: false,

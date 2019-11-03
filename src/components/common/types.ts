@@ -5,11 +5,11 @@ export type Bid = {
 export type Winner = Bid;
 
 export type Team = "us" | "they";
-export type Result = { [K in Team]: number };
+export type Score = { [K in Team]: number };
 
 export interface Round {
   bid?: Bid;
-  result?: Result;
+  result?: Score;
 }
 
 export type Game = Round[];
