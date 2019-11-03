@@ -31,7 +31,7 @@ export const App: React.FC = () => {
       rounds: [...dropRight(game.rounds), { ...lastRound, result }],
       score: incrementScore(game.score, result)
     };
-    dispatch({ game: updatedGame, result, type: "UPDATE_GAME" });
+    dispatch({ game: updatedGame, type: "UPDATE_GAME" });
   };
 
   const redo = (): void => {

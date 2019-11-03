@@ -1,10 +1,10 @@
-import { Game, Score } from "components/common/types";
 import { History, Phase } from "./types";
 import {
   changePhase,
   checkRedoPossibility,
   checkUndoPossibility
 } from "./logic";
+import { Game } from "components/common/types";
 
 interface State {
   canRedo: boolean;
@@ -17,7 +17,7 @@ interface State {
 
 type Action =
   | { step: number; type: "TRAVERSE_HISTORY" }
-  | { game: Game; result?: Score; type: "UPDATE_GAME" };
+  | { game: Game; type: "UPDATE_GAME" };
 
 const initialGame = { rounds: [], score: { they: 0, us: 0 } };
 export const initialState: State = {
