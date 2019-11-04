@@ -8,7 +8,6 @@ import styles from "../Scoreboard.module.css";
 
 export const Head: FC<Props> = ({ headRef, score }) => {
   const [leader, setLeader] = useState<Team | null>(null);
-
   useEffect(() => {
     if (score.us > score.they) setLeader("us");
     else if (score.they > score.us) setLeader("they");

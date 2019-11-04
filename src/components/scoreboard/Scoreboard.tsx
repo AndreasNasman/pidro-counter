@@ -1,4 +1,4 @@
-import React, { FC, useLayoutEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { Body } from "./body";
 import { Foot } from "./foot";
 import { Head } from "./head";
@@ -10,7 +10,7 @@ export const Scoreboard: FC<Props> = ({ game }) => {
   const headRef = useRef<HTMLDivElement | null>(null);
   const footRef = useRef<HTMLDivElement | null>(null);
   const footCellRef = useRef<HTMLDivElement | null>(null);
-  useLayoutEffect(() => {
+  useEffect(() => {
     const { current: currentHeadRef } = headRef;
     const { current: currentFootRef } = footRef;
     const { current: currentFootCellRef } = footCellRef;
