@@ -9,7 +9,7 @@ import last from "lodash.last";
 import styles from "./App.module.css";
 
 export const App: React.FC = () => {
-  const [{ canRedo, canUndo, game, phase }, dispatch] = useReducer(
+  const [{ canRedo, canReset, canUndo, game, phase }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -38,6 +38,10 @@ export const App: React.FC = () => {
     dispatch({ type: "CHECK_TOOLBAR" });
   };
 
+  const reset = (): void => {
+    dispatch({ type: "RESET" });
+  };
+
   const undo = (): void => {
     const step = -1;
     dispatch({ step, type: "TRAVERSE_HISTORY" });
@@ -48,7 +52,14 @@ export const App: React.FC = () => {
     <div className={styles.felt}>
       <div className={styles.grid}>
         <Scoreboard game={game} />
-        <Toolbar canRedo={canRedo} canUndo={canUndo} redo={redo} undo={undo} />
+        <Toolbar
+          canRedo={canRedo}
+          canReset={canReset}
+          canUndo={canUndo}
+          redo={redo}
+          reset={reset}
+          undo={undo}
+        />
         <Keypad updateRound={phase === "bid" ? addBid : addResult} />
       </div>
     </div>

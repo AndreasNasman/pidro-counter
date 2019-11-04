@@ -3,6 +3,7 @@ import { History, Phase } from "./types";
 import {
   changePhase,
   checkRedoPossibility,
+  checkResetPossibility,
   checkUndoPossibility,
   incrementScore
 } from "./logic";
@@ -10,6 +11,7 @@ import { dropRight, last } from "lodash";
 
 interface State {
   canRedo: boolean;
+  canReset: boolean;
   canUndo: boolean;
   game: Game;
   history: History;
@@ -21,12 +23,14 @@ type Action =
   | { bid: Bid; type: "ADD_BID" }
   | { result: Score; type: "ADD_RESULT" }
   | { type: "CHECK_TOOLBAR" }
+  | { type: "RESET" }
   | { step: number; type: "TRAVERSE_HISTORY" }
   | { type: "UPDATE_HISTORY" };
 
 const initialGame = { rounds: [], score: { they: 0, us: 0 } };
 export const initialState: State = {
   canRedo: false,
+  canReset: false,
   canUndo: false,
   game: initialGame,
   history: [initialGame],
@@ -62,8 +66,11 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         canRedo: checkRedoPossibility(state.history, state.historyIndex),
+        canReset: checkResetPossibility(state.history),
         canUndo: checkUndoPossibility(state.historyIndex)
       };
+    case "RESET":
+      return initialState;
     case "TRAVERSE_HISTORY": {
       const historyIndex = state.historyIndex + action.step;
       return {

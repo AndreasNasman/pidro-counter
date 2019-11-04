@@ -14,6 +14,11 @@ export const checkRedoPossibility = (
   return historyIndex < threshold;
 };
 
+export const checkResetPossibility = (history: History): boolean => {
+  const threshold = 0;
+  return history.length > threshold;
+};
+
 export const checkUndoPossibility = (historyIndex: number): boolean => {
   const threshold = 0;
   return historyIndex > threshold;
