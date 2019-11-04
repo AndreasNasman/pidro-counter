@@ -14,13 +14,13 @@ export const App: React.FC = () => {
     initialState
   );
 
-  const updateBid = (bid: Bid): void => {
+  const addBid = (bid: Bid): void => {
     dispatch({ bid, type: "ADD_BID" });
     dispatch({ type: "UPDATE_HISTORY" });
     dispatch({ type: "CHECK_TOOLBAR" });
   };
 
-  const updateResult = (winner: Winner): void => {
+  const addResult = (winner: Winner): void => {
     const lastRound = last(game.rounds);
     if (!lastRound) return;
     const { bid } = lastRound;
@@ -49,7 +49,7 @@ export const App: React.FC = () => {
       <div className={styles.grid}>
         <Scoreboard game={game} />
         <Toolbar canRedo={canRedo} canUndo={canUndo} redo={redo} undo={undo} />
-        <Keypad updateGame={phase === "bid" ? updateBid : updateResult} />
+        <Keypad updateRound={phase === "bid" ? addBid : addResult} />
       </div>
     </div>
   );
