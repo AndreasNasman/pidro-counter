@@ -1,4 +1,4 @@
-@value playingCardBlack, playingCardRed, playingCardWhite from "../../common/colors.css";
+@value playingCardBlack, playingCardRed, playingCardWhite from "../../common/colors.module.css";
 
 @value duration: 0.3s;
 

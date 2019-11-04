@@ -1,4 +1,4 @@
-@value chalkWhite from "../../common/colors.css";
+@value chalkWhite from "../../common/colors.module.css";
 
 .wrapper {
   align-items: center;

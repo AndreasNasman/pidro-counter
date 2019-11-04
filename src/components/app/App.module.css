@@ -1,4 +1,4 @@
-@value feltGreen from "../common/colors.css";
+@value feltGreen from "../common/colors.module.css";
 
 @value spacing: 1rem;
 
