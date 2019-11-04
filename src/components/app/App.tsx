@@ -17,6 +17,7 @@ export const App: React.FC = () => {
   const updateBid = (bid: Bid): void => {
     dispatch({ bid, type: "ADD_BID" });
     dispatch({ type: "UPDATE_HISTORY" });
+    dispatch({ type: "CHECK_TOOLBAR" });
   };
 
   const updateResult = (winner: Winner): void => {
@@ -28,16 +29,19 @@ export const App: React.FC = () => {
     const result = determineResult(bid, winner);
     dispatch({ result, type: "ADD_RESULT" });
     dispatch({ type: "UPDATE_HISTORY" });
+    dispatch({ type: "CHECK_TOOLBAR" });
   };
 
   const redo = (): void => {
     const step = 1;
     dispatch({ step, type: "TRAVERSE_HISTORY" });
+    dispatch({ type: "CHECK_TOOLBAR" });
   };
 
   const undo = (): void => {
     const step = -1;
     dispatch({ step, type: "TRAVERSE_HISTORY" });
+    dispatch({ type: "CHECK_TOOLBAR" });
   };
 
   return (
