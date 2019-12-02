@@ -1,5 +1,5 @@
-import { Score } from "components/common/types";
+import { Bid, Winner } from "components/common/types";
 
 export interface Props {
-  updateGame: (score: Score) => void;
+  updateRound: (input: Bid | Winner) => void;
 }

@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { last } from "lodash";
 import styles from "../Scoreboard.module.css";
 
-export const Body: FC<Props> = ({ game }) => {
+export const Body: FC<Props> = ({ rounds }) => {
   const bodyColumnRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const { current } = bodyColumnRef;
@@ -18,7 +18,7 @@ export const Body: FC<Props> = ({ game }) => {
     <div className={styles.body}>
       {TEAMS.map(team => (
         <div className={styles.column} key={team} ref={bodyColumnRef}>
-          {game.map((round, index) => (
+          {rounds.map((round, index) => (
             <div
               className={classNames(styles.cell, {
                 [styles.reverse]: last(TEAMS) === team

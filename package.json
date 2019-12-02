@@ -20,6 +20,7 @@
     "react-dom": "^16.10.2",
     "react-icons": "^3.8.0",
     "react-scripts": "3.2.0",
+    "react-tiny-popover": "^3.4.5",
     "typeface-roboto": "^0.0.75",
     "typescript": "3.6.3"
   },

@@ -1,0 +1,14 @@
+@value chalkWhite from "../../common/colors.module.css";
+
+.wrapper {
+  align-items: center;
+  color: chalkWhite;
+  cursor: pointer;
+  display: flex;
+  padding: 0.5rem;
+}
+
+.wrapper.disabled {
+  color: gray;
+  pointer-events: none;
+}

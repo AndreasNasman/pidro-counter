@@ -1,5 +1,5 @@
-import { Game } from "components/common/types";
+import { Round } from "components/common/types";
 
 export interface Props {
-  game: Game;
+  rounds: Round[];
 }

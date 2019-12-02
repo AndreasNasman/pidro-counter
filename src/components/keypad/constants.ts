@@ -1,10 +1,14 @@
-import { MAXIMUM_POINTS, MINIMUM_POINTS } from "components/common/constants";
+import {
+  MAXIMUM_POINTS,
+  MILLISECOND_MAGNITUDE,
+  MINIMUM_POINTS
+} from "components/common/constants";
 import buttonStyles from "./button/Button.module.css";
 import { range } from "lodash";
 
 const DELAY = 200;
-const MAGNITUDE = 1000;
-export const TIMEOUT = parseFloat(buttonStyles.duration) * MAGNITUDE + DELAY;
+export const TIMEOUT =
+  parseFloat(buttonStyles.duration) * MILLISECOND_MAGNITUDE + DELAY;
 
 const INCLUSIVE_END_OFFSET = 1;
 export const NUMBERS = range(

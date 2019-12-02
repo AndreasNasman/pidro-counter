@@ -1,4 +1,4 @@
-@value playingCardBlack, playingCardRed, playingCardWhite from "../../common/colors.css";
+@value playingCardBlack, playingCardRed, playingCardWhite from "../../common/colors.module.css";
 
 @value duration: 0.3s;
 
@@ -11,6 +11,7 @@
   border: 0.25rem solid playingCardWhite;
   border-radius: 0.5rem;
   color: playingCardWhite;
+  cursor: pointer;
   font-size: 1.5rem;
   font-weight: bold;
   padding: 0.5rem;
