@@ -1,8 +1,5 @@
 import React, { FC } from "react";
-import TinyPopover, {
-  ArrowContainer,
-  ContentRendererArgs
-} from "react-tiny-popover";
+import TinyPopover, { ArrowContainer } from "react-tiny-popover";
 import { MILLISECOND_MAGNITUDE } from "components/common/constants";
 import { Props } from "./types";
 import { TRANSITION_DURATION } from "./constants";
@@ -17,11 +14,7 @@ export const Popover: FC<Props> = ({
   isOpen
 }) => (
   <TinyPopover
-    content={({
-      popoverRect,
-      position,
-      targetRect
-    }: ContentRendererArgs): JSX.Element => (
+    content={({ popoverRect, position, targetRect }): JSX.Element => (
       <ArrowContainer
         arrowColor={colors.playingCardWhite}
         popoverRect={popoverRect}
