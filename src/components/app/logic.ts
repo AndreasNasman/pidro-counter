@@ -1,5 +1,5 @@
-import { Bid, Score, Winner } from "components/common/types";
-import { History, Phase } from "./types";
+import { Bid, Phase, Score, Winner } from "components/common/types";
+import { History } from "./types";
 import { MAXIMUM_POINTS } from "components/common/constants";
 
 export const changePhase = (phase: Phase): Phase =>

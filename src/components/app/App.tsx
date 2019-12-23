@@ -60,7 +60,7 @@ export const App: React.FC = () => {
           reset={reset}
           undo={undo}
         />
-        <Keypad updateRound={phase === "bid" ? addBid : addResult} />
+        <Keypad addBid={addBid} addResult={addResult} phase={phase} />
       </div>
     </div>
   );
