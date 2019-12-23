@@ -11,5 +11,6 @@ export interface Round {
   bid?: Bid;
   result?: Score;
 }
+export type Phase = keyof Round;
 
 export type Game = { rounds: Round[]; score: Score };

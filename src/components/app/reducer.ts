@@ -1,5 +1,4 @@
-import { Bid, Game, Score } from "components/common/types";
-import { History, Phase } from "./types";
+import { Bid, Game, Phase, Score } from "components/common/types";
 import {
   changePhase,
   checkRedoPossibility,
@@ -8,6 +7,7 @@ import {
   incrementScore
 } from "./logic";
 import { dropRight, last } from "lodash";
+import { History } from "./types";
 
 interface State {
   canRedo: boolean;

@@ -2,13 +2,14 @@ import { NUMBERS, TIMEOUT } from "./constants";
 import React, { FC, useReducer } from "react";
 import { initialState, reducer } from "./reducer";
 import { Button } from "./button";
+import { Prompt } from "./prompt";
 import { Props } from "./types";
 import { TEAMS } from "components/common/constants";
 import { Team } from "components/common/types";
 import buttonStyles from "./button/Button.module.css";
 import styles from "./Keypad.module.css";
 
-export const Keypad: FC<Props> = ({ updateRound }) => {
+export const Keypad: FC<Props> = ({ addBid, addResult, phase }) => {
   const [{ activeTeam, activeNumber, disableButtons }, dispatch] = useReducer(
     reducer,
     initialState
@@ -18,7 +19,7 @@ export const Keypad: FC<Props> = ({ updateRound }) => {
     dispatch({ type: "DISABLE_BUTTONS" });
 
     setTimeout(() => {
-      updateRound({ points, team });
+      phase === "bid" ? addBid({ points, team }) : addResult({ points, team });
       dispatch({ type: "RESET" });
     }, TIMEOUT);
   };
@@ -35,6 +36,8 @@ export const Keypad: FC<Props> = ({ updateRound }) => {
 
   return (
     <div className={styles.container}>
+      <Prompt phase={phase} />
+
       <div className={styles.team}>
         {TEAMS.map(team => (
           <Button

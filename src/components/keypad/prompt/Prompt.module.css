@@ -1,0 +1,8 @@
+@value playingCardWhite from "../../common/colors.module.css";
+
+.prompt {
+  color: playingCardWhite;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  text-align: center;
+}
