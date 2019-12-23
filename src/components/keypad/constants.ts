@@ -6,9 +6,8 @@ import {
 import buttonStyles from "./button/Button.module.css";
 import { range } from "lodash";
 
-const DELAY = 200;
 export const TIMEOUT =
-  parseFloat(buttonStyles.duration) * MILLISECOND_MAGNITUDE + DELAY;
+  parseFloat(buttonStyles.duration) * MILLISECOND_MAGNITUDE;
 
 const INCLUSIVE_END_OFFSET = 1;
 export const NUMBERS = range(
