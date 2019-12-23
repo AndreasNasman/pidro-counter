@@ -5,16 +5,7 @@ import { App } from "components/app";
 import React from "react";
 import ReactDOM from "react-dom";
 
-const rootElement = document.getElementById("root");
-
-ReactDOM.render(<App />, rootElement);
-
-if (module.hot) {
-  module.hot.accept("components/app", () => {
-    const NextApp = require("components/app").default; // eslint-disable-line global-require
-    ReactDOM.render(<NextApp />, rootElement);
-  });
-}
+ReactDOM.render(<App />, document.getElementById("root"));
 
 /*
  * If you want your app to work offline and load faster, you can change
