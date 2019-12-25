@@ -21,9 +21,7 @@ export const App: React.FC = () => {
   };
 
   const addResult = (winner: Winner): void => {
-    const lastRound = last(game.rounds);
-    if (!lastRound) return;
-    const { bid } = lastRound;
+    const bid = last(game.rounds)?.bid;
     if (!bid) return;
 
     const result = determineResult(bid, winner);

@@ -5,23 +5,22 @@ import { MAXIMUM_POINTS } from "components/common/constants";
 export const changePhase = (phase: Phase): Phase =>
   phase === "bid" ? "result" : "bid";
 
+const OFFSET = 1;
 export const checkRedoPossibility = (
   history: History,
   historyIndex: number
 ): boolean => {
-  const offset = 1;
-  const threshold = history.length - offset;
+  const threshold = history.length - OFFSET;
   return historyIndex < threshold;
 };
 
+const THRESHOLD = 0;
 export const checkResetPossibility = (history: History): boolean => {
-  const threshold = 0;
-  return history.length > threshold;
+  return history.length > THRESHOLD;
 };
 
 export const checkUndoPossibility = (historyIndex: number): boolean => {
-  const threshold = 0;
-  return historyIndex > threshold;
+  return historyIndex > THRESHOLD;
 };
 
 export const determineResult = (bid: Bid, winner: Winner): Score => {

@@ -25,7 +25,9 @@ export const Body: FC<Props> = ({ rounds }) => {
               })}
               key={index}
             >
-              {!round.result && round.bid && round.bid.team === team && (
+              {round.result ? (
+                <div className={styles.content}>{round.result[team]}</div>
+              ) : round.bid?.team === team ? (
                 <>
                   <div className={styles.content}>{round.bid.points}</div>
                   <span
@@ -36,10 +38,7 @@ export const Body: FC<Props> = ({ rounds }) => {
                     📣
                   </span>
                 </>
-              )}
-              {round.result && (
-                <div className={styles.content}>{round.result[team]}</div>
-              )}
+              ) : null}
             </div>
           ))}
         </div>
