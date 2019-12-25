@@ -1,4 +1,19 @@
 {
+  "cSpell.words": [
+    "Interop",
+    "Ostrobothnian",
+    "Pidro",
+    "browserslist",
+    "dropright",
+    "esnext",
+    "onstatechange",
+    "onupdatefound",
+    "precached",
+    "predeploy",
+    "roboto",
+    "stylelint",
+    "unmount"
+  ],
   "css.lint.unknownAtRules": "ignore",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
