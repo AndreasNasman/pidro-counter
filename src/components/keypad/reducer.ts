@@ -21,7 +21,7 @@ export const initialState: State = {
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "DISABLE_BUTTONS":
-      return { ...state, disableButtons: false };
+      return { ...state, disableButtons: true };
     case "RESET":
       return initialState;
     case "SET_ACTIVE_NUMBER":
