@@ -4,4 +4,4 @@ export interface Props {
   phase: Phase;
 }
 
-export type Questions = { [key in Phase]: string };
+export type Questions = { [T in Phase]: string };

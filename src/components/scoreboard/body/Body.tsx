@@ -8,10 +8,7 @@ import styles from "../Scoreboard.module.css";
 export const Body: FC<Props> = ({ rounds }) => {
   const bodyColumnRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    const { current } = bodyColumnRef;
-    if (!current) return;
-
-    current.scrollIntoView({ behavior: "smooth", block: "end" });
+    bodyColumnRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   });
 
   return (
@@ -25,7 +22,7 @@ export const Body: FC<Props> = ({ rounds }) => {
               })}
               key={index}
             >
-              {round.result ? (
+              {typeof round.result === "object" ? (
                 <div className={styles.content}>{round.result[team]}</div>
               ) : round.bid?.team === team ? (
                 <>

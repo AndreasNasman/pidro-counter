@@ -26,12 +26,12 @@ export const Keypad: FC<Props> = ({ addBid, addResult, phase }) => {
 
   const handleTeamClick = (team: Team): void => {
     dispatch({ team, type: "SET_ACTIVE_TEAM" });
-    if (activeNumber) update(activeNumber, team);
+    if (activeNumber !== null) update(activeNumber, team);
   };
 
   const handleNumberClick = (number: number): void => {
     dispatch({ number, type: "SET_ACTIVE_NUMBER" });
-    if (activeTeam) update(number, activeTeam);
+    if (activeTeam !== null) update(number, activeTeam);
   };
 
   return (

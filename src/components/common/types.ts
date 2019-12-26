@@ -1,10 +1,10 @@
 export type Team = "us" | "they";
-export type Score = { [K in Team]: number };
+export type Score = { [T in Team]: number };
 
-export type Bid = {
+export interface Bid {
   points: number;
   team: Team;
-};
+}
 export type Winner = Bid;
 
 export interface Round {
@@ -13,4 +13,7 @@ export interface Round {
 }
 export type Phase = keyof Round;
 
-export type Game = { rounds: Round[]; score: Score };
+export interface Game {
+  rounds: Round[];
+  score: Score;
+}

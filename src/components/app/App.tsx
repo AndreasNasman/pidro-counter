@@ -22,7 +22,7 @@ export const App: React.FC = () => {
 
   const addResult = (winner: Winner): void => {
     const bid = last(game.rounds)?.bid;
-    if (!bid) return;
+    if (typeof bid === "undefined") return;
 
     const result = determineResult(bid, winner);
     dispatch({ result, type: "ADD_RESULT" });
