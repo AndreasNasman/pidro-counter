@@ -1,5 +1,7 @@
 @value blackBoard, chalkWhite from "../common/colors.module.css";
 
+@value emojiWidth: 3ch;
+
 .body,
 .cell,
 .foot,
@@ -24,7 +26,7 @@
   column-gap: 0.25rem;
   font-size: 1.25rem;
   grid-template-areas: ". content emoji";
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: emojiWidth 1fr emojiWidth;
   padding: 0.5rem;
   text-align: center;
   text-transform: uppercase;
