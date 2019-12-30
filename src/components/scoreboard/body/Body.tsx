@@ -2,7 +2,6 @@ import React, { FC, useEffect, useRef } from "react";
 import { Props } from "./types";
 import { TEAMS } from "components/common/constants";
 import classNames from "classnames";
-import { last } from "lodash";
 import styles from "../Scoreboard.module.css";
 
 export const Body: FC<Props> = ({ rounds }) => {
@@ -18,7 +17,7 @@ export const Body: FC<Props> = ({ rounds }) => {
           {rounds.map((round, index) => (
             <div
               className={classNames(styles.cell, {
-                [styles.reverse]: last(TEAMS) === team
+                [styles.reverse]: TEAMS[TEAMS.length - 1] === team
               })}
               key={index}
             >

@@ -5,7 +5,6 @@ import { Keypad } from "components/keypad";
 import { Scoreboard } from "components/scoreboard";
 import { Toolbar } from "components/toolbar";
 import { determineResult } from "./logic";
-import last from "lodash.last";
 import styles from "./App.module.css";
 
 export const App: React.FC = () => {
@@ -21,7 +20,7 @@ export const App: React.FC = () => {
   };
 
   const addResult = (winner: Winner): void => {
-    const bid = last(game.rounds)?.bid;
+    const { bid } = game.rounds[game.rounds.length - 1];
     if (typeof bid === "undefined") return;
 
     const result = determineResult(bid, winner);
