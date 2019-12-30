@@ -21,9 +21,8 @@ export const App: React.FC = () => {
 
   const addResult = (winner: Winner): void => {
     const { bid } = game.rounds[game.rounds.length - 1];
-    if (typeof bid === "undefined") return;
-
     const result = determineResult(bid, winner);
+
     dispatch({ result, type: "ADD_RESULT" });
     dispatch({ type: "UPDATE_HISTORY" });
     dispatch({ type: "CHECK_TOOLBAR" });

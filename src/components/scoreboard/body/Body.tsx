@@ -23,7 +23,7 @@ export const Body: FC<Props> = ({ rounds }) => {
             >
               {typeof round.result === "object" ? (
                 <div className={styles.content}>{round.result[team]}</div>
-              ) : round.bid?.team === team ? (
+              ) : round.bid.team === team ? (
                 <>
                   <div className={styles.content}>{round.bid.points}</div>
                   <span

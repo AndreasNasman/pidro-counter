@@ -8,7 +8,7 @@ export interface Bid {
 export type Winner = Bid;
 
 export interface Round {
-  bid?: Bid;
+  bid: Bid;
   result?: Score;
 }
 export type Phase = keyof Round;
