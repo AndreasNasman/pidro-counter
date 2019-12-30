@@ -18,6 +18,7 @@ export const Toolbar: FC<Props> = ({
   return (
     <div className={styles.container}>
       <Icon disabled={!canUndo} handleClick={undo} IconType={MdUndo} />
+
       <Popover
         affirmative={reset}
         close={(): void => setResetPopover(false)}
@@ -29,6 +30,7 @@ export const Toolbar: FC<Props> = ({
           IconType={MdReplay}
         />
       </Popover>
+
       <Icon disabled={!canRedo} handleClick={redo} IconType={MdRedo} />
     </div>
   );
