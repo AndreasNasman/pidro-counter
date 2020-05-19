@@ -56,7 +56,12 @@ export const App: React.FC = () => {
           reset={reset}
           undo={undo}
         />
-        <Keypad addBid={addBid} addResult={addResult} phase={phase} />
+        <Keypad
+          addBid={addBid}
+          addResult={addResult}
+          game={game}
+          phase={phase}
+        />
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ import { Team } from "components/common/types";
 import buttonStyles from "./button/Button.module.css";
 import styles from "./Keypad.module.css";
 
-export const Keypad: FC<Props> = ({ addBid, addResult, phase }) => {
+export const Keypad: FC<Props> = ({ addBid, addResult, game, phase }) => {
   const [{ activeTeam, activeNumber, disableButtons }, dispatch] = useReducer(
     reducer,
     initialState
@@ -36,7 +36,7 @@ export const Keypad: FC<Props> = ({ addBid, addResult, phase }) => {
 
   return (
     <div className={styles.container}>
-      <Prompt phase={phase} />
+      <Prompt round={game.rounds.length} phase={phase} />
 
       <div className={styles.team}>
         {TEAMS.map(team => (
