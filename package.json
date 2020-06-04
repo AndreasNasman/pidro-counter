@@ -19,10 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prettier:all": "prettier '**/*' --write --ignore-path .gitignore",
-    "stylelint:all": "stylelint '**/*.css' --fix --ignore-path .gitignore",
-    "eslint:all": "eslint '**/*' --fix --ignore-path .gitignore"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
