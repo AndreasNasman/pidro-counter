@@ -20,7 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier:all": "prettier '**/*' --write --ignore-path .gitignore"
+    "prettier:all": "prettier '**/*' --write --ignore-path .gitignore",
+    "stylelint:all": "stylelint '**/*.css' --fix --ignore-path .gitignore"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,6 +39,9 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "stylelint": "^13.6.0",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-standard": "^20.0.0"
   }
 }
