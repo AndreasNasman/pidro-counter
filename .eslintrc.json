@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "react-app",
+    "plugin:react/recommended",
+    "eslint:all",
+    "plugin:@typescript-eslint/all",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
