@@ -5,7 +5,6 @@ import { Keypad } from "components/keypad";
 import { Scoreboard } from "components/scoreboard";
 import { Toolbar } from "components/toolbar";
 import { determineResult } from "./logic";
-import last from "lodash.last";
 import styles from "./App.module.css";
 
 export const App: React.FC = () => {
@@ -21,12 +20,9 @@ export const App: React.FC = () => {
   };
 
   const addResult = (winner: Winner): void => {
-    const lastRound = last(game.rounds);
-    if (!lastRound) return;
-    const { bid } = lastRound;
-    if (!bid) return;
-
+    const { bid } = game.rounds[game.rounds.length - 1];
     const result = determineResult(bid, winner);
+
     dispatch({ result, type: "ADD_RESULT" });
     dispatch({ type: "UPDATE_HISTORY" });
     dispatch({ type: "CHECK_TOOLBAR" });
@@ -60,7 +56,12 @@ export const App: React.FC = () => {
           reset={reset}
           undo={undo}
         />
-        <Keypad addBid={addBid} addResult={addResult} phase={phase} />
+        <Keypad
+          addBid={addBid}
+          addResult={addResult}
+          game={game}
+          phase={phase}
+        />
       </div>
     </div>
   );

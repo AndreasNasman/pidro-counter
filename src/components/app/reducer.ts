@@ -6,8 +6,8 @@ import {
   checkUndoPossibility,
   incrementScore
 } from "./logic";
-import { dropRight, last } from "lodash";
 import { History } from "./types";
+import { produce } from "immer";
 
 interface State {
   canRedo: boolean;
@@ -38,61 +38,41 @@ export const initialState: State = {
   phase: "bid"
 };
 
-export const reducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case "ADD_BID":
-      return {
-        ...state,
-        game: {
-          ...state.game,
-          rounds: [...state.game.rounds, { bid: action.bid }]
-        },
-        phase: "result"
-      };
-    case "ADD_RESULT": {
-      return {
-        ...state,
-        game: {
-          rounds: [
-            ...dropRight(state.game.rounds),
-            { ...last(state.game.rounds), result: action.result }
-          ],
-          score: incrementScore(state.game.score, action.result)
-        },
-        phase: "bid"
-      };
+export const reducer = produce(
+  (draft: State, action: Action): State => {
+    switch (action.type) {
+      case "ADD_BID":
+        draft.game.rounds.push({ bid: action.bid });
+        draft.phase = changePhase(draft.phase);
+        break;
+      case "ADD_RESULT":
+        draft.game.rounds[draft.game.rounds.length - 1].result = action.result;
+        draft.game.score = incrementScore(draft.game.score, action.result);
+        draft.phase = changePhase(draft.phase);
+        break;
+      case "CHECK_TOOLBAR":
+        draft.canRedo = checkRedoPossibility(draft.history, draft.historyIndex);
+        draft.canReset = checkResetPossibility(draft.history);
+        draft.canUndo = checkUndoPossibility(draft.historyIndex);
+        break;
+      case "RESET":
+        return initialState;
+      case "TRAVERSE_HISTORY":
+        draft.historyIndex += action.step;
+        draft.game = draft.history[draft.historyIndex];
+        draft.phase = changePhase(draft.phase);
+        break;
+      case "UPDATE_HISTORY":
+        draft.historyIndex += 1;
+        draft.history = [
+          ...draft.history.slice(0, draft.historyIndex),
+          draft.game
+        ];
+        break;
+      default:
+        throw new Error();
     }
-    case "CHECK_TOOLBAR":
-      return {
-        ...state,
-        canRedo: checkRedoPossibility(state.history, state.historyIndex),
-        canReset: checkResetPossibility(state.history),
-        canUndo: checkUndoPossibility(state.historyIndex)
-      };
-    case "RESET":
-      return initialState;
-    case "TRAVERSE_HISTORY": {
-      const historyIndex = state.historyIndex + action.step;
-      return {
-        ...state,
-        game: state.history[historyIndex],
-        historyIndex,
-        phase: changePhase(state.phase)
-      };
-    }
-    case "UPDATE_HISTORY": {
-      const step = 1;
-      const historyIndex = state.historyIndex + step;
-      return {
-        ...state,
-        history: [
-          ...dropRight(state.history, state.history.length - historyIndex),
-          state.game
-        ],
-        historyIndex
-      };
-    }
-    default:
-      throw new Error();
+
+    return draft;
   }
-};
+);

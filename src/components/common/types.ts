@@ -1,16 +1,19 @@
-export type Bid = {
+export type Team = "us" | "they";
+export type Score = { [T in Team]: number };
+
+export interface Bid {
   points: number;
   team: Team;
-};
+}
 export type Winner = Bid;
 
-export type Team = "us" | "they";
-export type Score = { [K in Team]: number };
-
 export interface Round {
-  bid?: Bid;
+  bid: Bid;
   result?: Score;
 }
 export type Phase = keyof Round;
 
-export type Game = { rounds: Round[]; score: Score };
+export interface Game {
+  rounds: Round[];
+  score: Score;
+}

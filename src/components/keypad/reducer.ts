@@ -1,4 +1,5 @@
 import { Team } from "components/common/types";
+import { produce } from "immer";
 
 interface State {
   activeNumber: number | null;
@@ -18,24 +19,26 @@ export const initialState: State = {
   disableButtons: false
 };
 
-export const reducer = (state: State, action: Action): State => {
-  switch (action.type) {
-    case "DISABLE_BUTTONS":
-      return { ...state, disableButtons: false };
-    case "RESET":
-      return initialState;
-    case "SET_ACTIVE_NUMBER":
-      return {
-        ...state,
-        activeNumber:
-          action.number === state.activeNumber ? null : action.number
-      };
-    case "SET_ACTIVE_TEAM":
-      return {
-        ...state,
-        activeTeam: action.team === state.activeTeam ? null : action.team
-      };
-    default:
-      throw new Error();
+export const reducer = produce(
+  (draft: State, action: Action): State => {
+    switch (action.type) {
+      case "DISABLE_BUTTONS":
+        draft.disableButtons = true;
+        break;
+      case "RESET":
+        return initialState;
+      case "SET_ACTIVE_NUMBER":
+        draft.activeNumber =
+          action.number === draft.activeNumber ? null : action.number;
+        break;
+      case "SET_ACTIVE_TEAM":
+        draft.activeTeam =
+          action.team === draft.activeTeam ? null : action.team;
+        break;
+      default:
+        throw new Error();
+    }
+
+    return draft;
   }
-};
+);

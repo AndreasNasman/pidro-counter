@@ -9,7 +9,7 @@ import { Team } from "components/common/types";
 import buttonStyles from "./button/Button.module.css";
 import styles from "./Keypad.module.css";
 
-export const Keypad: FC<Props> = ({ addBid, addResult, phase }) => {
+export const Keypad: FC<Props> = ({ addBid, addResult, game, phase }) => {
   const [{ activeTeam, activeNumber, disableButtons }, dispatch] = useReducer(
     reducer,
     initialState
@@ -26,17 +26,17 @@ export const Keypad: FC<Props> = ({ addBid, addResult, phase }) => {
 
   const handleTeamClick = (team: Team): void => {
     dispatch({ team, type: "SET_ACTIVE_TEAM" });
-    if (activeNumber) update(activeNumber, team);
+    if (activeNumber !== null) update(activeNumber, team);
   };
 
   const handleNumberClick = (number: number): void => {
     dispatch({ number, type: "SET_ACTIVE_NUMBER" });
-    if (activeTeam) update(number, activeTeam);
+    if (activeTeam !== null) update(number, activeTeam);
   };
 
   return (
     <div className={styles.container}>
-      <Prompt phase={phase} />
+      <Prompt round={game.rounds.length} phase={phase} />
 
       <div className={styles.team}>
         {TEAMS.map(team => (

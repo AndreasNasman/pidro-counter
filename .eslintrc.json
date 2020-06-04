@@ -2,12 +2,28 @@
   "extends": [
     "react-app",
     "eslint:all",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/all",
+    "prettier",
+    "prettier/@typescript-eslint"
   ],
   "rules": {
+    "@typescript-eslint/no-magic-numbers": ["error", { "ignore": [0, 1] }],
+    "@typescript-eslint/no-type-alias": "off",
+    "@typescript-eslint/no-unnecessary-condition": [
+      "error",
+      { "ignoreRhs": true }
+    ],
+    "@typescript-eslint/strict-boolean-expressions": [
+      "error",
+      { "ignoreRhs": true }
+    ],
+    "@typescript-eslint/typedef": "off",
     "max-lines-per-function": ["error", { "max": 100 }],
+    "no-nested-ternary": "off",
     "no-ternary": "off",
     "one-var": "off"
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }

@@ -16,7 +16,7 @@
   font-weight: bold;
   padding: 0.5rem;
   text-transform: uppercase;
-  transition: background-size duration ease-in-out 0s, color duration linear 0s;
+  transition: background-size duration ease-in 0s, color duration ease-in 0s;
 }
 
 .button:focus {

@@ -1,8 +1,16 @@
 @value playingCardWhite from "../../common/colors.module.css";
 
-.prompt {
+.prompt,
+.round {
   color: playingCardWhite;
-  margin-bottom: 0.5rem;
   margin-top: 0;
   text-align: center;
+}
+
+.prompt {
+  margin-bottom: 0.5rem;
+}
+
+.round {
+  margin-bottom: 0.25rem;
 }

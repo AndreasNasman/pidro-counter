@@ -2,16 +2,12 @@ import React, { FC, useEffect, useRef } from "react";
 import { Props } from "./types";
 import { TEAMS } from "components/common/constants";
 import classNames from "classnames";
-import { last } from "lodash";
 import styles from "../Scoreboard.module.css";
 
 export const Body: FC<Props> = ({ rounds }) => {
   const bodyColumnRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    const { current } = bodyColumnRef;
-    if (!current) return;
-
-    current.scrollIntoView({ behavior: "smooth", block: "end" });
+    bodyColumnRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   });
 
   return (
@@ -21,11 +17,13 @@ export const Body: FC<Props> = ({ rounds }) => {
           {rounds.map((round, index) => (
             <div
               className={classNames(styles.cell, {
-                [styles.reverse]: last(TEAMS) === team
+                [styles.reverse]: TEAMS[TEAMS.length - 1] === team
               })}
               key={index}
             >
-              {!round.result && round.bid && round.bid.team === team && (
+              {typeof round.result === "object" ? (
+                <div className={styles.content}>{round.result[team]}</div>
+              ) : round.bid.team === team ? (
                 <>
                   <div className={styles.content}>{round.bid.points}</div>
                   <span
@@ -36,10 +34,7 @@ export const Body: FC<Props> = ({ rounds }) => {
                     📣
                   </span>
                 </>
-              )}
-              {round.result && (
-                <div className={styles.content}>{round.result[team]}</div>
-              )}
+              ) : null}
             </div>
           ))}
         </div>

@@ -11,21 +11,11 @@ export const Scoreboard: FC<Props> = ({ game }) => {
   const footRef = useRef<HTMLDivElement | null>(null);
   const footCellRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    const { current: currentHeadRef } = headRef;
-    const { current: currentFootRef } = footRef;
-    const { current: currentFootCellRef } = footCellRef;
-    if (
-      currentHeadRef === null ||
-      currentFootRef === null ||
-      currentFootCellRef === null
-    )
-      return;
-
-    const newMinHeight =
-      currentHeadRef.offsetHeight +
-      currentFootRef.offsetHeight +
-      currentFootCellRef.offsetHeight;
-    setMinHeight(newMinHeight);
+    setMinHeight(
+      Number(headRef.current?.offsetHeight) +
+        Number(footRef.current?.offsetHeight) +
+        Number(footCellRef.current?.offsetHeight)
+    );
   }, []);
 
   return (
