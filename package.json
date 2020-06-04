@@ -19,10 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prettier:all": "prettier '**/*' --write --ignore-path .gitignore",
-    "stylelint:all": "stylelint '**/*.css' --fix --ignore-path .gitignore",
-    "eslint:all": "eslint '**/*' --fix --ignore-path .gitignore"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,9 +38,21 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.11.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.9",
     "prettier": "^2.0.5",
     "stylelint": "^13.6.0",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-standard": "^20.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc --noEmit && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*": "prettier --write",
+    "*.{ts,tsx}": "eslint --fix",
+    "*.css": "stylelint --fix"
   }
 }
