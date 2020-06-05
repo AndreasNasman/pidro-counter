@@ -9,5 +9,9 @@
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
+  },
+  "rules": {
+    "one-var": "off",
+    "sort-imports": "off"
   }
 }
