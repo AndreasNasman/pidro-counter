@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/prefer-readonly-parameter-types */
 import { TEAMS } from "components/common/constants";
 import { useGameContext } from "context/GameContext";
 import React, { FC } from "react";

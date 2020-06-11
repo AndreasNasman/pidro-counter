@@ -17,6 +17,7 @@
       "error",
       { "ignoreRhs": true }
     ],
+    "@typescript-eslint/prefer-readonly-parameter-types": "off",
     "@typescript-eslint/strict-boolean-expressions": [
       "error",
       { "ignoreRhs": true }

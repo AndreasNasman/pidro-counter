@@ -10,11 +10,11 @@ export const [useGameContext, GameContextProvider] = createCtx<Context>();
 export const GameProvider: FC<Props> = ({ children }: Props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const addBid = (bid: Readonly<Bid>): void => {
+  const addBid = (bid: Bid): void => {
     dispatch({ payload: { ...bid }, type: "ADD_BID" });
   };
 
-  const addScore = (score: Readonly<Score>): void => {
+  const addScore = (score: Score): void => {
     dispatch({ payload: { ...score }, type: "ADD_SCORE" });
   };
 
