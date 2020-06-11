@@ -1,0 +1,60 @@
+@value black_board, chalk_white from "../common/colors.module.css";
+
+.body,
+.foot,
+.head,
+.row {
+  column-gap: 0.1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.body {
+  overflow: auto;
+}
+
+.cell {
+  color: chalk_white;
+  display: grid;
+  font-size: 1.25rem;
+  grid-column-gap: 0.25rem;
+  grid-template-areas: ". content emoji";
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  padding: 0.5rem;
+  text-transform: uppercase;
+}
+
+.cell.reverse {
+  grid-template-areas: "emoji content .";
+}
+
+.column {
+  background-color: black_board;
+}
+
+.content {
+  grid-area: content;
+}
+
+.emoji {
+  grid-area: emoji;
+}
+
+.foot {
+  border-top: 0.2rem solid chalk_white;
+  font-weight: bold;
+}
+
+.head {
+  border-bottom: 0.2rem solid chalk_white;
+  font-weight: bold;
+}
+
+.table {
+  background-color: chalk_white;
+  display: grid;
+  grid-area: scoreboard;
+  grid-template-rows: auto 1fr auto;
+  min-width: max-content; /* min-height: ${(props: ITable): string => props.scoreboardMinHeight}; */
+}
