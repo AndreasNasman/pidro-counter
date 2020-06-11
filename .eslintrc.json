@@ -13,6 +13,14 @@
   "rules": {
     "@typescript-eslint/no-magic-numbers": ["error", { "ignore": [1] }],
     "@typescript-eslint/no-type-alias": "off",
+    "@typescript-eslint/no-unnecessary-condition": [
+      "error",
+      { "ignoreRhs": true }
+    ],
+    "@typescript-eslint/strict-boolean-expressions": [
+      "error",
+      { "ignoreRhs": true }
+    ],
     "one-var": "off",
     "sort-imports": "off"
   }
