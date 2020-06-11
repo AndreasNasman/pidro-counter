@@ -1,0 +1,50 @@
+@value playing_card_white from "../common/colors.module.css";
+
+@value button_gap: 0.1rem;
+
+.prompt {
+  color: playing_card_white;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  text-align: center; /* min-width: ${(props: IPrompt): string => props.minWidth}; */
+}
+
+.button {
+  background-color: "transparent";
+  border: 0.25rem solid playing_card_white;
+  border-radius: 0.5rem;
+  color: playing_card_white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  text-transform: uppercase;
+}
+
+.button.active {
+  background-color: playing_card_white;
+  color: red;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.digit-container {
+  display: grid;
+  grid-gap: button_gap;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.container {
+  align-content: center;
+  display: grid;
+  grid-area: keypad;
+  min-width: max-content;
+}
+
+.team-container {
+  column-gap: button_gap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: button_gap;
+}

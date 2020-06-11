@@ -1,3 +1,4 @@
+import { Keypad } from "components/keypad/Keypad";
 import { Scoreboard } from "components/scoreboard/Scoreboard";
 import React, { FC } from "react";
 import styles from "./App.module.css";
@@ -8,6 +9,7 @@ const App: FC = () => {
       <div className={styles.grid}>
         game
         <Scoreboard />
+        <Keypad />
       </div>
     </div>
   );
