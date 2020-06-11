@@ -22,7 +22,7 @@
 
 .button.active {
   background-color: playing_card_white;
-  color: red;
+  color: red; /* TODO */
 }
 
 .button:focus {
