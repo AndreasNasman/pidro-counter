@@ -1,5 +1,6 @@
 import App from "components/app/App";
 import { GameProvider } from "context/GameContext";
+import "normalize.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
