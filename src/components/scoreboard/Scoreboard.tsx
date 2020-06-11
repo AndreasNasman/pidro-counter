@@ -6,7 +6,7 @@ import { Round, Team } from "reducers/game/types";
 import styles from "./Scoreboard.module.css";
 
 export const Scoreboard: FC = () => {
-  // Leader, reverse, refs, keys, winner
+  // Leader, reverse, refs, keys, winner, lagnamn
   const { state } = useGameContext();
   return (
     <div className={styles.table}>
@@ -14,7 +14,7 @@ export const Scoreboard: FC = () => {
         {TEAMS.map((team: Team) => (
           <div className={styles.column} key={team}>
             <div className={styles.cell}>
-              <div className={styles.content}>{team}</div>
+              <div className={styles.content}>VI</div>
             </div>
           </div>
         ))}
