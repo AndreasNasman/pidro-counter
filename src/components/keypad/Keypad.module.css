@@ -10,7 +10,7 @@
 }
 
 .button {
-  background-color: "transparent";
+  background-color: transparent;
   border: 0.25rem solid playing_card_white;
   border-radius: 0.5rem;
   color: playing_card_white;
@@ -29,7 +29,7 @@
   outline: none;
 }
 
-.digit-container {
+.digit_container {
   display: grid;
   grid-gap: button_gap;
   grid-template-columns: repeat(3, 1fr);
@@ -42,7 +42,7 @@
   min-width: max-content;
 }
 
-.team-container {
+.team_container {
   column-gap: button_gap;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
