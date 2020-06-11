@@ -1,10 +1,12 @@
-import { useGameContext } from "context/GameContext";
 import React, { FC } from "react";
+import styles from "./App.module.css";
 
 const App: FC = () => {
-  const { state } = useGameContext();
-
-  return <div>{JSON.stringify(state)}</div>;
+  return (
+    <div className={styles.felt}>
+      <div className={styles.grid}>game</div>
+    </div>
+  );
 };
 
 export default App;
