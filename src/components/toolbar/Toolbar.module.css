@@ -29,16 +29,3 @@
   margin-top: 0;
   text-align: center;
 }
-
-.icon-wrapper {
-  align-items: center;
-  color: chalk_white;
-  display: flex;
-  padding: 0.5rem;
-  pointer-events: "auto";
-}
-
-.icon-wrapper.disabled {
-  pointer-events: "none";
-  color: "gray";
-}
