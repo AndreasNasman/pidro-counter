@@ -1,4 +1,5 @@
 import App from "components/app/App";
+import { GameProvider } from "context/GameContext";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -6,7 +7,9 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <GameProvider>
+      <App />
+    </GameProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

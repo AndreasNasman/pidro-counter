@@ -1,11 +1,11 @@
 type Team = "us" | "they";
 
-interface Bid {
+export interface Bid {
   points: number;
   team: Team;
 }
 
-type Score = { [T in Team]: number };
+export type Score = { [T in Team]: number };
 
 interface Round {
   bid: Bid;
