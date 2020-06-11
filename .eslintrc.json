@@ -3,7 +3,7 @@
     "react-app",
     "plugin:react/recommended",
     "eslint:all",
-    "plugin:@typescript-eslint/all",
+    "plugin:@typescript-eslint/recommended",
     "prettier",
     "prettier/@typescript-eslint"
   ],
