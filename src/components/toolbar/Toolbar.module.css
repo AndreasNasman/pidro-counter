@@ -1,32 +1,8 @@
 @value chalk_white from "../common/colors.module.css";
 
-.answer {
-  /* color: ${(props: IAnswer): string => props.color}; */
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 0.5rem;
-}
-
-.choice-container {
-  display: flex;
-  justify-content: space-around;
-}
-
-.confirmation {
-  background-color: white;
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
-
 .container {
   display: flex;
   font-size: 1.5rem;
   grid-area: toolbar;
   justify-content: space-between;
-}
-
-.h4 {
-  /* TODO */
-  margin-top: 0;
-  text-align: center;
 }
