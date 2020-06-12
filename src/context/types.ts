@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { Bid, Score, State } from "reducers/game/types";
 
 export interface Context {
@@ -8,5 +9,5 @@ export interface Context {
 }
 
 export interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }

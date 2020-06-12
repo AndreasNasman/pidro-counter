@@ -8,12 +8,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable func-style */
 
-import React from "react";
+import { createContext, useContext } from "react";
 
 export function createCtx<A extends {} | null>() {
-  const ctx = React.createContext<A | undefined>(undefined);
+  const ctx = createContext<A | undefined>(undefined);
   function useCtx() {
-    const c = React.useContext(ctx);
+    const c = useContext(ctx);
     if (c === undefined)
       throw new Error("useCtx must be inside a Provider with a value");
     return c;
