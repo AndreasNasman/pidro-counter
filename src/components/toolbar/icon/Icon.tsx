@@ -1,16 +1,21 @@
 import classNames from "classnames";
-import React, { FC } from "react";
+import React, { forwardRef } from "react";
 import styles from "./Icon.module.css";
 import { Props } from "./types";
 
-export const Icon: FC<Props> = ({ disabled, handleClick, IconType }: Props) => {
-  return (
-    <span
-      className={classNames(styles.wrapper, {
-        [styles.disabled]: disabled,
-      })}
-    >
-      <IconType onClick={handleClick} />
-    </span>
-  );
-};
+export const Icon = forwardRef<HTMLSpanElement, Props>(
+  ({ disabled, handleClick, IconType }: Props, ref) => {
+    return (
+      <span
+        className={classNames(styles.wrapper, {
+          [styles.disabled]: disabled,
+        })}
+        ref={ref}
+      >
+        <IconType onClick={handleClick} />
+      </span>
+    );
+  }
+);
+
+Icon.displayName = "Icon";
