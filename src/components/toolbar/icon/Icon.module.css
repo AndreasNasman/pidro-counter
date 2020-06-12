@@ -7,6 +7,7 @@
   display: flex;
   padding: 0.5rem;
 }
+
 .wrapper.disabled {
   color: gray;
   pointer-events: none;

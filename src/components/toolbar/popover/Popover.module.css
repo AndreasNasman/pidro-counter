@@ -6,9 +6,11 @@
   text-transform: uppercase;
   padding: 0.5rem;
 }
+
 .answer.affirmative {
   color: deck_blue;
 }
+
 .answer.negative {
   color: deck_red;
 }
