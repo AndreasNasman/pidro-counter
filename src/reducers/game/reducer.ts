@@ -7,9 +7,11 @@ export const reducer = produce(
     switch (action.type) {
       case "ADD_BID":
         draft.game.push({ bid: action.payload });
+        draft.phase = "score";
         break;
       case "ADD_SCORE":
         draft.game[draft.game.length - 1].score = action.payload;
+        draft.phase = "bid";
         break;
       case "RESET":
         return initialState;
