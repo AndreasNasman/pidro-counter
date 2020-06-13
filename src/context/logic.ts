@@ -2,7 +2,7 @@ import { Score } from "reducers/game/types";
 import { MAXIMUM_POINTS } from "../components/common/constants";
 import { Input } from "./types";
 
-export const determineResult = (bid: Input, winner: Input): Score => {
+export const determineScore = (bid: Input, winner: Input): Score => {
   const result = {
     [winner.team]: winner.points,
     [winner.team === "us" ? "they" : "us"]: MAXIMUM_POINTS - winner.points,

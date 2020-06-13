@@ -6,11 +6,11 @@ import styles from "../Scoreboard.module.css";
 import { Props } from "./types";
 
 export const Head: FC<Props> = ({ headRef }: Props) => {
-  const { score } = useGameContext().state;
+  const { totalScore } = useGameContext().state;
 
   let leader: string | null = null;
-  if (score.us > score.they) leader = "us";
-  else if (score.they > score.us) leader = "they";
+  if (totalScore.us > totalScore.they) leader = "us";
+  else if (totalScore.they > totalScore.us) leader = "they";
 
   return (
     <div className={styles.head} ref={headRef}>

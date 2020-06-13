@@ -17,7 +17,7 @@ export type Phase = keyof Round;
 export interface State {
   game: Round[];
   phase: Phase;
-  score: Score;
+  totalScore: Score;
 }
 
 export type Action =
