@@ -1,4 +1,5 @@
 import { TEAMS } from "components/common/constants";
+import { useGameContext } from "context/GameContext";
 import React, { FC, useState } from "react";
 import { Team } from "reducers/game/types";
 import { Button } from "./button/Button";
@@ -8,16 +9,18 @@ import styles from "./Keypad.module.css";
 import { Prompt } from "./prompt/Prompt";
 
 export const Keypad: FC = () => {
+  const { addBid, addScore, state } = useGameContext();
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
   const [activeNumber, setActiveNumber] = useState<number | null>(null);
   const [disabled, setDisabled] = useState(false);
 
-  const update = (number: number, team: Team): void => {
+  const update = (points: number, team: Team): void => {
     setDisabled(true);
 
     setTimeout(() => {
-      // eslint-disable-next-line no-console
-      console.log(number, team);
+      if (state.phase === "bid") addBid({ points, team });
+      else addScore({ points, team });
+
       setActiveNumber(null);
       setActiveTeam(null);
       setDisabled(false);
