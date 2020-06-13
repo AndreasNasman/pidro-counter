@@ -1,9 +1,9 @@
 {
   "extends": [
     "react-app",
-    "plugin:react/recommended",
     "eslint:all",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "prettier",
     "prettier/@typescript-eslint"
   ],
@@ -22,7 +22,10 @@
       "error",
       { "ignoreRhs": true }
     ],
+    "no-magic-numbers": ["error", { "ignore": [1] }],
     "one-var": "off",
-    "sort-imports": "off"
+    "sort-imports": "off",
+    "no-nested-ternary": "off",
+    "no-ternary": "off"
   }
 }
