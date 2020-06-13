@@ -1,0 +1,30 @@
+@value playing_card_white from "../common/colors.module.css";
+
+@value button_gap: 0.1rem;
+
+.prompt {
+  color: playing_card_white;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  text-align: center; /* min-width: ${(props: IPrompt): string => props.minWidth}; */
+}
+
+.container {
+  align-content: center;
+  display: grid;
+  grid-area: keypad;
+  min-width: max-content;
+}
+
+.number {
+  display: grid;
+  grid-gap: button_gap;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.team {
+  column-gap: button_gap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: button_gap;
+}

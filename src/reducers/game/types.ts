@@ -1,4 +1,4 @@
-type Team = "us" | "they";
+export type Team = "us" | "they";
 
 export interface Bid {
   points: number;
@@ -7,13 +7,14 @@ export interface Bid {
 
 export type Score = { [T in Team]: number };
 
-interface Round {
+export interface Round {
   bid: Bid;
   score?: Score;
 }
 
 export interface State {
   game: Round[];
+  score: Score;
 }
 
 export type Action =

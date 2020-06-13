@@ -1,0 +1,9 @@
+@value playing_card_white from "../../common/colors.module.css";
+
+.prompt {
+  color: playing_card_white;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+  text-align: center;
+  text-decoration: underline;
+}

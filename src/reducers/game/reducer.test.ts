@@ -10,7 +10,10 @@ test("add bid", () => {
     type: "ADD_BID",
   };
   state = reducer(state, action);
-  expect(state).toEqual({ game: [{ bid: { points: 14, team: "us" } }] });
+  expect(state).toEqual({
+    game: [{ bid: { points: 14, team: "us" } }],
+    score: { they: 0, us: 0 },
+  });
 });
 
 test("add score", () => {
@@ -26,6 +29,7 @@ test("add score", () => {
         score: { they: 14, us: 0 },
       },
     ],
+    score: { they: 0, us: 0 },
   });
 });
 

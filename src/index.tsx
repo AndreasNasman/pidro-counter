@@ -1,7 +1,9 @@
 import App from "components/app/App";
 import { GameProvider } from "context/GameContext";
+import "normalize.css";
 import React from "react";
 import ReactDOM from "react-dom";
+import "typeface-roboto";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 

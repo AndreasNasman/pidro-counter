@@ -1,0 +1,32 @@
+@value deck_blue, deck_red from "../../common/colors.module.css";
+
+.answer {
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.5rem;
+}
+
+.answer.affirmative {
+  color: deck_blue;
+}
+
+.answer.negative {
+  color: deck_red;
+}
+
+.choice {
+  display: flex;
+  justify-content: space-around;
+}
+
+.container {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.question {
+  margin-top: 0;
+  text-align: center;
+}

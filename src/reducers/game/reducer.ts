@@ -3,7 +3,6 @@ import { initialState } from "./initialState";
 import { Action, State } from "./types";
 
 export const reducer = produce(
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
   (draft: State, action: Action): State => {
     switch (action.type) {
       case "ADD_BID":

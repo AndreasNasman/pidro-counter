@@ -1,9 +1,9 @@
 {
   "extends": [
     "react-app",
-    "plugin:react/recommended",
     "eslint:all",
-    "plugin:@typescript-eslint/all",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "prettier",
     "prettier/@typescript-eslint"
   ],
@@ -13,7 +13,19 @@
   "rules": {
     "@typescript-eslint/no-magic-numbers": ["error", { "ignore": [1] }],
     "@typescript-eslint/no-type-alias": "off",
+    "@typescript-eslint/no-unnecessary-condition": [
+      "error",
+      { "ignoreRhs": true }
+    ],
+    "@typescript-eslint/prefer-readonly-parameter-types": "off",
+    "@typescript-eslint/strict-boolean-expressions": [
+      "error",
+      { "ignoreRhs": true }
+    ],
+    "no-magic-numbers": ["error", { "ignore": [1] }],
     "one-var": "off",
-    "sort-imports": "off"
+    "sort-imports": "off",
+    "no-nested-ternary": "off",
+    "no-ternary": "off"
   }
 }
