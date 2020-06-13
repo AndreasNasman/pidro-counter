@@ -1,20 +1,23 @@
 import classNames from "classnames";
 import { TEAMS } from "components/common/constants";
+import { useGameContext } from "context/GameContext";
 import React, { FC, useEffect, useRef } from "react";
 import styles from "../Scoreboard.module.css";
-import { Props } from "./types";
 
-export const Body: FC<Props> = ({ rounds }: Props) => {
+export const Body: FC = () => {
   const bodyColumnRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() =>
-    bodyColumnRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
-  );
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    bodyColumnRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  });
+
+  const { game } = useGameContext().state;
 
   return (
     <div className={styles.body}>
       {TEAMS.map((team) => (
         <div className={styles.column} key={team} ref={bodyColumnRef}>
-          {rounds.map((round, index) => (
+          {game.map((round, index) => (
             <div
               className={classNames(styles.cell, {
                 [styles.reverse]: TEAMS[TEAMS.length - 1] === team,
