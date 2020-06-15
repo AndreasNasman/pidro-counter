@@ -1,8 +1,8 @@
+import { determineScore } from "game/logic";
 import { initialState } from "game/reducer/initialState";
 import { reducer } from "game/reducer/reducer";
 import React, { FC, useReducer } from "react";
 import { createCtx } from "./helper";
-import { determineScore } from "./logic";
 import { Context, Input, Props } from "./types";
 
 export const [useGameContext, GameContextProvider] = createCtx<Context>();
