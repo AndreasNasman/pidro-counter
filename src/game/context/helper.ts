@@ -1,12 +1,6 @@
 // https://github.com/typescript-cheatsheets/react-typescript-cheatsheet
 
-/* eslint-disable line-comment-position */
-/* eslint-disable no-inline-comments */
-/* eslint-disable id-length */
-/* eslint-disable no-undefined */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable func-style */
+/* eslint-disable */
 
 import { createContext, useContext } from "react";
 

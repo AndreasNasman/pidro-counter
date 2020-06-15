@@ -1,8 +1,8 @@
-import { MAXIMUM_POINTS } from "game/constants";
-import { Score } from "game/reducer/types";
+import { MAXIMUM_POINTS } from "./constants";
 import { Input } from "./context/types";
+import { Bid, Score } from "./reducer/types";
 
-export const determineScore = (bid: Input, winner: Input): Score => {
+export const determineScore = (bid: Bid, winner: Input): Score => {
   const score = {
     [winner.team]: winner.points,
     [winner.team === "us" ? "they" : "us"]: MAXIMUM_POINTS - winner.points,
