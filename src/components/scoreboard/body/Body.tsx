@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { TEAMS } from "components/common/constants";
+import { TEAMS } from "common/constants";
 import { useGameContext } from "context/GameContext";
 import React, { FC, useEffect, useRef } from "react";
 import styles from "../Scoreboard.module.css";

@@ -1,4 +1,4 @@
-import { MAXIMUM_POINTS, MINIMUM_POINTS } from "components/common/constants";
+import { MAXIMUM_POINTS, MINIMUM_POINTS } from "common/constants";
 import buttonStyles from "./button/Button.module.css";
 
 const INCLUSIVE_END_OFFSET = 1;

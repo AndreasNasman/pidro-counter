@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { TEAMS, TEAM_TRANSLATION } from "components/common/constants";
+import { TEAMS, TEAM_TRANSLATION } from "common/constants";
 import { useGameContext } from "context/GameContext";
 import React, { FC } from "react";
 import { Team } from "reducers/game/types";
