@@ -5,13 +5,12 @@ import React, { FC, useEffect, useRef } from "react";
 import styles from "../Scoreboard.module.css";
 
 export const Body: FC = () => {
-  const bodyColumnRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
-    bodyColumnRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
-  });
-
   const { game } = useGameContext().state;
+
+  const bodyColumnRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() =>
+    bodyColumnRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
+  );
 
   return (
     <div className={styles.body}>
@@ -20,14 +19,14 @@ export const Body: FC = () => {
           {game.map((round, index) => (
             <div
               className={classNames(styles.cell, {
-                [styles.reverse]: TEAMS[TEAMS.length - 1] === team,
+                [styles.reverse]: team === TEAMS[TEAMS.length - 1],
               })}
               key={index}
             >
-              {typeof round.score === "object" ? (
+              {round.score ? (
                 <div className={styles.content}>{round.score[team]}</div>
               ) : (
-                round.bid.team === team && (
+                team === round.bid.team && (
                   <>
                     <div className={styles.content}>{round.bid.points}</div>
                     <span
