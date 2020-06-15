@@ -1,15 +1,14 @@
 import { render } from "@testing-library/react";
-import { GameProvider } from "context/GameContext";
+import { GameProvider } from "game/context/GameContext";
 import React from "react";
 import App from "./App";
 
-test("renders learn react link", () => {
+test("renders without crashing", () => {
   Element.prototype.scrollIntoView = jest.fn();
-  const { getByText } = render(
+
+  render(
     <GameProvider>
       <App />
     </GameProvider>
   );
-  const linkElement = getByText(/game/iu);
-  expect(linkElement).toBeInTheDocument();
 });

@@ -1,17 +1,17 @@
-import { TEAMS } from "components/common/constants";
-import { useGameContext } from "context/GameContext";
+import { TEAMS, TEAM_TRANSLATION } from "game/constants";
+import { useGameContext } from "game/context/GameContext";
+import { Team } from "game/reducer/types";
 import React, { FC, useState } from "react";
-import { Team } from "reducers/game/types";
 import { Button } from "./button/Button";
 import buttonStyles from "./button/Button.module.css";
-import { NUMBERS, TIMEOUT } from "./constants";
+import { POINTS, TIMEOUT } from "./constants";
 import styles from "./Keypad.module.css";
 import { Prompt } from "./prompt/Prompt";
 
 export const Keypad: FC = () => {
   const { addBid, addScore, state } = useGameContext();
+  const [activePoint, setActivePoint] = useState<number | null>(null);
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
-  const [activeNumber, setActiveNumber] = useState<number | null>(null);
   const [disabled, setDisabled] = useState(false);
 
   const update = (points: number, team: Team): void => {
@@ -21,20 +21,20 @@ export const Keypad: FC = () => {
       if (state.phase === "bid") addBid({ points, team });
       else addScore({ points, team });
 
-      setActiveNumber(null);
+      setActivePoint(null);
       setActiveTeam(null);
       setDisabled(false);
     }, TIMEOUT);
   };
 
-  const handleTeamClick = (team: Team): void => {
-    setActiveTeam(team);
-    if (activeNumber !== null) update(activeNumber, team);
+  const handlePointClick = (point: number): void => {
+    setActivePoint(point);
+    if (activeTeam) update(point, activeTeam);
   };
 
-  const handleNumberClick = (number: number): void => {
-    setActiveNumber(number);
-    if (activeTeam !== null) update(number, activeTeam);
+  const handleTeamClick = (team: Team): void => {
+    setActiveTeam(team);
+    if (activePoint) update(activePoint, team);
   };
 
   return (
@@ -49,19 +49,21 @@ export const Keypad: FC = () => {
             disabled={disabled}
             handleClick={handleTeamClick}
             key={team}
+            text={TEAM_TRANSLATION[team]}
             value={team}
           />
         ))}
       </div>
 
       <div className={styles.number}>
-        {NUMBERS.map((number) => (
+        {POINTS.map((number) => (
           <Button
-            active={number === activeNumber}
+            active={number === activePoint}
             activeColor={buttonStyles.red}
             disabled={disabled}
-            handleClick={handleNumberClick}
+            handleClick={handlePointClick}
             key={number}
+            text={String(number)}
             value={number}
           />
         ))}

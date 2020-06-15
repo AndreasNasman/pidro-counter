@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import colors from "components/common/colors.module.css";
+import colors from "components/colors.module.css";
 import React, { FC } from "react";
 import TinyPopover, { ArrowContainer } from "react-tiny-popover";
 import { TRANSITION_DURATION } from "./constants";

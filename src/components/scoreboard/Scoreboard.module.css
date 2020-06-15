@@ -1,11 +1,17 @@
-@value black_board, chalk_white from "../common/colors.module.css";
+@value black_board, chalk_white from "../colors.module.css";
+
+.body,
+.cell,
+.foot,
+.head,
+.table {
+  display: grid;
+}
 
 .body,
 .foot,
-.head,
-.row {
+.head {
   column-gap: 0.1rem;
-  display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -15,13 +21,12 @@
 
 .cell {
   color: chalk_white;
-  display: grid;
   font-size: 1.25rem;
-  grid-column-gap: 0.25rem;
+  column-gap: 0.25rem;
   grid-template-areas: ". content emoji";
   grid-template-columns: repeat(3, 1fr);
-  text-align: center;
   padding: 0.5rem;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -41,20 +46,22 @@
   grid-area: emoji;
 }
 
+.foot,
+.head {
+  font-weight: bold;
+}
+
 .foot {
   border-top: 0.2rem solid chalk_white;
-  font-weight: bold;
 }
 
 .head {
   border-bottom: 0.2rem solid chalk_white;
-  font-weight: bold;
 }
 
 .table {
   background-color: chalk_white;
-  display: grid;
   grid-area: scoreboard;
   grid-template-rows: auto 1fr auto;
-  min-width: max-content; /* min-height: ${(props: ITable): string => props.scoreboardMinHeight}; */
+  min-width: max-content;
 }

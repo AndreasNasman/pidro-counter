@@ -1,13 +1,14 @@
 import classNames from "classnames";
 import React from "react";
 import styles from "./Button.module.css";
-import { Props, Value } from "./types";
+import { Props } from "./types";
 
-export const Button = <T extends Value>({
+export const Button = <T,>({
   active,
   activeColor,
   disabled,
   handleClick,
+  text,
   value,
 }: Props<T>): JSX.Element => (
   <button
@@ -15,6 +16,6 @@ export const Button = <T extends Value>({
     disabled={disabled}
     onClick={(): void => handleClick(value)}
   >
-    {value}
+    {text}
   </button>
 );

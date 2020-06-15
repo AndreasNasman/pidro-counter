@@ -1,6 +1,7 @@
 import classNames from "classnames";
-import { TEAMS } from "components/common/constants";
-import { useGameContext } from "context/GameContext";
+import { TEAMS, TEAM_TRANSLATION } from "game/constants";
+import { useGameContext } from "game/context/GameContext";
+import { Team } from "game/reducer/types";
 import React, { FC } from "react";
 import styles from "../Scoreboard.module.css";
 import { Props } from "./types";
@@ -8,7 +9,7 @@ import { Props } from "./types";
 export const Head: FC<Props> = ({ headRef }: Props) => {
   const { totalScore } = useGameContext().state;
 
-  let leader: string | null = null;
+  let leader: Team | null = null;
   if (totalScore.us > totalScore.they) leader = "us";
   else if (totalScore.they > totalScore.us) leader = "they";
 
@@ -18,11 +19,11 @@ export const Head: FC<Props> = ({ headRef }: Props) => {
         <div className={styles.column} key={team}>
           <div
             className={classNames(styles.cell, {
-              [styles.reverse]: TEAMS[TEAMS.length - 1] === team,
+              [styles.reverse]: team === TEAMS[TEAMS.length - 1],
             })}
           >
-            <div className={styles.content}>VI</div>
-            {leader === team && (
+            <div className={styles.content}>{TEAM_TRANSLATION[team]}</div>
+            {team === leader && (
               <span
                 aria-label="Chequered Flag"
                 className={styles.emoji}

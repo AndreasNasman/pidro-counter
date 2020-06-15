@@ -1,4 +1,4 @@
-@value playing_card_white from "../../common/colors.module.css";
+@value playing_card_white from "../../colors.module.css";
 
 .prompt {
   color: playing_card_white;

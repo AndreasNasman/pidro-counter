@@ -7,26 +7,11 @@
     "prettier",
     "prettier/@typescript-eslint"
   ],
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
   "rules": {
-    "@typescript-eslint/no-magic-numbers": ["error", { "ignore": [1] }],
-    "@typescript-eslint/no-type-alias": "off",
-    "@typescript-eslint/no-unnecessary-condition": [
-      "error",
-      { "ignoreRhs": true }
-    ],
-    "@typescript-eslint/prefer-readonly-parameter-types": "off",
-    "@typescript-eslint/strict-boolean-expressions": [
-      "error",
-      { "ignoreRhs": true }
-    ],
-    "max-lines-per-function": ["error", { "max": 100 }],
+    "max-lines-per-function": ["error", { "max": 75, "skipBlankLines": true }],
     "no-magic-numbers": ["error", { "ignore": [1] }],
-    "one-var": "off",
-    "sort-imports": "off",
-    "no-nested-ternary": "off",
+    "one-var": ["error", "never"],
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }],
     "no-ternary": "off"
   }
 }
