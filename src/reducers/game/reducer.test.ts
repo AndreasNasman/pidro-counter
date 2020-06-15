@@ -13,6 +13,7 @@ test("add bid", () => {
   expect(state).toEqual({
     game: [{ bid: { points: 14, team: "us" } }],
     phase: "score",
+    round: 1,
     totalScore: { they: 0, us: 0 },
   });
 });
@@ -31,6 +32,7 @@ test("add score", () => {
       },
     ],
     phase: "bid",
+    round: 2,
     totalScore: { they: 14, us: 0 },
   });
 });
