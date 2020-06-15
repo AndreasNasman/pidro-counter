@@ -1,5 +1,3 @@
-@value chalk_white from "../common/colors.module.css";
-
 .container {
   display: flex;
   font-size: 1.5rem;
