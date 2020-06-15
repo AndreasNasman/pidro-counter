@@ -26,18 +26,20 @@ export const Body: FC = () => {
             >
               {typeof round.score === "object" ? (
                 <div className={styles.content}>{round.score[team]}</div>
-              ) : round.bid.team === team ? (
-                <>
-                  <div className={styles.content}>{round.bid.points}</div>
-                  <span
-                    aria-label="Megaphone"
-                    className={styles.emoji}
-                    role="img"
-                  >
-                    📣
-                  </span>
-                </>
-              ) : null}
+              ) : (
+                round.bid.team === team && (
+                  <>
+                    <div className={styles.content}>{round.bid.points}</div>
+                    <span
+                      aria-label="Megaphone"
+                      className={styles.emoji}
+                      role="img"
+                    >
+                      📣
+                    </span>
+                  </>
+                )
+              )}
             </div>
           ))}
         </div>
