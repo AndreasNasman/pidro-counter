@@ -1,4 +1,4 @@
-import { TEAMS } from "components/common/constants";
+import { TEAMS, TEAM_TRANSLATION } from "components/common/constants";
 import { useGameContext } from "context/GameContext";
 import React, { FC, useState } from "react";
 import { Team } from "reducers/game/types";
@@ -29,12 +29,12 @@ export const Keypad: FC = () => {
 
   const handleTeamClick = (team: Team): void => {
     setActiveTeam(team);
-    if (activeNumber !== null) update(activeNumber, team);
+    if (activeNumber) update(activeNumber, team);
   };
 
   const handleNumberClick = (number: number): void => {
     setActiveNumber(number);
-    if (activeTeam !== null) update(number, activeTeam);
+    if (activeTeam) update(number, activeTeam);
   };
 
   return (
@@ -49,6 +49,7 @@ export const Keypad: FC = () => {
             disabled={disabled}
             handleClick={handleTeamClick}
             key={team}
+            text={TEAM_TRANSLATION[team]}
             value={team}
           />
         ))}
@@ -62,6 +63,7 @@ export const Keypad: FC = () => {
             disabled={disabled}
             handleClick={handleNumberClick}
             key={number}
+            text={String(number)}
             value={number}
           />
         ))}

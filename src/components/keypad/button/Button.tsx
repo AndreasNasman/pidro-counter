@@ -8,6 +8,7 @@ export const Button = <T,>({
   activeColor,
   disabled,
   handleClick,
+  text,
   value,
 }: Props<T>): JSX.Element => (
   <button
@@ -15,6 +16,6 @@ export const Button = <T,>({
     disabled={disabled}
     onClick={(): void => handleClick(value)}
   >
-    {value}
+    {text}
   </button>
 );

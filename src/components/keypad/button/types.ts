@@ -3,5 +3,6 @@ export interface Props<T> {
   activeColor: string;
   disabled: boolean;
   handleClick: (value: T) => void;
+  text: string;
   value: T;
 }
