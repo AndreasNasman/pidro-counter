@@ -8,7 +8,6 @@ const App: FC = () => {
   return (
     <div className={styles.felt}>
       <div className={styles.grid}>
-        game
         <Scoreboard />
         <Toolbar />
         <Keypad />
