@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import React from "react";
 import styles from "./Button.module.css";
-import { Props, Value } from "./types";
+import { Props } from "./types";
 
-export const Button = <T extends Value>({
+export const Button = <T,>({
   active,
   activeColor,
   disabled,
