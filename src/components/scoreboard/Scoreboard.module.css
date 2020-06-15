@@ -1,4 +1,4 @@
-@value black_board, chalk_white from "../common/colors.module.css";
+@value black_board, chalk_white from "../colors.module.css";
 
 .body,
 .cell,

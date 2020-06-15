@@ -1,4 +1,4 @@
-@value deck_blue, deck_red from "../../common/colors.module.css";
+@value deck_blue, deck_red from "../../colors.module.css";
 
 .answer {
   cursor: pointer;
