@@ -1,4 +1,4 @@
-import { Team } from "reducers/game/types";
+import { Team } from "game/reducer/types";
 import { TeamTranslation } from "./types";
 
 export const MAXIMUM_POINTS = 14;

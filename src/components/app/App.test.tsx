@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { GameProvider } from "context/GameContext";
+import { GameProvider } from "game/context/GameContext";
 import React from "react";
 import App from "./App";
 

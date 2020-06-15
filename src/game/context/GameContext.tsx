@@ -1,6 +1,6 @@
+import { initialState } from "game/reducer/initialState";
+import { reducer } from "game/reducer/reducer";
 import React, { FC, useReducer } from "react";
-import { initialState } from "reducers/game/initialState";
-import { reducer } from "reducers/game/reducer";
 import { createCtx } from "./helper";
 import { determineScore } from "./logic";
 import { Context, Input, Props } from "./types";

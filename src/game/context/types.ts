@@ -1,5 +1,5 @@
+import { State, Team } from "game/reducer/types";
 import { ReactNode } from "react";
-import { State, Team } from "reducers/game/types";
 
 export interface Input {
   points: number;

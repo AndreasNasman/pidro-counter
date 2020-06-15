@@ -1,5 +1,5 @@
 import { MAXIMUM_POINTS } from "common/constants";
-import { Score } from "reducers/game/types";
+import { Score } from "game/reducer/types";
 import { Input } from "./types";
 
 export const determineScore = (bid: Input, winner: Input): Score => {

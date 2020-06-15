@@ -1,4 +1,4 @@
-import { useGameContext } from "context/GameContext";
+import { useGameContext } from "game/context/GameContext";
 import React, { FC } from "react";
 import styles from "./Prompt.module.css";
 

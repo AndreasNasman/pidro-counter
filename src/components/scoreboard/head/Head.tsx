@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { TEAMS, TEAM_TRANSLATION } from "common/constants";
-import { useGameContext } from "context/GameContext";
+import { useGameContext } from "game/context/GameContext";
+import { Team } from "game/reducer/types";
 import React, { FC } from "react";
-import { Team } from "reducers/game/types";
 import styles from "../Scoreboard.module.css";
 import { Props } from "./types";
 

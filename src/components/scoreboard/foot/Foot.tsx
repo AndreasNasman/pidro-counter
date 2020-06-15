@@ -1,5 +1,5 @@
 import { TEAMS } from "common/constants";
-import { useGameContext } from "context/GameContext";
+import { useGameContext } from "game/context/GameContext";
 import React, { FC } from "react";
 import styles from "../Scoreboard.module.css";
 import { Props } from "./types";
