@@ -1,4 +1,4 @@
-import { MAXIMUM_POINTS } from "common/constants";
+import { MAXIMUM_POINTS } from "game/constants";
 import { Score } from "game/reducer/types";
 import { Input } from "./types";
 
