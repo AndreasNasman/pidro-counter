@@ -4,16 +4,13 @@ import { Toolbar } from "components/toolbar/Toolbar";
 import React, { FC } from "react";
 import styles from "./App.module.css";
 
-const App: FC = () => {
-  return (
-    <div className={styles.felt}>
-      <div className={styles.grid}>
-        <Scoreboard />
-        <Toolbar />
-        <Keypad />
-      </div>
+const App: FC = () => (
+  <div className={styles.felt}>
+    <div className={styles.grid}>
+      <Scoreboard />
+      <Toolbar />
+      <Keypad />
     </div>
-  );
-};
-
+  </div>
+);
 export default App;
