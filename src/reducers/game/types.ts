@@ -12,9 +12,12 @@ export interface Round {
   score?: Score;
 }
 
+export type Phase = keyof Round;
+
 export interface State {
   game: Round[];
-  score: Score;
+  phase: Phase;
+  totalScore: Score;
 }
 
 export type Action =

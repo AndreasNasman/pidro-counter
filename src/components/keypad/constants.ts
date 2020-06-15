@@ -7,6 +7,6 @@ export const NUMBERS = Array.from(
   (_value: number, index: number) => index + MINIMUM_POINTS
 );
 
-export const MILLISECOND_MAGNITUDE = 1000;
+const MILLISECOND_MAGNITUDE = 1000;
 export const TIMEOUT =
   parseFloat(buttonStyles.duration) * MILLISECOND_MAGNITUDE;

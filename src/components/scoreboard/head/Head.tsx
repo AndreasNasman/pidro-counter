@@ -1,13 +1,16 @@
 import classNames from "classnames";
 import { TEAMS } from "components/common/constants";
+import { useGameContext } from "context/GameContext";
 import React, { FC } from "react";
 import styles from "../Scoreboard.module.css";
 import { Props } from "./types";
 
-export const Head: FC<Props> = ({ headRef, score }: Props) => {
+export const Head: FC<Props> = ({ headRef }: Props) => {
+  const { totalScore } = useGameContext().state;
+
   let leader: string | null = null;
-  if (score.us > score.they) leader = "us";
-  else if (score.they > score.us) leader = "they";
+  if (totalScore.us > totalScore.they) leader = "us";
+  else if (totalScore.they > totalScore.us) leader = "they";
 
   return (
     <div className={styles.head} ref={headRef}>
@@ -18,7 +21,7 @@ export const Head: FC<Props> = ({ headRef, score }: Props) => {
               [styles.reverse]: TEAMS[TEAMS.length - 1] === team,
             })}
           >
-            <div className={styles.content}>{team}</div>
+            <div className={styles.content}>VI</div>
             {leader === team && (
               <span
                 aria-label="Chequered Flag"

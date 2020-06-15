@@ -1,9 +1,14 @@
 import { ReactNode } from "react";
-import { Bid, Score, State } from "reducers/game/types";
+import { State, Team } from "reducers/game/types";
+
+export interface Input {
+  points: number;
+  team: Team;
+}
 
 export interface Context {
-  addBid: (bid: Bid) => void;
-  addScore: (bid: Score) => void;
+  addBid: (input: Input) => void;
+  addScore: (input: Input) => void;
   reset: () => void;
   state: State;
 }

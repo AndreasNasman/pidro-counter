@@ -4,6 +4,7 @@ import React from "react";
 import App from "./App";
 
 test("renders learn react link", () => {
+  Element.prototype.scrollIntoView = jest.fn();
   const { getByText } = render(
     <GameProvider>
       <App />
