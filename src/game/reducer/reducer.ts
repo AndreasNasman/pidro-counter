@@ -13,8 +13,12 @@ export const reducer = produce(
         draft.game[draft.game.length - 1].score = action.payload;
         draft.phase = "bid";
         draft.round += 1;
-        draft.totalScore.they += action.payload.they;
-        draft.totalScore.us += action.payload.us;
+        break;
+      case "SET_WINNER":
+        draft.winner = action.payload;
+        break;
+      case "UPDATE_TOTAL_SCORE":
+        draft.totalScore = action.payload;
         break;
       case "RESET":
         return initialState;
