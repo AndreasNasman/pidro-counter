@@ -7,9 +7,12 @@ import buttonStyles from "./button/Button.module.css";
 import { POINTS, TIMEOUT } from "./constants";
 import styles from "./Keypad.module.css";
 import { Prompt } from "./prompt/Prompt";
+import { Winner } from "./winner/Winner";
 
 export const Keypad: FC = () => {
   const { addBid, addScore, state } = useGameContext();
+  const { phase, winner } = state;
+
   const [activePoint, setActivePoint] = useState<number | null>(null);
   const [activeTeam, setActiveTeam] = useState<Team | null>(null);
   const [disabled, setDisabled] = useState(false);
@@ -18,7 +21,7 @@ export const Keypad: FC = () => {
     setDisabled(true);
 
     setTimeout(() => {
-      if (state.phase === "bid") addBid({ points, team });
+      if (phase === "bid") addBid({ points, team });
       else addScore({ points, team });
 
       setActivePoint(null);
@@ -39,35 +42,41 @@ export const Keypad: FC = () => {
 
   return (
     <div className={styles.container}>
-      <Prompt />
+      {winner ? (
+        <Winner winningTeam={TEAM_TRANSLATION[winner]} />
+      ) : (
+        <>
+          <Prompt />
 
-      <div className={styles.team}>
-        {TEAMS.map((team) => (
-          <Button
-            active={team === activeTeam}
-            activeColor={buttonStyles.black}
-            disabled={disabled}
-            handleClick={handleTeamClick}
-            key={team}
-            text={TEAM_TRANSLATION[team]}
-            value={team}
-          />
-        ))}
-      </div>
+          <div className={styles.team}>
+            {TEAMS.map((team) => (
+              <Button
+                active={team === activeTeam}
+                activeColor={buttonStyles.black}
+                disabled={disabled}
+                handleClick={handleTeamClick}
+                key={team}
+                text={TEAM_TRANSLATION[team]}
+                value={team}
+              />
+            ))}
+          </div>
 
-      <div className={styles.number}>
-        {POINTS.map((number) => (
-          <Button
-            active={number === activePoint}
-            activeColor={buttonStyles.red}
-            disabled={disabled}
-            handleClick={handlePointClick}
-            key={number}
-            text={String(number)}
-            value={number}
-          />
-        ))}
-      </div>
+          <div className={styles.number}>
+            {POINTS.map((number) => (
+              <Button
+                active={number === activePoint}
+                activeColor={buttonStyles.red}
+                disabled={disabled}
+                handleClick={handlePointClick}
+                key={number}
+                text={String(number)}
+                value={number}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
