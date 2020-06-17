@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { GameProvider } from "game/context/GameContext";
 import React from "react";
-import App from "./App";
+import { App } from "./App";
 
 test("renders without crashing", () => {
   Element.prototype.scrollIntoView = jest.fn();
