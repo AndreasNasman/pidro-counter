@@ -1,0 +1,15 @@
+@value playing_card_white from "../../colors.module.css";
+
+.container {
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.winner {
+  color: playing_card_white;
+  font-weight: bold;
+  margin: 0 0.5rem;
+  text-transform: uppercase;
+}
