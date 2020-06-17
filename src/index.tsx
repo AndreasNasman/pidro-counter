@@ -1,4 +1,4 @@
-import App from "components/app/App";
+import { App } from "components/app/App";
 import { GameProvider } from "game/context/GameContext";
 import "normalize.css";
 import React from "react";

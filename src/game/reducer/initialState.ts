@@ -5,4 +5,5 @@ export const initialState: State = {
   phase: "bid",
   round: 1,
   totalScore: { they: 0, us: 0 },
+  winner: null,
 };
